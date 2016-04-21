@@ -202,7 +202,7 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
+            'from' => 'user@moneylover.pe.hu',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
