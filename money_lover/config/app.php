@@ -226,9 +226,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'root',
-            'password' => 'wdmoneylover',
-            'database' => 'money_lover_db',
+            'username' => 'u248478360_webd',
+            'password' => '12345678',
+            'database' => 'u248478360_mlwd',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
