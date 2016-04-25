@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2016 at 01:48 AM
--- Server version: 5.5.47-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Generation Time: Apr 25, 2016 at 12:46 PM
+-- Server version: 5.5.49-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `moneylover`
 --
+CREATE DATABASE IF NOT EXISTS `moneylover` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `moneylover`;
 
 -- --------------------------------------------------------
 
@@ -277,8 +279,8 @@ ALTER TABLE `customer`
 -- Constraints for table `debt`
 --
 ALTER TABLE `debt`
-  ADD CONSTRAINT `pk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fl_dept_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fl_dept_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`
@@ -290,8 +292,8 @@ ALTER TABLE `event`
 -- Constraints for table `recurring_transaction`
 --
 ALTER TABLE `recurring_transaction`
-  ADD CONSTRAINT `fk_recurring_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_recurring_transaction_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_recurring_transaction_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_recurring_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `setting`
