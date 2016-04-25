@@ -219,16 +219,16 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'moneylover.pe.hu',
+            'host' => 'localhost',
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'u248478360_webd',
+            'username' => 'moneylover',
             'password' => '12345678',
-            'database' => 'u248478360_mlwd',
+            'database' => 'moneylover',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
@@ -264,11 +264,11 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'moneylover.pe.hu',
+            'host' => 'localhost',
             //'port' => 'non_standard_port_number',
-            'username' => 'u248478360_webd',
+            'username' => 'moneylover',
             'password' => '12345678',
-            'database' => 'u248478360_mlwd',
+            'database' => 'moneylover',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
