@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2016 at 12:46 PM
+-- Generation Time: Apr 25, 2016 at 04:05 PM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.16
 
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `wallet` (
 -- Constraints for table `budget`
 --
 ALTER TABLE `budget`
-  ADD CONSTRAINT `fk_budget_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_budget_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_budget_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_budget_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
 
@@ -267,45 +267,47 @@ ALTER TABLE `budget`
 -- Constraints for table `category`
 --
 ALTER TABLE `category`
-  ADD CONSTRAINT `fk_category_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_category_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `customer`
 --
 ALTER TABLE `customer`
-  ADD CONSTRAINT `fk_customer_id` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `account` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_customer_account_id` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `account` (`username`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `debt`
 --
 ALTER TABLE `debt`
-  ADD CONSTRAINT `fl_dept_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_dept_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_event_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `recurring_transaction`
 --
 ALTER TABLE `recurring_transaction`
-  ADD CONSTRAINT `fk_recurring_transaction_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_recurring_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_recurring_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `setting`
 --
 ALTER TABLE `setting`
-  ADD CONSTRAINT `fk_setting_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_setting_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `fk_transaction_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_transaction_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_transaction_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
@@ -314,7 +316,7 @@ ALTER TABLE `transaction`
 -- Constraints for table `wallet`
 --
 ALTER TABLE `wallet`
-  ADD CONSTRAINT `fk_wallet_account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_wallet_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
