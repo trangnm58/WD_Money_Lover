@@ -98,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `gender` tinyint(1) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `wallet_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
@@ -276,8 +275,7 @@ ALTER TABLE `categorys`
 ALTER TABLE `customers`
   ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `accounts` (`email`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_customer_customer_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `accounts` (`username`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_wallet` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `accounts` (`username`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `debts`

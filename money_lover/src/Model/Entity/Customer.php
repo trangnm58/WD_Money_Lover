@@ -15,8 +15,6 @@ use Cake\ORM\Entity;
  * @property string $last_name
  * @property bool $gender
  * @property \Cake\I18n\Time $dob
- * @property int $wallet_id
- * @property \App\Model\Entity\Wallet[] $wallets
  * @property \App\Model\Entity\Budget[] $budgets
  * @property \App\Model\Entity\Category[] $categorys
  * @property \App\Model\Entity\Debt[] $debts
@@ -24,6 +22,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\RecurringTransaction[] $recurring_transactions
  * @property \App\Model\Entity\Setting[] $settings
  * @property \App\Model\Entity\Transaction[] $transactions
+ * @property \App\Model\Entity\Wallet[] $wallets
  */
 class Customer extends Entity
 {

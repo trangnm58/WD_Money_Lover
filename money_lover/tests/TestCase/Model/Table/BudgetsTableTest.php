@@ -27,13 +27,13 @@ class BudgetsTableTest extends TestCase
         'app.budgets',
         'app.customers',
         'app.accounts',
-        'app.wallets',
         'app.categorys',
         'app.debts',
         'app.events',
         'app.recurring_transactions',
         'app.settings',
-        'app.transactions'
+        'app.transactions',
+        'app.wallets'
     ];
 
     /**

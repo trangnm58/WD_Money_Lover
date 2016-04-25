@@ -57,11 +57,11 @@ class DebtsFixture extends TestFixture
             'amount' => 1,
             'paid' => 1,
             'description' => 'Lorem ipsum dolor sit amet',
-            'time' => '2016-04-25 15:12:14',
+            'time' => '2016-04-25 15:38:14',
             'wallet_id' => 1,
             'event_id' => 1,
             'partner' => 'Lorem ipsum dolor sit amet',
-            'created_at' => 1461597134
+            'created_at' => 1461598694
         ],
     ];
 }

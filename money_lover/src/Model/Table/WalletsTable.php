@@ -13,7 +13,6 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Units
  * @property \Cake\ORM\Association\HasMany $Budgets
- * @property \Cake\ORM\Association\HasMany $Customers
  * @property \Cake\ORM\Association\HasMany $Debts
  * @property \Cake\ORM\Association\HasMany $RecurringTransactions
  * @property \Cake\ORM\Association\HasMany $Transactions
@@ -44,9 +43,6 @@ class WalletsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Budgets', [
-            'foreignKey' => 'wallet_id'
-        ]);
-        $this->hasMany('Customers', [
             'foreignKey' => 'wallet_id'
         ]);
         $this->hasMany('Debts', [

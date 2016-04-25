@@ -54,7 +54,6 @@
                 <th><?= __('Last Name') ?></th>
                 <th><?= __('Gender') ?></th>
                 <th><?= __('Dob') ?></th>
-                <th><?= __('Wallet Id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($account->customers as $customers): ?>
@@ -67,7 +66,6 @@
                 <td><?= h($customers->last_name) ?></td>
                 <td><?= h($customers->gender) ?></td>
                 <td><?= h($customers->dob) ?></td>
-                <td><?= h($customers->wallet_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Customers', 'action' => 'view', $customers->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Customers', 'action' => 'edit', $customers->id]) ?>

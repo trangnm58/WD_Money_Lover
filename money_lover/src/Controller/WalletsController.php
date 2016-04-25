@@ -19,7 +19,7 @@ class WalletsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Units']
+            'contain' => ['Customers', 'Units']
         ];
         $wallets = $this->paginate($this->Wallets);
 
@@ -37,7 +37,7 @@ class WalletsController extends AppController
     public function view($id = null)
     {
         $wallet = $this->Wallets->get($id, [
-            'contain' => ['Units', 'Customers', 'Budgets', 'Debts', 'RecurringTransactions', 'Transactions']
+            'contain' => ['Customers', 'Units', 'Budgets', 'Debts', 'RecurringTransactions', 'Transactions']
         ]);
 
         $this->set('wallet', $wallet);
@@ -61,8 +61,9 @@ class WalletsController extends AppController
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
             }
         }
+        $customers = $this->Wallets->Customers->find('list', ['limit' => 200]);
         $units = $this->Wallets->Units->find('list', ['limit' => 200]);
-        $this->set(compact('wallet', 'units'));
+        $this->set(compact('wallet', 'customers', 'units'));
         $this->set('_serialize', ['wallet']);
     }
 
@@ -87,8 +88,9 @@ class WalletsController extends AppController
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
             }
         }
+        $customers = $this->Wallets->Customers->find('list', ['limit' => 200]);
         $units = $this->Wallets->Units->find('list', ['limit' => 200]);
-        $this->set(compact('wallet', 'units'));
+        $this->set(compact('wallet', 'customers', 'units'));
         $this->set('_serialize', ['wallet']);
     }
 

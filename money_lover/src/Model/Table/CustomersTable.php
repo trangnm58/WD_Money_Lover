@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  * Customers Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Accounts
- * @property \Cake\ORM\Association\BelongsTo $Wallets
  * @property \Cake\ORM\Association\HasMany $Budgets
  * @property \Cake\ORM\Association\HasMany $Categorys
  * @property \Cake\ORM\Association\HasMany $Debts
@@ -41,9 +40,6 @@ class CustomersTable extends Table
         $this->belongsTo('Accounts', [
             'foreignKey' => 'account_id',
             'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Wallets', [
-            'foreignKey' => 'wallet_id'
         ]);
         $this->hasMany('Budgets', [
             'foreignKey' => 'customer_id'
@@ -125,7 +121,6 @@ class CustomersTable extends Table
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['account_id'], 'Accounts'));
-        $rules->add($rules->existsIn(['wallet_id'], 'Wallets'));
         return $rules;
     }
 }

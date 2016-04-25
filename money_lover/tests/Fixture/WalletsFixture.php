@@ -53,7 +53,7 @@ class WalletsFixture extends TestFixture
             'icon' => 1,
             'amount' => 1,
             'unit_id' => 1,
-            'created_at' => 1461597168
+            'created_at' => 1461598725
         ],
     ];
 }

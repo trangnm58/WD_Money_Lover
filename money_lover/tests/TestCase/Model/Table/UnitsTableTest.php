@@ -28,11 +28,11 @@ class UnitsTableTest extends TestCase
         'app.recurring_transactions',
         'app.customers',
         'app.accounts',
-        'app.wallets',
         'app.budgets',
         'app.categorys',
         'app.groups',
         'app.transactions',
+        'app.wallets',
         'app.events',
         'app.debts',
         'app.settings'

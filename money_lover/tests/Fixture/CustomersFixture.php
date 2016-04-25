@@ -25,10 +25,8 @@ class CustomersFixture extends TestFixture
         'last_name' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'gender' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'dob' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
-        'wallet_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'fk_customer_customer_id' => ['type' => 'index', 'columns' => ['account_id'], 'length' => []],
-            'fk_customer_wallet' => ['type' => 'index', 'columns' => ['wallet_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
@@ -37,7 +35,6 @@ class CustomersFixture extends TestFixture
             'fk_customer_customer_id' => ['type' => 'foreign', 'columns' => ['account_id'], 'references' => ['accounts', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
             'fk_customer_email' => ['type' => 'foreign', 'columns' => ['email'], 'references' => ['accounts', 'email'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
             'fk_customer_username' => ['type' => 'foreign', 'columns' => ['username'], 'references' => ['accounts', 'username'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
-            'fk_customer_wallet' => ['type' => 'foreign', 'columns' => ['wallet_id'], 'references' => ['wallets', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -60,8 +57,7 @@ class CustomersFixture extends TestFixture
             'first_name' => 'Lorem ipsum dolor sit amet',
             'last_name' => 'Lorem ipsum dolor sit amet',
             'gender' => 1,
-            'dob' => '2016-04-25',
-            'wallet_id' => 1
+            'dob' => '2016-04-25'
         ],
     ];
 }

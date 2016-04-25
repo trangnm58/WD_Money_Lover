@@ -2,10 +2,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Wallet'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Budgets'), ['controller' => 'Budgets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Budget'), ['controller' => 'Budgets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Debts'), ['controller' => 'Debts', 'action' => 'index']) ?></li>
@@ -36,7 +36,7 @@
             <?php foreach ($wallets as $wallet): ?>
             <tr>
                 <td><?= $this->Number->format($wallet->id) ?></td>
-                <td><?= $this->Number->format($wallet->customer_id) ?></td>
+                <td><?= $wallet->has('customer') ? $this->Html->link($wallet->customer->id, ['controller' => 'Customers', 'action' => 'view', $wallet->customer->id]) : '' ?></td>
                 <td><?= h($wallet->name) ?></td>
                 <td><?= h($wallet->description) ?></td>
                 <td><?= $this->Number->format($wallet->icon) ?></td>

@@ -47,7 +47,7 @@ class AccountsFixture extends TestFixture
             'username' => 'Lorem ipsum dolor sit amet',
             'email' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-            'created_at' => 1461597114,
+            'created_at' => 1461598670,
             'tokenhash' => 'Lorem ipsum dolor sit amet',
             'activate' => 1
         ],

@@ -50,7 +50,7 @@ class SettingsFixture extends TestFixture
             'first_day_of_week' => 1,
             'first_day_of_month' => 1,
             'first_month_of_year' => 1,
-            'update_at' => 1461597154
+            'update_at' => 1461598711
         ],
     ];
 }

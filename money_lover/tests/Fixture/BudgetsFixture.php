@@ -59,7 +59,7 @@ class BudgetsFixture extends TestFixture
             'to_date' => '2016-04-25',
             'category_id' => 1,
             'wallet_id' => 1,
-            'created_at' => 1461597123
+            'created_at' => 1461598683
         ],
     ];
 }

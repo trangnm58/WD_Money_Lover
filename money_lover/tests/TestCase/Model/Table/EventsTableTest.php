@@ -27,12 +27,12 @@ class EventsTableTest extends TestCase
         'app.events',
         'app.customers',
         'app.accounts',
-        'app.wallets',
         'app.budgets',
         'app.categorys',
         'app.groups',
         'app.recurring_transactions',
         'app.transactions',
+        'app.wallets',
         'app.debts',
         'app.settings'
     ];

@@ -19,12 +19,12 @@ class TransactionsControllerTest extends IntegrationTestCase
         'app.transactions',
         'app.customers',
         'app.accounts',
-        'app.wallets',
         'app.budgets',
         'app.categorys',
         'app.groups',
         'app.recurring_transactions',
         'app.units',
+        'app.wallets',
         'app.debts',
         'app.events',
         'app.settings'

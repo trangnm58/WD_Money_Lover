@@ -5,10 +5,10 @@
         <li><?= $this->Form->postLink(__('Delete Wallet'), ['action' => 'delete', $wallet->id], ['confirm' => __('Are you sure you want to delete # {0}?', $wallet->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Wallets'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Wallet'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Budgets'), ['controller' => 'Budgets', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Budget'), ['controller' => 'Budgets', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Debts'), ['controller' => 'Debts', 'action' => 'index']) ?> </li>
@@ -22,6 +22,10 @@
 <div class="wallets view large-9 medium-8 columns content">
     <h3><?= h($wallet->name) ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th><?= __('Customer') ?></th>
+            <td><?= $wallet->has('customer') ? $this->Html->link($wallet->customer->id, ['controller' => 'Customers', 'action' => 'view', $wallet->customer->id]) : '' ?></td>
+        </tr>
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($wallet->name) ?></td>
@@ -39,10 +43,6 @@
             <td><?= $this->Number->format($wallet->id) ?></td>
         </tr>
         <tr>
-            <th><?= __('Customer Id') ?></th>
-            <td><?= $this->Number->format($wallet->customer_id) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Icon') ?></th>
             <td><?= $this->Number->format($wallet->icon) ?></td>
         </tr>
@@ -55,43 +55,6 @@
             <td><?= h($wallet->created_at) ?></td>
         </tr>
     </table>
-    <div class="related">
-        <h4><?= __('Related Customers') ?></h4>
-        <?php if (!empty($wallet->customers)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
-                <th><?= __('Username') ?></th>
-                <th><?= __('Email') ?></th>
-                <th><?= __('First Name') ?></th>
-                <th><?= __('Last Name') ?></th>
-                <th><?= __('Gender') ?></th>
-                <th><?= __('Dob') ?></th>
-                <th><?= __('Wallet Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($wallet->customers as $customers): ?>
-            <tr>
-                <td><?= h($customers->id) ?></td>
-                <td><?= h($customers->account_id) ?></td>
-                <td><?= h($customers->username) ?></td>
-                <td><?= h($customers->email) ?></td>
-                <td><?= h($customers->first_name) ?></td>
-                <td><?= h($customers->last_name) ?></td>
-                <td><?= h($customers->gender) ?></td>
-                <td><?= h($customers->dob) ?></td>
-                <td><?= h($customers->wallet_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Customers', 'action' => 'view', $customers->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Customers', 'action' => 'edit', $customers->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Customers', 'action' => 'delete', $customers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customers->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
     <div class="related">
         <h4><?= __('Related Budgets') ?></h4>
         <?php if (!empty($wallet->budgets)): ?>
