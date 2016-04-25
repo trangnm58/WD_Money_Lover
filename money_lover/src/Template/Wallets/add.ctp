@@ -25,7 +25,7 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('icon');
-            echo $this->Form->input('ammount');
+            echo $this->Form->input('amount');
             echo $this->Form->input('unit_id', ['options' => $units]);
             echo $this->Form->input('created_at');
         ?>

@@ -83,9 +83,9 @@ class WalletsTable extends Table
             ->allowEmpty('icon');
 
         $validator
-            ->numeric('ammount')
-            ->requirePresence('ammount', 'create')
-            ->notEmpty('ammount');
+            ->numeric('amount')
+            ->requirePresence('amount', 'create')
+            ->notEmpty('amount');
 
         $validator
             ->dateTime('created_at')

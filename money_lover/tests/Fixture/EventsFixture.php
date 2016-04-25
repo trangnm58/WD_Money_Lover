@@ -46,8 +46,8 @@ class EventsFixture extends TestFixture
             'id' => 1,
             'customer_id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
-            'ending_date' => '2016-04-25 14:34:50',
-            'created_at' => 1461594890
+            'ending_date' => '2016-04-25 15:12:21',
+            'created_at' => 1461597141
         ],
     ];
 }

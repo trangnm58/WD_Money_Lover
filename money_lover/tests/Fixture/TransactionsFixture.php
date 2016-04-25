@@ -62,12 +62,12 @@ class TransactionsFixture extends TestFixture
             'unit_id' => 1,
             'wallet_id' => 1,
             'category_id' => 1,
-            'time' => '2016-04-25 14:35:08',
+            'time' => '2016-04-25 15:12:39',
             'event_id' => 1,
             'description' => 'Lorem ipsum dolor sit amet',
             'location' => 'Lorem ipsum dolor sit amet',
             'partner' => 'Lorem ipsum dolor sit amet',
-            'created_at' => 1461594908
+            'created_at' => 1461597159
         ],
     ];
 }

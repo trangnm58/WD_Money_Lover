@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `categorys` (
 
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `wallets` (
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `icon` tinyint(4) DEFAULT NULL,
-  `ammount` double NOT NULL DEFAULT '0',
+  `amount` double NOT NULL DEFAULT '0',
   `unit_id` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

@@ -75,7 +75,7 @@
                 <th><?= __('Name') ?></th>
                 <th><?= __('Description') ?></th>
                 <th><?= __('Icon') ?></th>
-                <th><?= __('Ammount') ?></th>
+                <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Created At') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -87,7 +87,7 @@
                 <td><?= h($wallets->name) ?></td>
                 <td><?= h($wallets->description) ?></td>
                 <td><?= h($wallets->icon) ?></td>
-                <td><?= h($wallets->ammount) ?></td>
+                <td><?= h($wallets->amount) ?></td>
                 <td><?= h($wallets->unit_id) ?></td>
                 <td><?= h($wallets->created_at) ?></td>
                 <td class="actions">

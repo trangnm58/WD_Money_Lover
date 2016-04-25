@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $description
  * @property int $icon
- * @property float $ammount
+ * @property float $amount
  * @property int $unit_id
  * @property \App\Model\Entity\Unit $unit
  * @property \Cake\I18n\Time $created_at

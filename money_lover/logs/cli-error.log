@@ -1,0 +1,27 @@
+2016-04-25 15:10:43 Error: [PDOException] SQLSTATE[HY000] [1045] Access denied for user 'my_app'@'localhost' (using password: YES)
+Stack Trace:
+#0 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Driver\PDODriverTrait.php(48): PDO->__construct('mysql:host=loca...', 'my_app', 'secret', Array)
+#1 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Driver\Mysql.php(90): Cake\Database\Driver\Mysql->_connect('mysql:host=loca...', Array)
+#2 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Schema\BaseSchema.php(45): Cake\Database\Driver\Mysql->connect()
+#3 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Dialect\MysqlDialectTrait.php(63): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(43): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Database\Connection.php(317): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(921): Cake\Database\Connection->schemaCollection()
+#8 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(876): Bake\Shell\Task\ModelTask->_getAllTables()
+#9 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(198): Bake\Shell\Task\ModelTask->listAll()
+#10 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(124): Bake\Shell\Task\ModelTask->getAssociations(Object(Cake\ORM\Table))
+#11 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(109): Bake\Shell\Task\ModelTask->getTableContext(Object(Cake\ORM\Table), 'accounts', 'Accounts')
+#12 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(96): Bake\Shell\Task\ModelTask->bake('Accounts')
+#13 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\BakeShell.php(250): Bake\Shell\Task\ModelTask->main('Accounts')
+#14 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Collection\CollectionTrait.php(51): Bake\Shell\BakeShell->Bake\Shell\{closure}('accounts', 0)
+#15 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\bake\src\Shell\BakeShell.php(253): Cake\Collection\Collection->each(Object(Closure))
+#16 [internal function]: Bake\Shell\BakeShell->all('accounts')
+#17 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Console\Shell.php(444): call_user_func_array(Array, Array)
+#18 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(217): Cake\Console\Shell->runCommand(Array, true, Array)
+#19 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(181): Cake\Console\ShellDispatcher->_dispatch(Array)
+#20 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(127): Cake\Console\ShellDispatcher->dispatch(Array)
+#21 D:\C_Simulator\Projects\WD_Money_Lover\money_lover\bin\cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#22 {main}
+
+

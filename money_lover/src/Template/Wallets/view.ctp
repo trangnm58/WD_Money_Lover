@@ -47,8 +47,8 @@
             <td><?= $this->Number->format($wallet->icon) ?></td>
         </tr>
         <tr>
-            <th><?= __('Ammount') ?></th>
-            <td><?= $this->Number->format($wallet->ammount) ?></td>
+            <th><?= __('Amount') ?></th>
+            <td><?= $this->Number->format($wallet->amount) ?></td>
         </tr>
         <tr>
             <th><?= __('Created At') ?></th>

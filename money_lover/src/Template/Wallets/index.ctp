@@ -26,7 +26,7 @@
                 <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('description') ?></th>
                 <th><?= $this->Paginator->sort('icon') ?></th>
-                <th><?= $this->Paginator->sort('ammount') ?></th>
+                <th><?= $this->Paginator->sort('amount') ?></th>
                 <th><?= $this->Paginator->sort('unit_id') ?></th>
                 <th><?= $this->Paginator->sort('created_at') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -40,7 +40,7 @@
                 <td><?= h($wallet->name) ?></td>
                 <td><?= h($wallet->description) ?></td>
                 <td><?= $this->Number->format($wallet->icon) ?></td>
-                <td><?= $this->Number->format($wallet->ammount) ?></td>
+                <td><?= $this->Number->format($wallet->amount) ?></td>
                 <td><?= $wallet->has('unit') ? $this->Html->link($wallet->unit->name, ['controller' => 'Units', 'action' => 'view', $wallet->unit->id]) : '' ?></td>
                 <td><?= h($wallet->created_at) ?></td>
                 <td class="actions">
