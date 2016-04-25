@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
  * Budget Entity.
  *
  * @property int $id
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property float $goal
  * @property float $spent
  * @property \Cake\I18n\Time $from_date

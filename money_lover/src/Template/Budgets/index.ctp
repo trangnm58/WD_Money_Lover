@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Budget'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Categorys'), ['controller' => 'Categorys', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categorys', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('goal') ?></th>
                 <th><?= $this->Paginator->sort('spent') ?></th>
                 <th><?= $this->Paginator->sort('from_date') ?></th>
@@ -31,7 +31,7 @@
             <?php foreach ($budgets as $budget): ?>
             <tr>
                 <td><?= $this->Number->format($budget->id) ?></td>
-                <td><?= $budget->has('account') ? $this->Html->link($budget->account->id, ['controller' => 'Accounts', 'action' => 'view', $budget->account->id]) : '' ?></td>
+                <td><?= $budget->has('customer') ? $this->Html->link($budget->customer->id, ['controller' => 'Customers', 'action' => 'view', $budget->customer->id]) : '' ?></td>
                 <td><?= $this->Number->format($budget->goal) ?></td>
                 <td><?= $this->Number->format($budget->spent) ?></td>
                 <td><?= h($budget->from_date) ?></td>

@@ -8,8 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Categorys'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Budgets'), ['controller' => 'Budgets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Budget'), ['controller' => 'Budgets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Recurring Transactions'), ['controller' => 'RecurringTransactions', 'action' => 'index']) ?></li>
@@ -26,7 +26,7 @@
             echo $this->Form->input('name');
             echo $this->Form->input('icon');
             echo $this->Form->input('group_id');
-            echo $this->Form->input('account_id', ['options' => $accounts, 'empty' => true]);
+            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

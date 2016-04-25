@@ -11,8 +11,8 @@ use Cake\ORM\Entity;
  * @property int $icon
  * @property int $group_id
  * @property \App\Model\Entity\Group $group
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Budget[] $budgets
  * @property \App\Model\Entity\RecurringTransaction[] $recurring_transactions
  * @property \App\Model\Entity\Transaction[] $transactions

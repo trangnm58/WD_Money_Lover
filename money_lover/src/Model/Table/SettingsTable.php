@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Settings Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  */
 class SettingsTable extends Table
 {
@@ -26,11 +26,11 @@ class SettingsTable extends Table
         parent::initialize($config);
 
         $this->table('settings');
-        $this->displayField('account_id');
-        $this->primaryKey('account_id');
+        $this->displayField('customer_id');
+        $this->primaryKey('customer_id');
 
-        $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id',
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -87,7 +87,7 @@ class SettingsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         return $rules;
     }
 }

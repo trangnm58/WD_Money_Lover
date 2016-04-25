@@ -10,9 +10,10 @@ use Cake\Validation\Validator;
 /**
  * Wallets Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Units
  * @property \Cake\ORM\Association\HasMany $Budgets
+ * @property \Cake\ORM\Association\HasMany $Customers
  * @property \Cake\ORM\Association\HasMany $Debts
  * @property \Cake\ORM\Association\HasMany $RecurringTransactions
  * @property \Cake\ORM\Association\HasMany $Transactions
@@ -34,8 +35,8 @@ class WalletsTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id',
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Units', [
@@ -43,6 +44,9 @@ class WalletsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Budgets', [
+            'foreignKey' => 'wallet_id'
+        ]);
+        $this->hasMany('Customers', [
             'foreignKey' => 'wallet_id'
         ]);
         $this->hasMany('Debts', [
@@ -100,7 +104,7 @@ class WalletsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['unit_id'], 'Units'));
         return $rules;
     }

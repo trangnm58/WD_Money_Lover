@@ -18,9 +18,10 @@ class CategorysControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.categorys',
         'app.groups',
+        'app.customers',
         'app.accounts',
-        'app.budgets',
         'app.wallets',
+        'app.budgets',
         'app.debts',
         'app.events',
         'app.recurring_transactions',

@@ -18,7 +18,7 @@ class DebtsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'account_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'customer_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'debt_type' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'amount' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => ''],
         'paid' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => ''],
@@ -29,12 +29,12 @@ class DebtsFixture extends TestFixture
         'partner' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'account_id' => ['type' => 'index', 'columns' => ['account_id'], 'length' => []],
+            'customer_id' => ['type' => 'index', 'columns' => ['customer_id'], 'length' => []],
             'wallet_id' => ['type' => 'index', 'columns' => ['wallet_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'fk_dept_customer_id' => ['type' => 'foreign', 'columns' => ['account_id'], 'references' => ['customers', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
+            'fk_dept_customer_id' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
             'fk_dept_wallet_id' => ['type' => 'foreign', 'columns' => ['wallet_id'], 'references' => ['wallets', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
@@ -52,16 +52,16 @@ class DebtsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'account_id' => 1,
+            'customer_id' => 1,
             'debt_type' => 1,
             'amount' => 1,
             'paid' => 1,
             'description' => 'Lorem ipsum dolor sit amet',
-            'time' => '2016-04-25 10:34:04',
+            'time' => '2016-04-25 14:34:46',
             'wallet_id' => 1,
             'event_id' => 1,
             'partner' => 'Lorem ipsum dolor sit amet',
-            'created_at' => 1461580444
+            'created_at' => 1461594886
         ],
     ];
 }

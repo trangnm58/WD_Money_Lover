@@ -10,14 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Accounts Model
  *
- * @property \Cake\ORM\Association\HasMany $Budgets
- * @property \Cake\ORM\Association\HasMany $Categorys
- * @property \Cake\ORM\Association\HasMany $Debts
- * @property \Cake\ORM\Association\HasMany $Events
- * @property \Cake\ORM\Association\HasMany $RecurringTransactions
- * @property \Cake\ORM\Association\HasMany $Settings
- * @property \Cake\ORM\Association\HasMany $Transactions
- * @property \Cake\ORM\Association\HasMany $Wallets
+ * @property \Cake\ORM\Association\HasMany $Customers
  */
 class AccountsTable extends Table
 {
@@ -36,28 +29,7 @@ class AccountsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->hasMany('Budgets', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Categorys', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Debts', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Events', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('RecurringTransactions', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Settings', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Transactions', [
-            'foreignKey' => 'account_id'
-        ]);
-        $this->hasMany('Wallets', [
+        $this->hasMany('Customers', [
             'foreignKey' => 'account_id'
         ]);
     }

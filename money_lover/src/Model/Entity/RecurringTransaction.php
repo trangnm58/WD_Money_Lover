@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
  * RecurringTransaction Entity.
  *
  * @property int $id
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property float $amount
  * @property int $unit_id
  * @property \App\Model\Entity\Unit $unit

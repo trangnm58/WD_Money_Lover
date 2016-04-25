@@ -18,7 +18,7 @@ class TransactionsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'account_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'customer_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'amount' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => ''],
         'unit_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'wallet_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -30,7 +30,7 @@ class TransactionsFixture extends TestFixture
         'partner' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'account_id' => ['type' => 'index', 'columns' => ['account_id'], 'length' => []],
+            'customer_id' => ['type' => 'index', 'columns' => ['customer_id'], 'length' => []],
             'category_id' => ['type' => 'index', 'columns' => ['category_id'], 'length' => []],
             'wallet_id' => ['type' => 'index', 'columns' => ['wallet_id'], 'length' => []],
             'event_id' => ['type' => 'index', 'columns' => ['event_id'], 'length' => []],
@@ -38,7 +38,7 @@ class TransactionsFixture extends TestFixture
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'fk_transaction_category_id' => ['type' => 'foreign', 'columns' => ['category_id'], 'references' => ['categorys', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
-            'fk_transaction_customer_id' => ['type' => 'foreign', 'columns' => ['account_id'], 'references' => ['customers', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
+            'fk_transaction_customer_id' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
             'fk_transaction_event_id' => ['type' => 'foreign', 'columns' => ['event_id'], 'references' => ['events', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
             'fk_transaction_wallet_id' => ['type' => 'foreign', 'columns' => ['wallet_id'], 'references' => ['wallets', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
         ],
@@ -57,17 +57,17 @@ class TransactionsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'account_id' => 1,
+            'customer_id' => 1,
             'amount' => 1,
             'unit_id' => 1,
             'wallet_id' => 1,
             'category_id' => 1,
-            'time' => '2016-04-25 10:34:39',
+            'time' => '2016-04-25 14:35:08',
             'event_id' => 1,
             'description' => 'Lorem ipsum dolor sit amet',
             'location' => 'Lorem ipsum dolor sit amet',
             'partner' => 'Lorem ipsum dolor sit amet',
-            'created_at' => 1461580479
+            'created_at' => 1461594908
         ],
     ];
 }

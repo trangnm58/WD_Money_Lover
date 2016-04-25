@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * Categorys Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Groups
- * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $Budgets
  * @property \Cake\ORM\Association\HasMany $RecurringTransactions
  * @property \Cake\ORM\Association\HasMany $Transactions
@@ -37,8 +37,8 @@ class CategorysTable extends Table
             'foreignKey' => 'group_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id'
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Budgets', [
             'foreignKey' => 'category_id'
@@ -85,7 +85,7 @@ class CategorysTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['group_id'], 'Groups'));
-        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         return $rules;
     }
 }

@@ -5,8 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Budget'), ['action' => 'delete', $budget->id], ['confirm' => __('Are you sure you want to delete # {0}?', $budget->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Budgets'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Budget'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Categorys'), ['controller' => 'Categorys', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categorys', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?> </li>
@@ -17,8 +17,8 @@
     <h3><?= h($budget->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Account') ?></th>
-            <td><?= $budget->has('account') ? $this->Html->link($budget->account->id, ['controller' => 'Accounts', 'action' => 'view', $budget->account->id]) : '' ?></td>
+            <th><?= __('Customer') ?></th>
+            <td><?= $budget->has('customer') ? $this->Html->link($budget->customer->id, ['controller' => 'Customers', 'action' => 'view', $budget->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Category') ?></th>

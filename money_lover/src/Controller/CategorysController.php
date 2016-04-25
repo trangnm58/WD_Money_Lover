@@ -19,7 +19,7 @@ class CategorysController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Groups', 'Accounts']
+            'contain' => ['Groups', 'Customers']
         ];
         $categorys = $this->paginate($this->Categorys);
 
@@ -37,7 +37,7 @@ class CategorysController extends AppController
     public function view($id = null)
     {
         $category = $this->Categorys->get($id, [
-            'contain' => ['Groups', 'Accounts', 'Budgets', 'RecurringTransactions', 'Transactions']
+            'contain' => ['Groups', 'Customers', 'Budgets', 'RecurringTransactions', 'Transactions']
         ]);
 
         $this->set('category', $category);
@@ -62,8 +62,8 @@ class CategorysController extends AppController
             }
         }
         $groups = $this->Categorys->Groups->find('list', ['limit' => 200]);
-        $accounts = $this->Categorys->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'groups', 'accounts'));
+        $customers = $this->Categorys->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('category', 'groups', 'customers'));
         $this->set('_serialize', ['category']);
     }
 
@@ -89,8 +89,8 @@ class CategorysController extends AppController
             }
         }
         $groups = $this->Categorys->Groups->find('list', ['limit' => 200]);
-        $accounts = $this->Categorys->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'groups', 'accounts'));
+        $customers = $this->Categorys->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('category', 'groups', 'customers'));
         $this->set('_serialize', ['category']);
     }
 

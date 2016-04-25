@@ -13,14 +13,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $created_at
  * @property string $tokenhash
  * @property bool $activate
- * @property \App\Model\Entity\Budget[] $budgets
- * @property \App\Model\Entity\Category[] $categorys
- * @property \App\Model\Entity\Debt[] $debts
- * @property \App\Model\Entity\Event[] $events
- * @property \App\Model\Entity\RecurringTransaction[] $recurring_transactions
- * @property \App\Model\Entity\Setting[] $settings
- * @property \App\Model\Entity\Transaction[] $transactions
- * @property \App\Model\Entity\Wallet[] $wallets
+ * @property \App\Model\Entity\Customer[] $customers
  */
 class Account extends Entity
 {

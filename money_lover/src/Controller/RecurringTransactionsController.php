@@ -19,7 +19,7 @@ class RecurringTransactionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts', 'Units', 'Wallets', 'Categorys']
+            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys']
         ];
         $recurringTransactions = $this->paginate($this->RecurringTransactions);
 
@@ -37,7 +37,7 @@ class RecurringTransactionsController extends AppController
     public function view($id = null)
     {
         $recurringTransaction = $this->RecurringTransactions->get($id, [
-            'contain' => ['Accounts', 'Units', 'Wallets', 'Categorys']
+            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys']
         ]);
 
         $this->set('recurringTransaction', $recurringTransaction);
@@ -61,11 +61,11 @@ class RecurringTransactionsController extends AppController
                 $this->Flash->error(__('The recurring transaction could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->RecurringTransactions->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->RecurringTransactions->Customers->find('list', ['limit' => 200]);
         $units = $this->RecurringTransactions->Units->find('list', ['limit' => 200]);
         $wallets = $this->RecurringTransactions->Wallets->find('list', ['limit' => 200]);
         $categorys = $this->RecurringTransactions->Categorys->find('list', ['limit' => 200]);
-        $this->set(compact('recurringTransaction', 'accounts', 'units', 'wallets', 'categorys'));
+        $this->set(compact('recurringTransaction', 'customers', 'units', 'wallets', 'categorys'));
         $this->set('_serialize', ['recurringTransaction']);
     }
 
@@ -90,11 +90,11 @@ class RecurringTransactionsController extends AppController
                 $this->Flash->error(__('The recurring transaction could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->RecurringTransactions->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->RecurringTransactions->Customers->find('list', ['limit' => 200]);
         $units = $this->RecurringTransactions->Units->find('list', ['limit' => 200]);
         $wallets = $this->RecurringTransactions->Wallets->find('list', ['limit' => 200]);
         $categorys = $this->RecurringTransactions->Categorys->find('list', ['limit' => 200]);
-        $this->set(compact('recurringTransaction', 'accounts', 'units', 'wallets', 'categorys'));
+        $this->set(compact('recurringTransaction', 'customers', 'units', 'wallets', 'categorys'));
         $this->set('_serialize', ['recurringTransaction']);
     }
 

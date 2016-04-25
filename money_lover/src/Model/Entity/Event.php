@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
  * Event Entity.
  *
  * @property int $id
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property string $name
  * @property \Cake\I18n\Time $ending_date
  * @property \Cake\I18n\Time $created_at

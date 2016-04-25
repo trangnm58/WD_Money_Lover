@@ -5,8 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Events'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Event'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Debts'), ['controller' => 'Debts', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Debt'), ['controller' => 'Debts', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Transactions'), ['controller' => 'Transactions', 'action' => 'index']) ?> </li>
@@ -17,8 +17,8 @@
     <h3><?= h($event->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Account') ?></th>
-            <td><?= $event->has('account') ? $this->Html->link($event->account->id, ['controller' => 'Accounts', 'action' => 'view', $event->account->id]) : '' ?></td>
+            <th><?= __('Customer') ?></th>
+            <td><?= $event->has('customer') ? $this->Html->link($event->customer->id, ['controller' => 'Customers', 'action' => 'view', $event->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Name') ?></th>
@@ -43,7 +43,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Debt Type') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Paid') ?></th>
@@ -58,7 +58,7 @@
             <?php foreach ($event->debts as $debts): ?>
             <tr>
                 <td><?= h($debts->id) ?></td>
-                <td><?= h($debts->account_id) ?></td>
+                <td><?= h($debts->customer_id) ?></td>
                 <td><?= h($debts->debt_type) ?></td>
                 <td><?= h($debts->amount) ?></td>
                 <td><?= h($debts->paid) ?></td>
@@ -84,7 +84,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Wallet Id') ?></th>
@@ -100,7 +100,7 @@
             <?php foreach ($event->transactions as $transactions): ?>
             <tr>
                 <td><?= h($transactions->id) ?></td>
-                <td><?= h($transactions->account_id) ?></td>
+                <td><?= h($transactions->customer_id) ?></td>
                 <td><?= h($transactions->amount) ?></td>
                 <td><?= h($transactions->unit_id) ?></td>
                 <td><?= h($transactions->wallet_id) ?></td>

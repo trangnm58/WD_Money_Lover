@@ -19,7 +19,7 @@ class DebtsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts', 'Wallets', 'Events']
+            'contain' => ['Customers', 'Wallets', 'Events']
         ];
         $debts = $this->paginate($this->Debts);
 
@@ -37,7 +37,7 @@ class DebtsController extends AppController
     public function view($id = null)
     {
         $debt = $this->Debts->get($id, [
-            'contain' => ['Accounts', 'Wallets', 'Events']
+            'contain' => ['Customers', 'Wallets', 'Events']
         ]);
 
         $this->set('debt', $debt);
@@ -61,10 +61,10 @@ class DebtsController extends AppController
                 $this->Flash->error(__('The debt could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Debts->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Debts->Customers->find('list', ['limit' => 200]);
         $wallets = $this->Debts->Wallets->find('list', ['limit' => 200]);
         $events = $this->Debts->Events->find('list', ['limit' => 200]);
-        $this->set(compact('debt', 'accounts', 'wallets', 'events'));
+        $this->set(compact('debt', 'customers', 'wallets', 'events'));
         $this->set('_serialize', ['debt']);
     }
 
@@ -89,10 +89,10 @@ class DebtsController extends AppController
                 $this->Flash->error(__('The debt could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Debts->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Debts->Customers->find('list', ['limit' => 200]);
         $wallets = $this->Debts->Wallets->find('list', ['limit' => 200]);
         $events = $this->Debts->Events->find('list', ['limit' => 200]);
-        $this->set(compact('debt', 'accounts', 'wallets', 'events'));
+        $this->set(compact('debt', 'customers', 'wallets', 'events'));
         $this->set('_serialize', ['debt']);
     }
 

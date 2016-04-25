@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Debt'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Wallet'), ['controller' => 'Wallets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('debt_type') ?></th>
                 <th><?= $this->Paginator->sort('amount') ?></th>
                 <th><?= $this->Paginator->sort('paid') ?></th>
@@ -33,7 +33,7 @@
             <?php foreach ($debts as $debt): ?>
             <tr>
                 <td><?= $this->Number->format($debt->id) ?></td>
-                <td><?= $debt->has('account') ? $this->Html->link($debt->account->id, ['controller' => 'Accounts', 'action' => 'view', $debt->account->id]) : '' ?></td>
+                <td><?= $debt->has('customer') ? $this->Html->link($debt->customer->id, ['controller' => 'Customers', 'action' => 'view', $debt->customer->id]) : '' ?></td>
                 <td><?= h($debt->debt_type) ?></td>
                 <td><?= $this->Number->format($debt->amount) ?></td>
                 <td><?= $this->Number->format($debt->paid) ?></td>

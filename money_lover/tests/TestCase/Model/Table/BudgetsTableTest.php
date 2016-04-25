@@ -25,14 +25,15 @@ class BudgetsTableTest extends TestCase
      */
     public $fixtures = [
         'app.budgets',
+        'app.customers',
         'app.accounts',
+        'app.wallets',
         'app.categorys',
         'app.debts',
         'app.events',
         'app.recurring_transactions',
         'app.settings',
-        'app.transactions',
-        'app.wallets'
+        'app.transactions'
     ];
 
     /**

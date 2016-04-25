@@ -3,13 +3,13 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $setting->account_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $setting->account_id)]
+                ['action' => 'delete', $setting->customer_id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $setting->customer_id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Settings'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="settings form large-9 medium-8 columns content">

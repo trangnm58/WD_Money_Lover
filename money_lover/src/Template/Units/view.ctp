@@ -35,7 +35,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Wallet Id') ?></th>
@@ -53,7 +53,7 @@
             <?php foreach ($unit->recurring_transactions as $recurringTransactions): ?>
             <tr>
                 <td><?= h($recurringTransactions->id) ?></td>
-                <td><?= h($recurringTransactions->account_id) ?></td>
+                <td><?= h($recurringTransactions->customer_id) ?></td>
                 <td><?= h($recurringTransactions->amount) ?></td>
                 <td><?= h($recurringTransactions->unit_id) ?></td>
                 <td><?= h($recurringTransactions->wallet_id) ?></td>
@@ -82,7 +82,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Wallet Id') ?></th>
@@ -98,7 +98,7 @@
             <?php foreach ($unit->transactions as $transactions): ?>
             <tr>
                 <td><?= h($transactions->id) ?></td>
-                <td><?= h($transactions->account_id) ?></td>
+                <td><?= h($transactions->customer_id) ?></td>
                 <td><?= h($transactions->amount) ?></td>
                 <td><?= h($transactions->unit_id) ?></td>
                 <td><?= h($transactions->wallet_id) ?></td>
@@ -125,7 +125,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Name') ?></th>
                 <th><?= __('Description') ?></th>
                 <th><?= __('Icon') ?></th>
@@ -137,7 +137,7 @@
             <?php foreach ($unit->wallets as $wallets): ?>
             <tr>
                 <td><?= h($wallets->id) ?></td>
-                <td><?= h($wallets->account_id) ?></td>
+                <td><?= h($wallets->customer_id) ?></td>
                 <td><?= h($wallets->name) ?></td>
                 <td><?= h($wallets->description) ?></td>
                 <td><?= h($wallets->icon) ?></td>

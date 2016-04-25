@@ -64,7 +64,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', 'aa5cce9e5480b7a722f7fcf69d1ec8e4e9e5c1b7bd84b7bd0bdf0f5c162aedf3'),
+        'salt' => env('SECURITY_SALT', '295ab38c333df740585ab6e59d353bc0bfb47d01d7e6a68bd04f2dcab9a532e5'),
     ],
 
     /**
@@ -268,7 +268,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'moneylover',
             'password' => '12345678',
-            'database' => 'moneylover',
+            'database' => 'test_moneylover',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

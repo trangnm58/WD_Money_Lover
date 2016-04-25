@@ -37,12 +37,19 @@ class PagesController extends AppController
      */
     public function display()
     {
+		/**
+		 * PAGENGUYEN
+		 * $path is an array represents the url after the '/' that was typed in
+		 * Ex: "abc/cde" => $path[0] = 'abc', $path[1] = 'cde'
+		 * use $path to catch the action
+		 */
         $path = func_get_args();
 
         $count = count($path);
         if (!$count) {
             return $this->redirect('/');
         }
+		
         $page = $subpage = null;
 
         if (!empty($path[0])) {
@@ -54,6 +61,10 @@ class PagesController extends AppController
         $this->set(compact('page', 'subpage'));
 
         try {
+			/**
+			 * everything goes to home page in src\Template\Pages
+			 * change $path to ['home']
+			 */
             $this->render(implode('/', $path));
         } catch (MissingTemplateException $e) {
             if (Configure::read('debug')) {

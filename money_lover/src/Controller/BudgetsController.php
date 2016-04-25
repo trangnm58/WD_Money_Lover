@@ -19,7 +19,7 @@ class BudgetsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts', 'Categorys', 'Wallets']
+            'contain' => ['Customers', 'Categorys', 'Wallets']
         ];
         $budgets = $this->paginate($this->Budgets);
 
@@ -37,7 +37,7 @@ class BudgetsController extends AppController
     public function view($id = null)
     {
         $budget = $this->Budgets->get($id, [
-            'contain' => ['Accounts', 'Categorys', 'Wallets']
+            'contain' => ['Customers', 'Categorys', 'Wallets']
         ]);
 
         $this->set('budget', $budget);
@@ -61,10 +61,10 @@ class BudgetsController extends AppController
                 $this->Flash->error(__('The budget could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Budgets->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Budgets->Customers->find('list', ['limit' => 200]);
         $categorys = $this->Budgets->Categorys->find('list', ['limit' => 200]);
         $wallets = $this->Budgets->Wallets->find('list', ['limit' => 200]);
-        $this->set(compact('budget', 'accounts', 'categorys', 'wallets'));
+        $this->set(compact('budget', 'customers', 'categorys', 'wallets'));
         $this->set('_serialize', ['budget']);
     }
 
@@ -89,10 +89,10 @@ class BudgetsController extends AppController
                 $this->Flash->error(__('The budget could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Budgets->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Budgets->Customers->find('list', ['limit' => 200]);
         $categorys = $this->Budgets->Categorys->find('list', ['limit' => 200]);
         $wallets = $this->Budgets->Wallets->find('list', ['limit' => 200]);
-        $this->set(compact('budget', 'accounts', 'categorys', 'wallets'));
+        $this->set(compact('budget', 'customers', 'categorys', 'wallets'));
         $this->set('_serialize', ['budget']);
     }
 

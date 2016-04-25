@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * RecurringTransactions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Units
  * @property \Cake\ORM\Association\BelongsTo $Wallets
  * @property \Cake\ORM\Association\BelongsTo $Categorys
@@ -32,8 +32,8 @@ class RecurringTransactionsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id',
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Units', [
@@ -113,7 +113,7 @@ class RecurringTransactionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['unit_id'], 'Units'));
         $rules->add($rules->existsIn(['wallet_id'], 'Wallets'));
         $rules->add($rules->existsIn(['category_id'], 'Categorys'));

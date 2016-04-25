@@ -6,8 +6,8 @@ use Cake\ORM\Entity;
 /**
  * Setting Entity.
  *
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property string $displayed_amount
  * @property string $language
  * @property string $date_format
@@ -30,6 +30,6 @@ class Setting extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'account_id' => false,
+        'customer_id' => false,
     ];
 }

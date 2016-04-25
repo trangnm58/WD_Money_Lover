@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `categorys` (
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -274,7 +275,7 @@ ALTER TABLE `categorys`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `accounts` (`email`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_customer_id` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_customer_customer_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `accounts` (`username`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_customer_wallet` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON UPDATE CASCADE;
 

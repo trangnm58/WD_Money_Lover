@@ -10,7 +10,16 @@ use Cake\Validation\Validator;
 /**
  * Customers Model
  *
- * @property \Cake\ORM\Association\BelongsTo $CurentWallets
+ * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Wallets
+ * @property \Cake\ORM\Association\HasMany $Budgets
+ * @property \Cake\ORM\Association\HasMany $Categorys
+ * @property \Cake\ORM\Association\HasMany $Debts
+ * @property \Cake\ORM\Association\HasMany $Events
+ * @property \Cake\ORM\Association\HasMany $RecurringTransactions
+ * @property \Cake\ORM\Association\HasMany $Settings
+ * @property \Cake\ORM\Association\HasMany $Transactions
+ * @property \Cake\ORM\Association\HasMany $Wallets
  */
 class CustomersTable extends Table
 {
@@ -29,8 +38,36 @@ class CustomersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('CurentWallets', [
-            'foreignKey' => 'curent_wallet_id'
+        $this->belongsTo('Accounts', [
+            'foreignKey' => 'account_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Wallets', [
+            'foreignKey' => 'wallet_id'
+        ]);
+        $this->hasMany('Budgets', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Categorys', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Debts', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Events', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('RecurringTransactions', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Settings', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Transactions', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Wallets', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -87,7 +124,8 @@ class CustomersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['curent_wallet_id'], 'CurentWallets'));
+        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['wallet_id'], 'Wallets'));
         return $rules;
     }
 }

@@ -126,17 +126,17 @@
     },
     {
         "name": "mobiledetect/mobiledetectlib",
-        "version": "2.8.21",
-        "version_normalized": "2.8.21.0",
+        "version": "2.8.22",
+        "version_normalized": "2.8.22.0",
         "source": {
             "type": "git",
             "url": "https://github.com/serbanghita/Mobile-Detect.git",
-            "reference": "edf31d000b1166e0f78f3498b688c7b11a849499"
+            "reference": "53cddae0c272a478b24a4b5fb60d0f838caf70b6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/edf31d000b1166e0f78f3498b688c7b11a849499",
-            "reference": "edf31d000b1166e0f78f3498b688c7b11a849499",
+            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/53cddae0c272a478b24a4b5fb60d0f838caf70b6",
+            "reference": "53cddae0c272a478b24a4b5fb60d0f838caf70b6",
             "shasum": ""
         },
         "require": {
@@ -147,7 +147,7 @@
             "johnkary/phpunit-speedtrap": "~1.0@dev",
             "phpunit/phpunit": "*"
         },
-        "time": "2016-04-18 15:04:00",
+        "time": "2016-04-24 09:47:16",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -319,17 +319,17 @@
     },
     {
         "name": "cakephp/cakephp",
-        "version": "3.2.7",
-        "version_normalized": "3.2.7.0",
+        "version": "3.2.8",
+        "version_normalized": "3.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/cakephp/cakephp.git",
-            "reference": "2d6e369b3cb216bc861453beb223f5b973d4a61d"
+            "reference": "c263b386982abd22d38d171ebdc56ab64881030a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/2d6e369b3cb216bc861453beb223f5b973d4a61d",
-            "reference": "2d6e369b3cb216bc861453beb223f5b973d4a61d",
+            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/c263b386982abd22d38d171ebdc56ab64881030a",
+            "reference": "c263b386982abd22d38d171ebdc56ab64881030a",
             "shasum": ""
         },
         "require": {
@@ -361,7 +361,7 @@
         "suggest": {
             "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation."
         },
-        "time": "2016-04-11 01:25:26",
+        "time": "2016-04-25 01:54:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

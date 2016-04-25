@@ -5,8 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Recurring Transaction'), ['action' => 'delete', $recurringTransaction->id], ['confirm' => __('Are you sure you want to delete # {0}?', $recurringTransaction->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Recurring Transactions'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Recurring Transaction'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?> </li>
@@ -19,8 +19,8 @@
     <h3><?= h($recurringTransaction->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Account') ?></th>
-            <td><?= $recurringTransaction->has('account') ? $this->Html->link($recurringTransaction->account->id, ['controller' => 'Accounts', 'action' => 'view', $recurringTransaction->account->id]) : '' ?></td>
+            <th><?= __('Customer') ?></th>
+            <td><?= $recurringTransaction->has('customer') ? $this->Html->link($recurringTransaction->customer->id, ['controller' => 'Customers', 'action' => 'view', $recurringTransaction->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Unit') ?></th>

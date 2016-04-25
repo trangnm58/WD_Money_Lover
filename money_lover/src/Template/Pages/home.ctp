@@ -14,6 +14,7 @@
  */
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
@@ -132,6 +133,14 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 <?php else: ?>
                     <p class="problem">CakePHP is NOT able to connect to the database.<br /><br /><?= $errorMsg ?></p>
                 <?php endif; ?>
+
+                <hr>
+                <h4>DebugKit</h4>
+                <?php if (Plugin::loaded('DebugKit')): ?>
+                    <p class="success">DebugKit is loaded.</p>
+                <?php else: ?>
+                    <p class="problem">DebugKit is NOT loaded. You need to either install pdo_sqlite, or define the "debug_kit" connection name.</p>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -202,6 +211,10 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     <li>
                         <a href="https://github.com/cakephp/">CakePHP Code</a>
                         <ul><li>For the Development of CakePHP Git repository, Downloads</li></ul>
+                    </li>
+                    <li>
+                        <a href="https://github.com/FriendsOfCake/awesome-cakephp">CakePHP Awesome List/a>
+                        <ul><li>A curated list of amazingly awesome CakePHP plugins, resources and shiny things.</li></ul>
                     </li>
                     <li>
                         <a href="http://www.cakephp.org">CakePHP</a>

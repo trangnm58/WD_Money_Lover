@@ -8,8 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Transactions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
@@ -25,7 +25,7 @@
     <fieldset>
         <legend><?= __('Edit Transaction') ?></legend>
         <?php
-            echo $this->Form->input('account_id', ['options' => $accounts]);
+            echo $this->Form->input('customer_id', ['options' => $customers]);
             echo $this->Form->input('amount');
             echo $this->Form->input('unit_id', ['options' => $units]);
             echo $this->Form->input('wallet_id', ['options' => $wallets]);

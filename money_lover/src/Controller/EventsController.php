@@ -19,7 +19,7 @@ class EventsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts']
+            'contain' => ['Customers']
         ];
         $events = $this->paginate($this->Events);
 
@@ -37,7 +37,7 @@ class EventsController extends AppController
     public function view($id = null)
     {
         $event = $this->Events->get($id, [
-            'contain' => ['Accounts', 'Debts', 'Transactions']
+            'contain' => ['Customers', 'Debts', 'Transactions']
         ]);
 
         $this->set('event', $event);
@@ -61,8 +61,8 @@ class EventsController extends AppController
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Events->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'accounts'));
+        $customers = $this->Events->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'customers'));
         $this->set('_serialize', ['event']);
     }
 
@@ -87,8 +87,8 @@ class EventsController extends AppController
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Events->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'accounts'));
+        $customers = $this->Events->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'customers'));
         $this->set('_serialize', ['event']);
     }
 

@@ -19,7 +19,7 @@ class SettingsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts']
+            'contain' => ['Customers']
         ];
         $settings = $this->paginate($this->Settings);
 
@@ -37,7 +37,7 @@ class SettingsController extends AppController
     public function view($id = null)
     {
         $setting = $this->Settings->get($id, [
-            'contain' => ['Accounts']
+            'contain' => ['Customers']
         ]);
 
         $this->set('setting', $setting);
@@ -61,8 +61,8 @@ class SettingsController extends AppController
                 $this->Flash->error(__('The setting could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Settings->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('setting', 'accounts'));
+        $customers = $this->Settings->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('setting', 'customers'));
         $this->set('_serialize', ['setting']);
     }
 
@@ -87,8 +87,8 @@ class SettingsController extends AppController
                 $this->Flash->error(__('The setting could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Settings->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('setting', 'accounts'));
+        $customers = $this->Settings->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('setting', 'customers'));
         $this->set('_serialize', ['setting']);
     }
 

@@ -7,8 +7,7 @@ use Cake\ORM\Entity;
  * Wallet Entity.
  *
  * @property int $id
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
  * @property string $name
  * @property string $description
  * @property int $icon
@@ -16,6 +15,7 @@ use Cake\ORM\Entity;
  * @property int $unit_id
  * @property \App\Model\Entity\Unit $unit
  * @property \Cake\I18n\Time $created_at
+ * @property \App\Model\Entity\Customer[] $customers
  * @property \App\Model\Entity\Budget[] $budgets
  * @property \App\Model\Entity\Debt[] $debts
  * @property \App\Model\Entity\RecurringTransaction[] $recurring_transactions

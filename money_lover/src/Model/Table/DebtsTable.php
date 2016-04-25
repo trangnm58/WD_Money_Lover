@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Debts Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Accounts
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Wallets
  * @property \Cake\ORM\Association\BelongsTo $Events
  */
@@ -31,8 +31,8 @@ class DebtsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id',
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Wallets', [
@@ -100,7 +100,7 @@ class DebtsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['wallet_id'], 'Wallets'));
         $rules->add($rules->existsIn(['event_id'], 'Events'));
         return $rules;

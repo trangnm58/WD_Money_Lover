@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
  * Debt Entity.
  *
  * @property int $id
- * @property int $account_id
- * @property \App\Model\Entity\Account $account
+ * @property int $customer_id
+ * @property \App\Model\Entity\Customer $customer
  * @property bool $debt_type
  * @property float $amount
  * @property float $paid

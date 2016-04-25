@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Transaction'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
@@ -20,7 +20,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('amount') ?></th>
                 <th><?= $this->Paginator->sort('unit_id') ?></th>
                 <th><?= $this->Paginator->sort('wallet_id') ?></th>
@@ -38,7 +38,7 @@
             <?php foreach ($transactions as $transaction): ?>
             <tr>
                 <td><?= $this->Number->format($transaction->id) ?></td>
-                <td><?= $transaction->has('account') ? $this->Html->link($transaction->account->id, ['controller' => 'Accounts', 'action' => 'view', $transaction->account->id]) : '' ?></td>
+                <td><?= $transaction->has('customer') ? $this->Html->link($transaction->customer->id, ['controller' => 'Customers', 'action' => 'view', $transaction->customer->id]) : '' ?></td>
                 <td><?= $this->Number->format($transaction->amount) ?></td>
                 <td><?= $transaction->has('unit') ? $this->Html->link($transaction->unit->name, ['controller' => 'Units', 'action' => 'view', $transaction->unit->id]) : '' ?></td>
                 <td><?= $transaction->has('wallet') ? $this->Html->link($transaction->wallet->name, ['controller' => 'Wallets', 'action' => 'view', $transaction->wallet->id]) : '' ?></td>

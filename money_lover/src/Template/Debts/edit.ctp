@@ -8,8 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Debts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Wallet'), ['controller' => 'Wallets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
@@ -21,7 +21,7 @@
     <fieldset>
         <legend><?= __('Edit Debt') ?></legend>
         <?php
-            echo $this->Form->input('account_id', ['options' => $accounts]);
+            echo $this->Form->input('customer_id', ['options' => $customers]);
             echo $this->Form->input('debt_type');
             echo $this->Form->input('amount');
             echo $this->Form->input('paid');

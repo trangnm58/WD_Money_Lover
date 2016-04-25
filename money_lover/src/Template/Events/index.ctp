@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Event'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Debts'), ['controller' => 'Debts', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Debt'), ['controller' => 'Debts', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Transactions'), ['controller' => 'Transactions', 'action' => 'index']) ?></li>
@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('ending_date') ?></th>
                 <th><?= $this->Paginator->sort('created_at') ?></th>
@@ -27,7 +27,7 @@
             <?php foreach ($events as $event): ?>
             <tr>
                 <td><?= $this->Number->format($event->id) ?></td>
-                <td><?= $event->has('account') ? $this->Html->link($event->account->id, ['controller' => 'Accounts', 'action' => 'view', $event->account->id]) : '' ?></td>
+                <td><?= $event->has('customer') ? $this->Html->link($event->customer->id, ['controller' => 'Customers', 'action' => 'view', $event->customer->id]) : '' ?></td>
                 <td><?= h($event->name) ?></td>
                 <td><?= h($event->ending_date) ?></td>
                 <td><?= h($event->created_at) ?></td>

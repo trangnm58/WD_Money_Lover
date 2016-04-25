@@ -5,8 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Category'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Categorys'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Budgets'), ['controller' => 'Budgets', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Budget'), ['controller' => 'Budgets', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Recurring Transactions'), ['controller' => 'RecurringTransactions', 'action' => 'index']) ?> </li>
@@ -23,8 +23,8 @@
             <td><?= h($category->name) ?></td>
         </tr>
         <tr>
-            <th><?= __('Account') ?></th>
-            <td><?= $category->has('account') ? $this->Html->link($category->account->id, ['controller' => 'Accounts', 'action' => 'view', $category->account->id]) : '' ?></td>
+            <th><?= __('Customer') ?></th>
+            <td><?= $category->has('customer') ? $this->Html->link($category->customer->id, ['controller' => 'Customers', 'action' => 'view', $category->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>
@@ -45,7 +45,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Goal') ?></th>
                 <th><?= __('Spent') ?></th>
                 <th><?= __('From Date') ?></th>
@@ -58,7 +58,7 @@
             <?php foreach ($category->budgets as $budgets): ?>
             <tr>
                 <td><?= h($budgets->id) ?></td>
-                <td><?= h($budgets->account_id) ?></td>
+                <td><?= h($budgets->customer_id) ?></td>
                 <td><?= h($budgets->goal) ?></td>
                 <td><?= h($budgets->spent) ?></td>
                 <td><?= h($budgets->from_date) ?></td>
@@ -82,7 +82,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Wallet Id') ?></th>
@@ -100,7 +100,7 @@
             <?php foreach ($category->recurring_transactions as $recurringTransactions): ?>
             <tr>
                 <td><?= h($recurringTransactions->id) ?></td>
-                <td><?= h($recurringTransactions->account_id) ?></td>
+                <td><?= h($recurringTransactions->customer_id) ?></td>
                 <td><?= h($recurringTransactions->amount) ?></td>
                 <td><?= h($recurringTransactions->unit_id) ?></td>
                 <td><?= h($recurringTransactions->wallet_id) ?></td>
@@ -129,7 +129,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Account Id') ?></th>
+                <th><?= __('Customer Id') ?></th>
                 <th><?= __('Amount') ?></th>
                 <th><?= __('Unit Id') ?></th>
                 <th><?= __('Wallet Id') ?></th>
@@ -145,7 +145,7 @@
             <?php foreach ($category->transactions as $transactions): ?>
             <tr>
                 <td><?= h($transactions->id) ?></td>
-                <td><?= h($transactions->account_id) ?></td>
+                <td><?= h($transactions->customer_id) ?></td>
                 <td><?= h($transactions->amount) ?></td>
                 <td><?= h($transactions->unit_id) ?></td>
                 <td><?= h($transactions->wallet_id) ?></td>

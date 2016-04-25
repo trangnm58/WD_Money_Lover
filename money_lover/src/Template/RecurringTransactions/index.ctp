@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Recurring Transaction'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Wallets'), ['controller' => 'Wallets', 'action' => 'index']) ?></li>
@@ -18,7 +18,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('amount') ?></th>
                 <th><?= $this->Paginator->sort('unit_id') ?></th>
                 <th><?= $this->Paginator->sort('wallet_id') ?></th>
@@ -37,7 +37,7 @@
             <?php foreach ($recurringTransactions as $recurringTransaction): ?>
             <tr>
                 <td><?= $this->Number->format($recurringTransaction->id) ?></td>
-                <td><?= $recurringTransaction->has('account') ? $this->Html->link($recurringTransaction->account->id, ['controller' => 'Accounts', 'action' => 'view', $recurringTransaction->account->id]) : '' ?></td>
+                <td><?= $recurringTransaction->has('customer') ? $this->Html->link($recurringTransaction->customer->id, ['controller' => 'Customers', 'action' => 'view', $recurringTransaction->customer->id]) : '' ?></td>
                 <td><?= $this->Number->format($recurringTransaction->amount) ?></td>
                 <td><?= $recurringTransaction->has('unit') ? $this->Html->link($recurringTransaction->unit->name, ['controller' => 'Units', 'action' => 'view', $recurringTransaction->unit->id]) : '' ?></td>
                 <td><?= $recurringTransaction->has('wallet') ? $this->Html->link($recurringTransaction->wallet->name, ['controller' => 'Wallets', 'action' => 'view', $recurringTransaction->wallet->id]) : '' ?></td>

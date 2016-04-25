@@ -19,7 +19,7 @@ class TransactionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Accounts', 'Units', 'Wallets', 'Categorys', 'Events']
+            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys', 'Events']
         ];
         $transactions = $this->paginate($this->Transactions);
 
@@ -37,7 +37,7 @@ class TransactionsController extends AppController
     public function view($id = null)
     {
         $transaction = $this->Transactions->get($id, [
-            'contain' => ['Accounts', 'Units', 'Wallets', 'Categorys', 'Events']
+            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys', 'Events']
         ]);
 
         $this->set('transaction', $transaction);
@@ -61,12 +61,12 @@ class TransactionsController extends AppController
                 $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Transactions->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Transactions->Customers->find('list', ['limit' => 200]);
         $units = $this->Transactions->Units->find('list', ['limit' => 200]);
         $wallets = $this->Transactions->Wallets->find('list', ['limit' => 200]);
         $categorys = $this->Transactions->Categorys->find('list', ['limit' => 200]);
         $events = $this->Transactions->Events->find('list', ['limit' => 200]);
-        $this->set(compact('transaction', 'accounts', 'units', 'wallets', 'categorys', 'events'));
+        $this->set(compact('transaction', 'customers', 'units', 'wallets', 'categorys', 'events'));
         $this->set('_serialize', ['transaction']);
     }
 
@@ -91,12 +91,12 @@ class TransactionsController extends AppController
                 $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
             }
         }
-        $accounts = $this->Transactions->Accounts->find('list', ['limit' => 200]);
+        $customers = $this->Transactions->Customers->find('list', ['limit' => 200]);
         $units = $this->Transactions->Units->find('list', ['limit' => 200]);
         $wallets = $this->Transactions->Wallets->find('list', ['limit' => 200]);
         $categorys = $this->Transactions->Categorys->find('list', ['limit' => 200]);
         $events = $this->Transactions->Events->find('list', ['limit' => 200]);
-        $this->set(compact('transaction', 'accounts', 'units', 'wallets', 'categorys', 'events'));
+        $this->set(compact('transaction', 'customers', 'units', 'wallets', 'categorys', 'events'));
         $this->set('_serialize', ['transaction']);
     }
 

@@ -19,7 +19,7 @@ class CustomersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['CurentWallets']
+            'contain' => ['Accounts']
         ];
         $customers = $this->paginate($this->Customers);
 
@@ -37,7 +37,7 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['CurentWallets']
+            'contain' => ['Accounts', 'Wallets', 'Budgets', 'Categorys', 'Debts', 'Events', 'RecurringTransactions', 'Settings', 'Transactions']
         ]);
 
         $this->set('customer', $customer);
@@ -61,8 +61,8 @@ class CustomersController extends AppController
                 $this->Flash->error(__('The customer could not be saved. Please, try again.'));
             }
         }
-        $curentWallets = $this->Customers->CurentWallets->find('list', ['limit' => 200]);
-        $this->set(compact('customer', 'curentWallets'));
+        $accounts = $this->Customers->Accounts->find('list', ['limit' => 200]);
+        $this->set(compact('customer', 'accounts'));
         $this->set('_serialize', ['customer']);
     }
 
@@ -87,8 +87,8 @@ class CustomersController extends AppController
                 $this->Flash->error(__('The customer could not be saved. Please, try again.'));
             }
         }
-        $curentWallets = $this->Customers->CurentWallets->find('list', ['limit' => 200]);
-        $this->set(compact('customer', 'curentWallets'));
+        $accounts = $this->Customers->Accounts->find('list', ['limit' => 200]);
+        $this->set(compact('customer', 'accounts'));
         $this->set('_serialize', ['customer']);
     }
 

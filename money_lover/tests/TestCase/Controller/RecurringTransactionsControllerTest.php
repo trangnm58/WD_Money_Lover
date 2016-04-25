@@ -17,12 +17,13 @@ class RecurringTransactionsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.recurring_transactions',
+        'app.customers',
         'app.accounts',
+        'app.wallets',
         'app.budgets',
         'app.categorys',
         'app.groups',
         'app.transactions',
-        'app.wallets',
         'app.debts',
         'app.events',
         'app.settings',

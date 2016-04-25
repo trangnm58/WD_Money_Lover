@@ -2,8 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Budgets'), ['controller' => 'Budgets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Budget'), ['controller' => 'Budgets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Recurring Transactions'), ['controller' => 'RecurringTransactions', 'action' => 'index']) ?></li>
@@ -21,7 +21,7 @@
                 <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('icon') ?></th>
                 <th><?= $this->Paginator->sort('group_id') ?></th>
-                <th><?= $this->Paginator->sort('account_id') ?></th>
+                <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -32,7 +32,7 @@
                 <td><?= h($category->name) ?></td>
                 <td><?= $this->Number->format($category->icon) ?></td>
                 <td><?= $this->Number->format($category->group_id) ?></td>
-                <td><?= $category->has('account') ? $this->Html->link($category->account->id, ['controller' => 'Accounts', 'action' => 'view', $category->account->id]) : '' ?></td>
+                <td><?= $category->has('customer') ? $this->Html->link($category->customer->id, ['controller' => 'Customers', 'action' => 'view', $category->customer->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $category->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id]) ?>
