@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2016 at 04:05 PM
+-- Generation Time: Apr 25, 2016 at 05:20 PM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.16
 
@@ -25,11 +25,11 @@ USE `moneylover`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `account`
+-- Table structure for table `accounts`
 --
 
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE IF NOT EXISTS `account` (
+DROP TABLE IF EXISTS `accounts`;
+CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -45,11 +45,11 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `budget`
+-- Table structure for table `budgets`
 --
 
-DROP TABLE IF EXISTS `budget`;
-CREATE TABLE IF NOT EXISTS `budget` (
+DROP TABLE IF EXISTS `budgets`;
+CREATE TABLE IF NOT EXISTS `budgets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `goal` double NOT NULL DEFAULT '0',
@@ -68,11 +68,11 @@ CREATE TABLE IF NOT EXISTS `budget` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `categorys`
 --
 
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
+DROP TABLE IF EXISTS `categorys`;
+CREATE TABLE IF NOT EXISTS `categorys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `icon` tinyint(4) unsigned NOT NULL DEFAULT '0',
@@ -85,11 +85,11 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE IF NOT EXISTS `customer` (
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -106,11 +106,11 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `debt`
+-- Table structure for table `debts`
 --
 
-DROP TABLE IF EXISTS `debt`;
-CREATE TABLE IF NOT EXISTS `debt` (
+DROP TABLE IF EXISTS `debts`;
+CREATE TABLE IF NOT EXISTS `debts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `debt_type` tinyint(1) NOT NULL,
@@ -130,11 +130,11 @@ CREATE TABLE IF NOT EXISTS `debt` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `event`
+-- Table structure for table `events`
 --
 
-DROP TABLE IF EXISTS `event`;
-CREATE TABLE IF NOT EXISTS `event` (
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -147,11 +147,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recurring_transaction`
+-- Table structure for table `recurring_transactions`
 --
 
-DROP TABLE IF EXISTS `recurring_transaction`;
-CREATE TABLE IF NOT EXISTS `recurring_transaction` (
+DROP TABLE IF EXISTS `recurring_transactions`;
+CREATE TABLE IF NOT EXISTS `recurring_transactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `amount` double NOT NULL,
@@ -174,11 +174,11 @@ CREATE TABLE IF NOT EXISTS `recurring_transaction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `setting`
+-- Table structure for table `settings`
 --
 
-DROP TABLE IF EXISTS `setting`;
-CREATE TABLE IF NOT EXISTS `setting` (
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE IF NOT EXISTS `settings` (
   `account_id` int(11) NOT NULL,
   `displayed_amount` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `language` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
@@ -193,11 +193,11 @@ CREATE TABLE IF NOT EXISTS `setting` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaction`
+-- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `transaction`;
-CREATE TABLE IF NOT EXISTS `transaction` (
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE IF NOT EXISTS `transactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
@@ -220,11 +220,11 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `unit`
+-- Table structure for table `units`
 --
 
-DROP TABLE IF EXISTS `unit`;
-CREATE TABLE IF NOT EXISTS `unit` (
+DROP TABLE IF EXISTS `units`;
+CREATE TABLE IF NOT EXISTS `units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `exchange_rate` double NOT NULL DEFAULT '0',
@@ -234,11 +234,11 @@ CREATE TABLE IF NOT EXISTS `unit` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wallet`
+-- Table structure for table `wallets`
 --
 
-DROP TABLE IF EXISTS `wallet`;
-CREATE TABLE IF NOT EXISTS `wallet` (
+DROP TABLE IF EXISTS `wallets`;
+CREATE TABLE IF NOT EXISTS `wallets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -256,67 +256,67 @@ CREATE TABLE IF NOT EXISTS `wallet` (
 --
 
 --
--- Constraints for table `budget`
+-- Constraints for table `budgets`
 --
-ALTER TABLE `budget`
-  ADD CONSTRAINT `fk_budget_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_budget_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_budget_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `budgets`
+  ADD CONSTRAINT `fk_budget_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_budget_category_id` FOREIGN KEY (`category_id`) REFERENCES `categorys` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_budget_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `category`
+-- Constraints for table `categorys`
 --
-ALTER TABLE `category`
-  ADD CONSTRAINT `fk_category_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `categorys`
+  ADD CONSTRAINT `fk_category_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `customer`
+-- Constraints for table `customers`
 --
-ALTER TABLE `customer`
-  ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `account` (`email`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_account_id` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `account` (`username`) ON UPDATE CASCADE;
+ALTER TABLE `customers`
+  ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `accounts` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_customer_account_id` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `accounts` (`username`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `debt`
+-- Constraints for table `debts`
 --
-ALTER TABLE `debt`
-  ADD CONSTRAINT `fk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_dept_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `debts`
+  ADD CONSTRAINT `fk_dept_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_dept_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `event`
+-- Constraints for table `events`
 --
-ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `events`
+  ADD CONSTRAINT `fk_event_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `recurring_transaction`
+-- Constraints for table `recurring_transactions`
 --
-ALTER TABLE `recurring_transaction`
-  ADD CONSTRAINT `fk_recurring_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_recurring_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `recurring_transactions`
+  ADD CONSTRAINT `fk_recurring_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_recurring_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `categorys` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `setting`
+-- Constraints for table `settings`
 --
-ALTER TABLE `setting`
-  ADD CONSTRAINT `fk_setting_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `settings`
+  ADD CONSTRAINT `fk_setting_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `transaction`
+-- Constraints for table `transactions`
 --
-ALTER TABLE `transaction`
-  ADD CONSTRAINT `fk_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_transaction_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_transaction_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `fk_transaction_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_category_id` FOREIGN KEY (`category_id`) REFERENCES `categorys` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transaction_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `wallet`
+-- Constraints for table `wallets`
 --
-ALTER TABLE `wallet`
-  ADD CONSTRAINT `fk_wallet_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `wallets`
+  ADD CONSTRAINT `fk_wallet_customer_id` FOREIGN KEY (`account_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
