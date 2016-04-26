@@ -1,5 +1,6 @@
 # CakePHP 3
 
+/bin/*
 /vendor/*
 /config/app.php
 /tmp/*
