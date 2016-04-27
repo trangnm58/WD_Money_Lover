@@ -1,5 +1,13 @@
 <IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	IndexIgnore */*
     RewriteEngine on
-    RewriteRule    ^$    webroot/    [L]
-    RewriteRule    (.*) webroot/$1    [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)\.(ico|gif|jpg|png|jpeg|css|js|swf|otf|eot|svg|ttf|woff|woff2)$ /moneylover/webroot/$1.$2 [L,NC]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* index.php
 </IfModule>

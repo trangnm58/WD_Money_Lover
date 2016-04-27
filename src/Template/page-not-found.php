@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>404 - Page Not Found</title>
     <link rel="stylesheet" type="text/css" href="css/page-not-found.css?v=1.0.0">
-    <link rel="stylesheet" type="text/css" href="css/ionicons.min.css?v=2.0.0">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css?v=1.0.0">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                 <li style="height: 57px; line-height: 57px;">o</li>
                 <li style="height: 57px; line-height: 57px;">k</li>
                 <li style="height: 57px; line-height: 57px;">c</li>
-                <li style="height: 57px; line-h?v=1.0.0eight: 57px;">s</li>
+                <li style="height: 57px; line-height: 57px;">s</li>
                 <li style="height: 57px; line-height: 57px;">c</li>
                 <li style="height: 57px; line-height: 57px;">t</li>
                 <li style="height: 57px; line-height: 57px;">a</li>
@@ -88,7 +88,7 @@
                 <form>
                     <input type="text" placeholder="Tell Us Your Problems">
                     <button type="submit" class="input-contact">
-                        <i class="ion-checkmark"></i>
+                        <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </form>
             </div>
@@ -96,10 +96,10 @@
                 <a class="navigation" href="#">Home</a>
                 <a class="navigation" href="#">About Us</a>
                 <a class="navigation" href="#">
-                    <i class="ion-social-twitter"></i>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
                 </a>
                 <a class="navigation" href="#">
-                    <i class="ion-social-googleplus"></i>
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
