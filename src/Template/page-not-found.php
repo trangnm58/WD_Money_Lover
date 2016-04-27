@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>404 - Page Not Found</title>
     <link rel="stylesheet" type="text/css" href="css/page-not-found.css?v=1.0.0">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css?v=1.0.0">
+    <link rel="stylesheet" type="text/css" href="lib/font-awesome.min.css?v=4.6.1">
+    <link rel="shortcut icon" href="favicon.png">
 </head>
 
 <body>
@@ -14,70 +15,70 @@
     <div id="wrap">
         <div id="wordsearch" style="height: 466px;">
             <ul>
-                <li style="height: 57px; line-height: 57px;">r</li>
-                <li style="height: 57px; line-height: 57px;">u</li>
-                <li style="height: 57px; line-height: 57px;">f</li>
-                <li style="height: 57px; line-height: 57px;">a</li>
-                <li style="height: 57px; line-height: 57px;">o</li>
-                <li style="height: 57px; line-height: 57px;">k</li>
-                <li style="height: 57px; line-height: 57px;">c</li>
-                <li style="height: 57px; line-height: 57px;">s</li>
-                <li style="height: 57px; line-height: 57px;">c</li>
-                <li style="height: 57px; line-height: 57px;">t</li>
-                <li style="height: 57px; line-height: 57px;">a</li>
-                <li style="height: 57px; line-height: 57px;">p</li>
-                <li class="one" style="height: 57px; line-height: 57px;">4</li>
-                <li class="two" style="height: 57px; line-height: 57px;">0</li>
-                <li class="three" style="height: 57px; line-height: 57px;">4</li>
-                <li style="height: 57px; line-height: 57px;">f</li>
-                <li style="height: 57px; line-height: 57px;">b</li>
-                <li style="height: 57px; line-height: 57px;">v</li>
-                <li style="height: 57px; line-height: 57px;">i</li>
-                <li style="height: 57px; line-height: 57px;">n</li>
-                <li style="height: 57px; line-height: 57px;">e</li>
-                <li style="height: 57px; line-height: 57px;">m</li>
-                <li style="height: 57px; line-height: 57px;">s</li>
-                <li style="height: 57px; line-height: 57px;">q</li>
-                <li style="height: 57px; line-height: 57px;">l</li>
-                <li style="height: 57px; line-height: 57px;">k</li>
-                <li class="four" style="height: 57px; line-height: 57px;">p</li>
-                <li class="five" style="height: 57px; line-height: 57px;">a</li>
-                <li class="six" style="height: 57px; line-height: 57px;">g</li>
-                <li class="seven" style="height: 57px; line-height: 57px;">e</li>
-                <li style="height: 57px; line-height: 57px;">f</li>
-                <li style="height: 57px; line-height: 57px;">a</li>
-                <li style="height: 57px; line-height: 57px;">x</li>
-                <li class="eight" style="height: 57px; line-height: 57px;">n</li>
-                <li class="nine" style="height: 57px; line-height: 57px;">o</li>
-                <li class="ten" style="height: 57px; line-height: 57px;">t</li>
-                <li style="height: 57px; line-height: 57px;">r</li>
-                <li style="height: 57px; line-height: 57px;">l</li>
-                <li style="height: 57px; line-height: 57px;">y</li>
-                <li style="height: 57px; line-height: 57px;">j</li>
-                <li style="height: 57px; line-height: 57px;">b</li>
-                <li style="height: 57px; line-height: 57px;">y</li>
-                <li style="height: 57px; line-height: 57px;">r</li>
-                <li style="height: 57px; line-height: 57px;">c</li>
-                <li style="height: 57px; line-height: 57px;">c</li>
-                <li style="height: 57px; line-height: 57px;">p</li>
-                <li style="height: 57px; line-height: 57px;">p</li>
-                <li style="height: 57px; line-height: 57px;">s</li>
-                <li style="height: 57px; line-height: 57px;">c</li>
-                <li class="eleven" style="height: 57px; line-height: 57px;">f</li>
-                <li class="twelve" style="height: 57px; line-height: 57px;">o</li>
-                <li class="thirteen" style="height: 57px; line-height: 57px;">u</li>
-                <li class="fourteen" style="height: 57px; line-height: 57px;">n</li>
-                <li class="fifteen" style="height: 57px; line-height: 57px;">d</li>
-                <li style="height: 57px; line-height: 57px;">b</li>
-                <li style="height: 57px; line-height: 57px;">v</li>
-                <li style="height: 57px; line-height: 57px;">z</li>
-                <li style="height: 57px; line-height: 57px;">v</li>
-                <li style="height: 57px; line-height: 57px;">e</li>
-                <li style="height: 57px; line-height: 57px;">i</li>
-                <li style="height: 57px; line-height: 57px;">x</li>
-                <li style="height: 57px; line-height: 57px;">w</li>
-                <li style="height: 57px; line-height: 57px;">e</li>
-                <li style="height: 57px; line-height: 57px;">z</li>
+                <li>r</li>
+                <li>u</li>
+                <li>f</li>
+                <li>a</li>
+                <li>o</li>
+                <li>k</li>
+                <li>c</li>
+                <li>s</li>
+                <li>c</li>
+                <li>t</li>
+                <li>a</li>
+                <li>p</li>
+                <li class="one">4</li>
+                <li class="two">0</li>
+                <li class="three">4</li>
+                <li>f</li>
+                <li>b</li>
+                <li>v</li>
+                <li>i</li>
+                <li>n</li>
+                <li>e</li>
+                <li>m</li>
+                <li>s</li>
+                <li>q</li>
+                <li>l</li>
+                <li>k</li>
+                <li class="four">p</li>
+                <li class="five">a</li>
+                <li class="six">g</li>
+                <li class="seven">e</li>
+                <li>f</li>
+                <li>a</li>
+                <li>x</li>
+                <li class="eight">n</li>
+                <li class="nine">o</li>
+                <li class="ten">t</li>
+                <li>r</li>
+                <li>l</li>
+                <li>y</li>
+                <li>j</li>
+                <li>b</li>
+                <li>y</li>
+                <li>r</li>
+                <li>c</li>
+                <li>c</li>
+                <li>p</li>
+                <li>p</li>
+                <li>s</li>
+                <li>c</li>
+                <li class="eleven">f</li>
+                <li class="twelve">o</li>
+                <li class="thirteen">u</li>
+                <li class="fourteen">n</li>
+                <li class="fifteen">d</li>
+                <li>b</li>
+                <li>v</li>
+                <li>z</li>
+                <li>v</li>
+                <li>e</li>
+                <li>i</li>
+                <li>x</li>
+                <li>w</li>
+                <li>e</li>
+                <li>z</li>
             </ul>
         </div>
         <div id="main-content">
@@ -85,7 +86,7 @@
             <p>Unfortunately the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exist.</p>
             <p>Check the URL you entered for any mistakes and try again. Alternatively, tell us your problems and what can we do for you.</p>
             <div id="contact">
-                <form>
+                <form onsubmit="contact()">
                     <input type="text" placeholder="Tell Us Your Problems">
                     <button type="submit" class="input-contact">
                         <i class="fa fa-check" aria-hidden="true"></i>
