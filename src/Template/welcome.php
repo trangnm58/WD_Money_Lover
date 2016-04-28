@@ -30,34 +30,33 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#page-top" class="hidden"></a>
-                        <div class="login-moneylover">
-                            <a href="" id="forgot-password">Forgot Your Password?</a>
-                            <form action="" id="login-form" method="post" novalidate="novalidate">
-                                <div class="left-inner-addon ">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <input type="text" name="username" placeholder="Username" class="username">
-                                </div>
-                                <div class="left-inner-addon ">
-                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                    <input type="password" name="password" placeholder="Password" class="password">
-                                </div>
-
-                                <input id="login-button" class="btn btn-primary" name="loginButton" tabindex="100" type="submit" value="Login">
-                            </form>
+                <div class="login-moneylover">
+                    <a href="" id="forgot-password">Forgot Your Password?</a>
+                    <form action="" id="login-form" method="post" novalidate="novalidate">
+                        <div class="left-inner-addon ">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <input type="text" name="username" placeholder="Username" class="username">
                         </div>
+                        <div class="left-inner-addon ">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <input type="password" name="password" placeholder="Password" class="password">
+                        </div>
+
+                        <input id="login-button" class="btn btn-primary" name="loginButton" tabindex="100" type="submit" value="Login">
+                    </form>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
                     </li>
-                    <br id="header-break" />
-                    <li class="page-scroll" id="first-item">
+                    <li class="page-scroll">
                         <a href="#features">Features</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#download">Apps</a>
+                        <a href="#download">Download</a>
                     </li>
                     <li class="page-scroll">
                         <a href="">Sign Up</a>
@@ -103,6 +102,7 @@
                         </div>
                         <img src="img/budget.png" class="img-responsive" alt="">
                     </a>
+                    <p>Budget Planner</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal2" class="features-link" data-toggle="modal">
@@ -113,6 +113,7 @@
                         </div>
                         <img src="img/safe.png" class="img-responsive" alt="">
                     </a>
+                    <p>Budget Planner</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal3" class="features-link" data-toggle="modal">
@@ -123,6 +124,7 @@
                         </div>
                         <img src="img/sale.png" class="img-responsive" alt="">
                     </a>
+                    <p>Expense Tracker</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal4" class="features-link" data-toggle="modal">
@@ -133,6 +135,7 @@
                         </div>
                         <img src="img/billreminder.png" class="img-responsive" alt="">
                     </a>
+                    <p>Bill Reminder</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal5" class="features-link" data-toggle="modal">
@@ -143,6 +146,7 @@
                         </div>
                         <img src="img/report.png" class="img-responsive" alt="">
                     </a>
+                    <p>In-depth Report</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal6" class="features-link" data-toggle="modal">
@@ -153,6 +157,7 @@
                         </div>
                         <img src="img/multi.png" class="img-responsive" alt="">
                     </a>
+                    <p>Multiple Accounts & Currencies</p>
                 </div>
             </div>
         </div>
@@ -263,7 +268,7 @@
     </footer>
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
+    <div class="scroll-top page-scroll hidden-lg hidden-md" style="display: none;">
         <a class="btn btn-primary" href="#page-top">
             <i class="fa fa-chevron-up"></i>
         </a>
@@ -378,7 +383,7 @@
 <script src="lib/bootstrap.min.js?v=3.3.6"></script>
 
 <!-- Plugin JavaScript  -->
-<script src="js/jquery.easing.min.js?v=1.3.2"></script>
+<script src="lib/jquery.easing.min.js?v=1.3.2"></script>
 <script src="js/classie.js?v=1.0.0"></script>
 <script src="js/cbpAnimatedHeader.js?v=1.0.0"></script>
 
