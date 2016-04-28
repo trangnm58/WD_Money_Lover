@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+
+// Creata
 /**
  * Wallets Controller
  *
@@ -10,106 +12,95 @@ use App\Controller\AppController;
  */
 class WalletsController extends AppController
 {
-
     /**
-     * Index method
+     * Add wallet into Database
      *
-     * @return \Cake\Network\Response|null
+     * @param Wallet $newWallet
+     * @return Id of that wallet added
      */
-    public function index()
+    public function addWallet(Wallet $newWallet)
     {
-        $this->paginate = [
-            'contain' => ['Customers', 'Units']
-        ];
-        $wallets = $this->paginate($this->Wallets);
-
-        $this->set(compact('wallets'));
-        $this->set('_serialize', ['wallets']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Wallet id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $wallet = $this->Wallets->get($id, [
-            'contain' => ['Customers', 'Units', 'Budgets', 'Debts', 'RecurringTransactions', 'Transactions']
-        ]);
-
-        $this->set('wallet', $wallet);
-        $this->set('_serialize', ['wallet']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $wallet = $this->Wallets->newEntity();
-        if ($this->request->is('post')) {
-            $wallet = $this->Wallets->patchEntity($wallet, $this->request->data);
-            if ($this->Wallets->save($wallet)) {
-                $this->Flash->success(__('The wallet has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Wallets->Customers->find('list', ['limit' => 200]);
-        $units = $this->Wallets->Units->find('list', ['limit' => 200]);
-        $this->set(compact('wallet', 'customers', 'units'));
-        $this->set('_serialize', ['wallet']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Wallet id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $wallet = $this->Wallets->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $wallet = $this->Wallets->patchEntity($wallet, $this->request->data);
-            if ($this->Wallets->save($wallet)) {
-                $this->Flash->success(__('The wallet has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Wallets->Customers->find('list', ['limit' => 200]);
-        $units = $this->Wallets->Units->find('list', ['limit' => 200]);
-        $this->set(compact('wallet', 'customers', 'units'));
-        $this->set('_serialize', ['wallet']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Wallet id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $wallet = $this->Wallets->get($id);
-        if ($this->Wallets->delete($wallet)) {
-            $this->Flash->success(__('The wallet has been deleted.'));
+        $walletTable = new WalletsTable();
+        if ($walletTable.insert($newWallet)) {
+            return $newWallet.getId();
         } else {
-            $this->Flash->error(__('The wallet could not be deleted. Please, try again.'));
+            return fasle;
+        }        
+    }
+
+    /**
+     * Updates wallet info
+     *
+     * @param Wallet $wallet
+     * @return boolean variable, it is true if set successfully
+     */
+    public function updateWaletInfo(Wallet $newWallet)
+    {
+        $walletTable = new WalletsTable();
+        if ($walletTable.update($newWallet)) {
+            return true;
+        } else {
+            return false;
+        }     
+    }
+    
+    /**
+     * Sets current wallet for accountId
+     *
+     * @param accountId and WalletId
+     * @return boolean variable, it is true if set successfully
+     */
+    public function setCurrentWallet($accountId, $walletId)
+    {
+        $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
+        $query1 = "SELECT username FROM accounts where id = $accountId";
+        $query2 = "SELECT name FROM wallets where id = $walletId";
+        $result1 = mysql_query($query1,$conn);
+        $result2 = mysql_query($query2, $conn);
+
+        if(mysqli_num_rows($result1) > 0 && mysqli_num_rows($result2) > 0) {
+            $query = "UPDATE wallets SET account_id = $account_id WHERE id = $walletId";
+            $result = mysql_query($query,$conn);
+            $conn.close();
         }
-        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Transfers money method between fromWallet and toWallet
+     *
+     * @param two wallet objects and amount of money that needs to transfer
+     * @return arrary as json has properties: fromAmount and toAmount as the current money amount of fromWallet and toWallet object after transfering     
+     */
+    public function transferMoney(Wallet $fromWallet, Wallet $toWallet, $amount) {
+        if ($fromWallet.getAccount_id() == $toWallet.getAccount_id() && $fromWallet.getAmount() >= $amount && $amount > 0) {
+            $fromAmount = $fromWallet.getAmount() - $amount;
+            $toAmount = $toWallet.getAmount() + $amount;
+            $fromWallet.setAmount($fromAmount);
+            $toWallet.setAmount($toAmount);
+
+            $walletTable = new WalletsTable();
+            if ( $walletTable.update($fromWallet) && $walletTable.update($toWallet)) {
+                $result = array('fromAmount' => $fromAmount, 'toAmount' =>$toAmount );
+                return $result;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Removes a Wallet object as a record from wallets table in moneylover database
+     * @param id of a wallet
+     * @return id of wallet object removed successfully
+     */
+    public function removeWallet($_id)
+    {
+        $walletTable = new WalletsTable();
+        if ($walletTable.remove($_id)) {
+            return $_id;
+        } else {
+            return false;
+        }
     }
 }
