@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 
-// Creata
+// Create
 /**
  * Wallets Controller
  *

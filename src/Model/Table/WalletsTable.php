@@ -114,16 +114,20 @@ class WalletsTable extends Table
     {
         if (is_int($newWallet.getAccount_Id()) && is_string($newWallet.getName()) && is_string($newWallet.getDescription()) && is_int($newWallet.getIcon()) && is_int($newWallet.getAmount()) && is_int($newWallet.getUnit_id())) {
             $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
-            $sql = "INSERT INTO wallets VALUES ('',$newWallet.getAccount_Id(),$newWallet.getName(),$newWallet.getDescription(),$newWallet.getIcon(),$newWallet.getAmount(), $newWallet.getUnit_id(),$newWallet.getCreated_at())";
-        }
-
-        if (mysqli_query($conn,$sql)) {
-            $last_id = $conn->insert_id;
-            $conn->close();
-            return true;
-        } else {
+            if (!$conn) {
             return false;
+            } else {
+                $sql = "INSERT INTO wallets VALUES ('',$newWallet.getAccount_Id(),$newWallet.getName(),$newWallet.getDescription(),$newWallet.getIcon(),$newWallet.getAmount(), $newWallet.getUnit_id(),$newWallet.getCreated_at())";
+                if (mysqli_query($conn,$sql)) {
+                $last_id = $conn->insert_id;
+                $conn->close();
+                return true;
+                } else {
+                    return false;
+                }
+            }
         }
+        
     }
 
     /**
@@ -133,17 +137,28 @@ class WalletsTable extends Table
      */
     public function update(Wallet $newWallet)
     {
-        if (is_int($newWallet.getAccount_Id()) && is_string($newWallet.getName()) && is_string($newWallet.getDescription()) && is_int($newWallet.getIcon()) && is_int($newWallet.getAmount()) && is_int($newWallet.getUnit_id())) {
+        if (is_int($newWallet.getAccount_Id()) && is_string($newWallet.getName()) && is_string($newWallet.getDescription()) && is_int($newWallet.getIcon()) && is_int($newWallet.getAmount()) && is_int($newWallet.getUnit_id())) {            
             $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
-            $sql = "UPDATE wallets SET account_id = $newWallet.getAccount_Id(), name = $newWallet.getName(),description = $newWallet.getDescription(),icon = $newWallet.getIcon(),amount = $newWallet.getAmount(), unit_id = $newWallet.getUnit_id(), created_at = $newWallet.getCreated_at() where id = $newWallet.getId()";
+
+            if (!$conn) {
+           
+            return false;
+            }
+            else {
+                $sql = "UPDATE wallets SET account_id = $newWallet.getAccount_Id(), name = $newWallet.getName(),
+                description = $newWallet.getDescription(),icon = $newWallet.getIcon(),amount = $newWallet.getAmount(),
+                unit_id = $newWallet.getUnit_id(), created_at = $newWallet.getCreated_at() where id = $newWallet.getId()";
+        
+
+                if (mysqli_query($conn,$sql)) {            
+                    $conn->close();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
-        if (mysqli_query($conn,$sql)) {            
-            $conn->close();
-            return true;
-        }  else {
-            return false;
-        }
     }
 
     /**
@@ -156,13 +171,14 @@ class WalletsTable extends Table
         $conn = mysqli_connect("localhost", "moneylover","12345678","moneylover");
         if (!$conn) {
             return false;
-        }
-        $sql = "DELETE from wallets WHERE id = $_id";
-        if (mysqli_query($conn, $sql)) {
-            $conn.close();
-            return true;
         } else {
-            return false;
+            $sql = "DELETE from wallets WHERE id = $_id";
+            if (mysqli_query($conn, $sql)) {
+                $conn.close();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -175,13 +191,17 @@ class WalletsTable extends Table
     {
 
         $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
-        $query = "SELECT * FROM wallets where id = $_id";
-        $result = mysql_query($query,$conn);
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-             $arrW = array('id' =>$row["id"] , 'account_id' =>$row["account_id"] , 'name' =>$row["name"] , 'description' =>$row["description"] , 'icon' =>$row["icon"] , 'amount' =>$row["amount"] , 'unit_id' =>$row["unit_id"] , 'created_at' =>$row["created_at"]);
-             return $arrW;
+        if (!$conn) {
+            return false;
+        } else {
+            $query = "SELECT * FROM wallets where id = $_id";
+            $result = mysql_query($query,$conn);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $arrW = array('id' =>$row["id"] , 'account_id' =>$row["account_id"] , 'name' =>$row["name"] , 'description' =>$row["description"] , 'icon' =>$row["icon"] , 'amount' =>$row["amount"] , 'unit_id' =>$row["unit_id"] , 'created_at' =>$row["created_at"]);
+                return $arrW;
+            }
         }
-
     }
+
 }

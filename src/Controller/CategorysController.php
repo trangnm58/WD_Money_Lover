@@ -10,106 +10,75 @@ use App\Controller\AppController;
  */
 class CategorysController extends AppController
 {
-
-    /**
-     * Index method
+	/**
+     * Add category into Database
      *
-     * @return \Cake\Network\Response|null
+     * @param Category $newCategory
+     * @return Id of that category added
      */
-    public function index()
+    public function addCategory(Category $newCategory)
     {
-        $this->paginate = [
-            'contain' => ['Groups', 'Customers']
-        ];
-        $categorys = $this->paginate($this->Categorys);
-
-        $this->set(compact('categorys'));
-        $this->set('_serialize', ['categorys']);
+    	$categorysTable = new CategorysTable();    	
+    	if ($categorysTable.insert($newCategory)) {
+    		return $newCategory.getId();
+    	} else {
+    		return false;
+    	}
     }
 
     /**
-     * View method
+     * Updates categoy info
      *
-     * @param string|null $id Category id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param Cateogry $category
+     * @return boolean variable, it is true if set successfully
      */
-    public function view($id = null)
+    public function updateCategoryInfo(Category $newCategory)
     {
-        $category = $this->Categorys->get($id, [
-            'contain' => ['Groups', 'Customers', 'Budgets', 'RecurringTransactions', 'Transactions']
-        ]);
+    	$categorysTable = new CategorysTable();
+    	if ($categorysTable.update($newCategory)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
 
-        $this->set('category', $category);
-        $this->set('_serialize', ['category']);
+    }
+    /**
+     * Merge to category1 object to category2 object and all transaction and other info of category 1 to become category2
+     *
+     * @param Category $category1 and $category2
+     * @return boolean variable, it is true if set successfully
+     */
+    public function mergeCategory (Category $cate1, Category $cate2)
+    {
+    	$conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
+    	if(!conn) {
+    		return false;
+    	} else {
+    		$sql1 = "UPDATE recurring_transactions SET category_id = $cate2.getId() WHERE id = $cate1.getId()";
+    		$sql1 = "UPDATE transactions SET category_id = $cate2.getId() WHERE id = $cate1.getId()";
+	        $sql3 = "DELETE from categorys WHERE id = $cate1.getId()";
+	        if (mysqli_query($conn,$sql1) && mysqli_query($conn, $sql2)) {            
+		        $conn->close();
+		        return true;
+		    } else {
+	        return false;
+	       	}
+    	}    	
+        
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+	/**
+     * Removes a Category object as a record from categorys table in moneylover database
+     * @param id of a category
+     * @return id of category object removed successfully
      */
-    public function add()
+    public function removeCategory($_id)
     {
-        $category = $this->Categorys->newEntity();
-        if ($this->request->is('post')) {
-            $category = $this->Categorys->patchEntity($category, $this->request->data);
-            if ($this->Categorys->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
-            }
-        }
-        $groups = $this->Categorys->Groups->find('list', ['limit' => 200]);
-        $customers = $this->Categorys->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'groups', 'customers'));
-        $this->set('_serialize', ['category']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Category id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $category = $this->Categorys->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $category = $this->Categorys->patchEntity($category, $this->request->data);
-            if ($this->Categorys->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
-            }
-        }
-        $groups = $this->Categorys->Groups->find('list', ['limit' => 200]);
-        $customers = $this->Categorys->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'groups', 'customers'));
-        $this->set('_serialize', ['category']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Category id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $category = $this->Categorys->get($id);
-        if ($this->Categorys->delete($category)) {
-            $this->Flash->success(__('The category has been deleted.'));
-        } else {
-            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
+    	$categorysTable = new CategorysTable();
+    	if ($categorysTable.remove($_id)) {
+    		return true;
+    	} else {
+    		return false;
+    	}    	
     }
 }

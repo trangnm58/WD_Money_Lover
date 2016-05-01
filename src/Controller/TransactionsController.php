@@ -12,110 +12,49 @@ class TransactionsController extends AppController
 {
 
     /**
-     * Index method
+     * Add transaction into Database
      *
-     * @return \Cake\Network\Response|null
+     * @param Transaction $newTransaction
+     * @return Id of that transaction added
      */
-    public function index()
+    public function addTransaction(Transaction $newTransaction)
     {
-        $this->paginate = [
-            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys', 'Events']
-        ];
-        $transactions = $this->paginate($this->Transactions);
-
-        $this->set(compact('transactions'));
-        $this->set('_serialize', ['transactions']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Transaction id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $transaction = $this->Transactions->get($id, [
-            'contain' => ['Customers', 'Units', 'Wallets', 'Categorys', 'Events']
-        ]);
-
-        $this->set('transaction', $transaction);
-        $this->set('_serialize', ['transaction']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $transaction = $this->Transactions->newEntity();
-        if ($this->request->is('post')) {
-            $transaction = $this->Transactions->patchEntity($transaction, $this->request->data);
-            if ($this->Transactions->save($transaction)) {
-                $this->Flash->success(__('The transaction has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Transactions->Customers->find('list', ['limit' => 200]);
-        $units = $this->Transactions->Units->find('list', ['limit' => 200]);
-        $wallets = $this->Transactions->Wallets->find('list', ['limit' => 200]);
-        $categorys = $this->Transactions->Categorys->find('list', ['limit' => 200]);
-        $events = $this->Transactions->Events->find('list', ['limit' => 200]);
-        $this->set(compact('transaction', 'customers', 'units', 'wallets', 'categorys', 'events'));
-        $this->set('_serialize', ['transaction']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Transaction id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $transaction = $this->Transactions->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $transaction = $this->Transactions->patchEntity($transaction, $this->request->data);
-            if ($this->Transactions->save($transaction)) {
-                $this->Flash->success(__('The transaction has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Transactions->Customers->find('list', ['limit' => 200]);
-        $units = $this->Transactions->Units->find('list', ['limit' => 200]);
-        $wallets = $this->Transactions->Wallets->find('list', ['limit' => 200]);
-        $categorys = $this->Transactions->Categorys->find('list', ['limit' => 200]);
-        $events = $this->Transactions->Events->find('list', ['limit' => 200]);
-        $this->set(compact('transaction', 'customers', 'units', 'wallets', 'categorys', 'events'));
-        $this->set('_serialize', ['transaction']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Transaction id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $transaction = $this->Transactions->get($id);
-        if ($this->Transactions->delete($transaction)) {
-            $this->Flash->success(__('The transaction has been deleted.'));
+        $transactionsTable = new TransactionsTable();
+        if ($transactionsTable.insert($newTransaction)) {
+            return $newTransaction.getId();
         } else {
-            $this->Flash->error(__('The transaction could not be deleted. Please, try again.'));
+            return fasle;
         }
-        return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Updates transaction info
+     *
+     * @param Transaction $transaction
+     * @return boolean variable, it is true if set successfully
+     */
+    public function updateWaletInfo(Wallet $transaction)
+    {
+        $transactionsTable = new TransactionsTable();
+        if ($transactionsTable.update($transaction)) {
+            return true;
+        } else {
+            return false;
+        }     
+    }
+    /**
+     * Removes a Transaction object as a record from transactions table in moneylover database
+     * @param id of a transaction
+     * @return id of transaction object removed successfully
+     */
+    public function removeTransaction($_id)
+    {
+        $transactionTable = new TransactionsTable();
+        if ($transactionTable.remove($_id)) {
+            return $_id;
+        } else {
+            return false;
+        }
+    }
+    
 }
