@@ -16,8 +16,7 @@ p.small {
 }
 a:hover,
 a:focus,
-a:active,
-a.active {
+a:active {
     outline: 0;
     color: #43b696 !important;
 }
@@ -117,6 +116,13 @@ hr.star-primary:after {
 .navbar-default,
 .navbar-inverse {
     border: 0;
+}
+.fa.fa-bars {
+    color: white;
+    font-size: 24px;
+}
+.navbar-toggle {
+    padding: 3px 10px;
 }
 /* ===== STYLE FOR LOGIN FORM IN TOP NAV BAR ===== */
 

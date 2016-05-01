@@ -22,9 +22,7 @@
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <i class="fa fa-bars" aria-hidden="true" title="Toggle navigation"></i>
                 </button>
                 <a class="navbar-brand" href="#page-top">Moneylover</a>
             </div>
@@ -32,10 +30,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="login-moneylover">
                     <a href="" id="forgot-password">Forgot Your Password?</a>
-                    <form action="" id="login-form" method="post" novalidate="novalidate">
+                    <form action="/login" id="login-form" method="post" novalidate="novalidate">
                         <div class="left-inner-addon ">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <input type="text" name="username" placeholder="Username" class="username">
+                            <input type="text" name="username" placeholder="Username" class="username" autofocus>
                         </div>
                         <div class="left-inner-addon ">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -59,10 +57,10 @@
                         <a href="#download">Download</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="">Sign Up</a>
+                        <a href="/sign-up">Sign Up</a>
                     </li>
                     <li class="page-scroll" id="login-item">
-                        <a href="">Login</a>
+                        <a href="/login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -113,7 +111,7 @@
                         </div>
                         <img src="img/safe.png" class="img-responsive" alt="">
                     </a>
-                    <p>Budget Planner</p>
+                    <p>Cloud Synchronize</p>
                 </div>
                 <div class="col-sm-4 features-item">
                     <a href="#featuresModal3" class="features-link" data-toggle="modal">
