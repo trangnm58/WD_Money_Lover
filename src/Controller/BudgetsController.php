@@ -10,108 +10,87 @@ use App\Controller\AppController;
  */
 class BudgetsController extends AppController
 {
-
-    /**
-     * Index method
+	/**
+     * Add wallet into Database
      *
-     * @return \Cake\Network\Response|null
+     * @param Wallet $newWallet
+     * @return Id of that wallet added
      */
-    public function index()
+    public function addBudget(Budget $newBudget)
     {
-        $this->paginate = [
-            'contain' => ['Customers', 'Categorys', 'Wallets']
-        ];
-        $budgets = $this->paginate($this->Budgets);
-
-        $this->set(compact('budgets'));
-        $this->set('_serialize', ['budgets']);
+        $budgetTable = new WalletsTable();
+        $budgetTable.insert($newBudget);        
     }
 
     /**
-     * View method
+     * Updates wallet info
      *
-     * @param string|null $id Budget id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param Wallet $wallet
+     * @return boolean variable, it is true if set successfully
      */
-    public function view($id = null)
+    public function updateBudgetInfo(Wallet $newBudget)
     {
-        $budget = $this->Budgets->get($id, [
-            'contain' => ['Customers', 'Categorys', 'Wallets']
-        ]);
-
-        $this->set('budget', $budget);
-        $this->set('_serialize', ['budget']);
+        $budgetTable = new BudgetsTable();
+        $budgetTable.update($newBudget);                    
     }
-
+    
     /**
-     * Add method
+     * Sets current wallet for accountId
      *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @param accountId and WalletId
+     * @return boolean variable, it is true if set successfully
      */
-    public function add()
+    public function setCurrentWallet($accountId, $walletId)
     {
-        $budget = $this->Budgets->newEntity();
-        if ($this->request->is('post')) {
-            $budget = $this->Budgets->patchEntity($budget, $this->request->data);
-            if ($this->Budgets->save($budget)) {
-                $this->Flash->success(__('The budget has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The budget could not be saved. Please, try again.'));
-            }
+        $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
+        $query1 = "SELECT username FROM accounts where id = $accountId";
+        $query2 = "SELECT name FROM wallets where id = $walletId";
+        $result1 = mysql_query($query1,$conn);
+        $result2 = mysql_query($query2, $conn);
+
+        if(mysqli_num_rows($result1) > 0 && mysqli_num_rows($result2) > 0) {
+            $query = "UPDATE wallets SET account_id = $account_id WHERE id = $walletId";
+            $result = mysql_query($query,$conn);
+            $conn.close();
         }
-        $customers = $this->Budgets->Customers->find('list', ['limit' => 200]);
-        $categorys = $this->Budgets->Categorys->find('list', ['limit' => 200]);
-        $wallets = $this->Budgets->Wallets->find('list', ['limit' => 200]);
-        $this->set(compact('budget', 'customers', 'categorys', 'wallets'));
-        $this->set('_serialize', ['budget']);
     }
 
     /**
-     * Edit method
+     * Transfers money method between fromWallet and toWallet
      *
-     * @param string|null $id Budget id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @param two wallet objects and amount of money that needs to transfer
+     * @return arrary as json has properties: fromAmount and toAmount as the current money amount of fromWallet and toWallet object after transfering     
      */
-    public function edit($id = null)
-    {
-        $budget = $this->Budgets->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $budget = $this->Budgets->patchEntity($budget, $this->request->data);
-            if ($this->Budgets->save($budget)) {
-                $this->Flash->success(__('The budget has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The budget could not be saved. Please, try again.'));
+    public function transferMoney(Wallet $fromWallet, Wallet $toWallet, $amount) {
+        if ($fromWallet.getAccount_id() == $toWallet.getAccount_id() && $fromWallet.getAmount() >= $amount && $amount > 0) {
+            $fromAmount = $fromWallet.getAmount() - $amount;
+            $toAmount = $toWallet.getAmount() + $amount;
+            $fromWallet.setAmount($fromAmount);
+            $toWallet.setAmount($toAmount);
+
+            $walletTable = new WalletsTable();
+            if ( $walletTable.update($fromWallet) && $walletTable.update($toWallet)) {
+                $result = array('fromAmount' => $fromAmount, 'toAmount' =>$toAmount );
+                return $result;
             }
-        }
-        $customers = $this->Budgets->Customers->find('list', ['limit' => 200]);
-        $categorys = $this->Budgets->Categorys->find('list', ['limit' => 200]);
-        $wallets = $this->Budgets->Wallets->find('list', ['limit' => 200]);
-        $this->set(compact('budget', 'customers', 'categorys', 'wallets'));
-        $this->set('_serialize', ['budget']);
-    }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Budget id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $budget = $this->Budgets->get($id);
-        if ($this->Budgets->delete($budget)) {
-            $this->Flash->success(__('The budget has been deleted.'));
         } else {
-            $this->Flash->error(__('The budget could not be deleted. Please, try again.'));
+            return false;
         }
-        return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Removes a Wallet object as a record from wallets table in moneylover database
+     * @param id of a wallet
+     * @return id of wallet object removed successfully
+     */
+    public function removeWallet($_id)
+    {
+        $walletTable = new WalletsTable();
+        if ($walletTable.delete($_id)) {
+            return $_id;
+        } else {
+            return false;
+        }
+   
 }

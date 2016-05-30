@@ -18,181 +18,129 @@ use Cake\Validation\Validator;
  */
 class TransactionsTable extends Table
 {
-
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config)
-    {
-        parent::initialize($config);
-
-        $this->table('transactions');
-        $this->displayField('id');
-        $this->primaryKey('id');
-
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Units', [
-            'foreignKey' => 'unit_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Wallets', [
-            'foreignKey' => 'wallet_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Categorys', [
-            'foreignKey' => 'category_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Events', [
-            'foreignKey' => 'event_id',
-            'joinType' => 'INNER'
-        ]);
-    }
-
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->numeric('amount')
-            ->requirePresence('amount', 'create')
-            ->notEmpty('amount');
-
-        $validator
-            ->dateTime('time')
-            ->requirePresence('time', 'create')
-            ->notEmpty('time');
-
-        $validator
-            ->allowEmpty('description');
-
-        $validator
-            ->allowEmpty('location');
-
-        $validator
-            ->allowEmpty('partner');
-
-        $validator
-            ->dateTime('created_at')
-            ->allowEmpty('created_at');
-
-        return $validator;
-    }
+    
 
     /**
      * insert Transaction object as a record into transactions table in moneylover database
      * @param Transaction $transaction
-     * @return boolean variable, it is true if insert into database successfully
+     * @return Id of transaction inserted
      */
+  
     public function insert(Transaction $transaction)
     {
-         if (is_int($transaction.getCustomer_id()) && is_float($transaction.getAmount()) && is_int($transaction.getUnit_id())
-            &&  is_int($transaction.getWallet_id()) && is_int($transaction.getCategory_id()) && is_int($transaction.getEvent_id())
-            && is_string($transaction.getDescription()) && is_string($transaction.getLocation()) && is_string($transaction.getPartner())
-            && checkdate(date("m",$transaction.getCreated_at()),date("d",$transaction.getCreated_at()),date("y",$transaction.getCreated_at()))) {
-            $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
-            if (!$conn) {
-            return false;
-            } else {
-                $sql = "INSERT INTO transactions VALUES ('',$transaction.getCustomer_id(),$transaction.getAmount(),$transaction.getUnit_id(),
-                $transaction.getWallet_id(),$transaction.getCategory_id(),"00:00:00",$transaction.getEvent_id(),$transaction.getDescription(),
-                $transaction.getLocation(),$transaction.getCreated_at())";
-                if (mysqli_query($conn,$sql)) {
-                    $last_id = $conn->insert_id;
-                    $conn->close();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+                   
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, time, event_id, description, location, partner, created_at) VALUES (:customer_id, :amount, :unit_id, :wallet_id, :time, :event_id, :description, :location, :partner, :created_at)");
+
+            $stmt->bindParam(':customer_id', $transaction->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':amount', $transaction->getAmount());
+            $stmt->bindParam(':unit_id', $transaction->getUnit_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':wallet_id', $transaction->getWallet_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':time', $transaction->getTime());
+            $stmt->bindParam(':event_id', $transaction->getEvent_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':description', $transaction->getDescription(), PDO::PARAM_STR);
+            $stmt->bindParam(':location', $transaction->getLocation(), PDO::PARAM_STR);
+            $stmt->bindParam(':partner', $transaction->getPartner(), PDO::PARAM_STR);
+            $stmt->bindParam(':created_at', $transaction->getCreated_at());
+                            
+            $stmt->execute();
+
+            return $conn->lastInsertId();
         }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;            
     }
 
     /**
      * Updates a Transaction object as a record on transactions table in moneylover database
-     * @param Transaction $transaction
-     * @return boolean variable, it is true if update on database successfully
+     * @param Transaction $transaction     
      */
+    
     public function update(Transaction $transaction)
     {
-        if (is_int($transaction.getCustomer_id()) && is_float($transaction.getAmount()) && is_int($transaction.getUnit_id())
-            &&  is_int($transaction.getWallet_id()) && is_int($transaction.getCategory_id()) && is_int($transaction.getEvent_id())
-            && is_string($transaction.getDescription()) && is_string($transaction.getLocation()) && is_string($transaction.getPartner())
-            && checkdate(date("m",$transaction.getCreated_at()),date("d",$transaction.getCreated_at()),date("y",$transaction.getCreated_at()))) {            
-            $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
+            
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("UPDATE transactions SET  amount =  :amount, time = :time, description = :description, location = :location, partner = :partner, created_at = :created_at WHERE  id = :id and customer_id = :customer_id");
 
-            if (!$conn) {
-                return false;
-            } else {
-                $sql = "UPDATE transactions SET ('',$transaction.getCustomer_id(),$transaction.getAmount(),$transaction.getUnit_id(),
-                $transaction.getWallet_id(),$transaction.getCategory_id(),"00:00:00",$transaction.getEvent_id(),$transaction.getDescription(),
-                $transaction.getLocation(),$transaction.getCreated_at())";
-        
-                if (mysqli_query($conn,$sql)) {            
-                    $conn->close();
-                    return true;
-                } else {
-                    return false;
-                }
+            $stmt->bindParam(':customer_id', $transaction->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':amount', $transaction->getAmount());
+            
+           
+            $stmt->bindParam(':time', $transaction->getTime());
+            
+            $stmt->bindParam(':description', $transaction->getDescription(), PDO::PARAM_STR);
+            $stmt->bindParam(':location', $transaction->getLocation(), PDO::PARAM_STR);
+            $stmt->bindParam(':partner', $transaction->getPartner(), PDO::PARAM_STR);
+            $stmt->bindParam(':created_at', $transaction->getCreated_at());
+                            
+            $stmt->execute();
+            echo "SUCCESS";
             }
-        }
-
+            catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            $conn = null;
     }
     /**
      * Get info of a Transaction object as a record from transactions table in moneylover database
      * @param id of a transaction
      * @return array as json has properties: id, customer_id, amount,unit_id, wallet_id, category_id, event_id, description, location, partner, created_at
      */
-    public function getData($_id)
+    public function getInfo($customerId)
     {
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("SELECT * FROM transactions WHERE customer_id = :customer_id");
+            $stmt->bindParam(':customer_id', $customerId, PDO::PARAM_INT);
+            $stmt->execute();
 
-        $conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
-        if (!$conn) {
-            return false;
-        } else {
-            $query = "SELECT * FROM transactions where id = $_id";
-            $result = mysql_query($query,$conn);
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                 $arrTrans = array('id' =>$row["id"] , 'customer_id' =>$row["customer_id"] , 'amount' =>$row["amount"] , 'unit_id' =>$row["unit_id"] , 'wallet_id' =>$row["wallet_id"], 'category_id' =>$row["category_id"], 'time' =>$row["event_id"], 'description' =>$row["description"], 'location' =>$row["location"],'partner' =>$row["partner"], 'created_at' =>$row["created_at"]);
-                 return $arrTrans;
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
             }
+
+            echo json_encode($result);
         }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+            
     }
+}
 
     /**
      * Deletes a Transaction object as a record from transactions table in moneylover database
-     * @param id of a transaction
-     * @return boolean variable, it is true if delete from database successfully
+     * @param id of a transaction    
      */
-    public function remove($_id)
+    public function delete($transactionId)
     {
-        $conn = mysqli_connect("localhost", "moneylover","12345678","moneylover");
-        if (!$conn) {
-            return false;
-        } else {
-            $sql = "DELETE from transactions WHERE id = $_id";
-            if (mysqli_query($conn, $sql)) {
-                $conn.close();
-                return true;
-            } else {
-                return false;
-            }
+                
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");            
+            $stmt->bindParam(':id', $transactionId);
+            $stmt->execute();
 
+            echo "SUCCESS";
         }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+        
+    }
     }
 }

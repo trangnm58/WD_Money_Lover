@@ -14,80 +14,120 @@ use Cake\Validation\Validator;
  */
 class SettingsTable extends Table
 {
-
+    
     /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config)
+     * insert Setting object as a record into settings table in moneylover database
+     * @param Setting $setting
+     * return id of setting inserted
+     */    
+    public function insert(Setting $setting)
     {
-        parent::initialize($config);
+           
+        $customerId = $check;
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("INSERT INTO settings (customer_id, displayed_amount, language, date_format, first_day_of_week, first_day_of_month, first_month_of_year, update_at) VALUES (:customer_id, :displayed_amount, :language, :date_format, :first_day_of_week, :first_day_of_month, :first_month_of_year, :update_at)");
 
-        $this->table('settings');
-        $this->displayField('customer_id');
-        $this->primaryKey('customer_id');
+            $stmt->bindParam(':customer_id', $setting->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':displayed_amount', $setting->getDisplayed_amount(), PDO::PARAM_STR);
+            $stmt->bindParam(':language', $setting->getLanguage(), PDO::PARAM_STR);
+            $stmt->bindParam(':date_format()', $setting->getDate_format(), PDO::PARAM_STR);
+            $stmt->bindParam(':first_day_of_week', $setting->getFirst_day_of_week(),PDO::PARAM_INT);
+            $stmt->bindParam(':first_day_of_month', $setting->getFirst_day_of_month(),PDO::PARAM_INT);
+            $stmt->bindParam(':first_month_of_year', $setting->getFirst_month_of_year(), PDO::PARAM_INT);
+            $stmt->bindParam(':update_at', $setting->getUpdate_at());
+            
+            $stmt->execute();
 
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER'
-        ]);
+            return $conn->lastInsertId();
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;            
     }
 
     /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * Updates a setting object as a record on settings table in moneylover database
+     * @param Setting $setting    
      */
-    public function validationDefault(Validator $validator)
+    
+
+    public function update(Event $event)
     {
-        $validator
-            ->requirePresence('displayed_amount', 'create')
-            ->notEmpty('displayed_amount');
+            
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("UPDATE setings SET  displayed_amount =  :displayed_amount, language = :language, date_format = :date_format, first_day_of_week = :first_day_of_week, first_day_of_month = :first_day_of_month, first_month_of_year = :first_month_of_year, update_at = :update_at WHERE customer_id = :customer_id");
 
-        $validator
-            ->requirePresence('language', 'create')
-            ->notEmpty('language');
+            $stmt->bindParam(':customer_id', $setting->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':displayed_amount', $setting->getDisplayed_amount(), PDO::PARAM_STR);
+            $stmt->bindParam(':language', $setting->getLanguage(), PDO::PARAM_STR);
+            $stmt->bindParam(':date_format()', $setting->getDate_format(), PDO::PARAM_STR);
+            $stmt->bindParam(':first_day_of_week', $setting->getFirst_day_of_week(),PDO::PARAM_INT);
+            $stmt->bindParam(':first_day_of_month', $setting->getFirst_day_of_month(),PDO::PARAM_INT);
+            $stmt->bindParam(':first_month_of_year', $setting->getFirst_month_of_year(), PDO::PARAM_INT);
+            $stmt->bindParam(':update_at', $setting->getUpdate_at());
+            $stmt->execute();
 
-        $validator
-            ->requirePresence('date_format', 'create')
-            ->notEmpty('date_format');
-
-        $validator
-            ->integer('first_day_of_week')
-            ->requirePresence('first_day_of_week', 'create')
-            ->notEmpty('first_day_of_week');
-
-        $validator
-            ->integer('first_day_of_month')
-            ->requirePresence('first_day_of_month', 'create')
-            ->notEmpty('first_day_of_month');
-
-        $validator
-            ->integer('first_month_of_year')
-            ->requirePresence('first_month_of_year', 'create')
-            ->notEmpty('first_month_of_year');
-
-        $validator
-            ->dateTime('update_at')
-            ->requirePresence('update_at', 'create')
-            ->notEmpty('update_at');
-
-        return $validator;
+            echo "SUCCESS";
+            }
+            catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            $conn = null;
     }
 
     /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * Deletes a setting object as a record from settings table in moneylover database
+     * @param id of a setting     
      */
-    public function buildRules(RulesChecker $rules)
+    
+    public function delete($customerId)
     {
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        return $rules;
+                
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("DELETE FROM settings WHERE customer_id = :customer_id");            
+            $stmt->bindParam(':id', $customerId);
+            $stmt->execute();
+
+            echo "SUCCESS";
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+        
+    }
+
+    public function getInfo($customerId)
+    {
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("SELECT * FROM settings WHERE customer_id = :customer_id");
+            $stmt->bindParam(':customer_id', $customerId);
+            $stmt->execute();
+
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+
+            echo json_encode($result);
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+            
     }
 }

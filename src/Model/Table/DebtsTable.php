@@ -2,10 +2,6 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Debt;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
-use Cake\Validation\Validator;
 
 /**
  * Debts Model
@@ -17,92 +13,123 @@ use Cake\Validation\Validator;
 class DebtsTable extends Table
 {
 
+    
     /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
+     * insert Budget object as a record into budgets table in moneylover database
+     * @param Budget $newBudget
+     * @return id of that budget if insert into database successfully
      */
-    public function initialize(array $config)
+    
+    public function insert(Debt $newDebt)
     {
-        parent::initialize($config);
+            
+        try {
 
-        $this->table('debts');
-        $this->displayField('id');
-        $this->primaryKey('id');
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("INSERT INTO debts (customer_id, debt_type, amount, paid, description, time, wallet_id, event_id, partner, created_at ) VALUES (:customer_id, :debt_type, :amount, :paid, :description, :time, :wallet_id, :event_id, :partner, :created_at )");
 
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Wallets', [
-            'foreignKey' => 'wallet_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Events', [
-            'foreignKey' => 'event_id',
-            'joinType' => 'INNER'
-        ]);
+            $stmt->bindParam(':customer_id', $newDebt->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':debt_type', $newDebt->getDebt_type(), PDO::PARAM_INT);
+            $stmt->bindParam(':amount', $newDebt->getAmount());
+            $stmt->bindParam(':paid', $newDebt->getPaid());
+            $stmt->bindParam(':description', $newDebt->getDescription, PDO::PARAM_STR);
+            $stmt->bindParam(':time', $newDebt->getTime());
+            $stmt->bindParam(':wallet_id', $newDebt->getWallet_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':event_id', $newDebt->getEvent_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':partner', $newDebt->getPartner(), PDO::PARAM_STR);
+            $stmt->bindParam(':created_at', $newDebt->getCreated_at());
+
+            $stmt->execute();
+
+            return $conn->lastInsertId();
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+            
     }
 
     /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * Updates a debt object as a record on debts table in moneylover database
+     * @param Debt $debt     
      */
-    public function validationDefault(Validator $validator)
+    
+    public function update(Debt $debt)
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+            
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("UPDATE request SET  debt_type =  :debt_type, amount = :amount, paid = :paid, description = :description, time = :time, partner = :partner, created_at = :created_at   WHERE  id = :id and customer_id = :customer_id");
 
-        $validator
-            ->boolean('debt_type')
-            ->requirePresence('debt_type', 'create')
-            ->notEmpty('debt_type');
+            $stmt->bindParam(':customer_id', $newDebt->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':debt_type', $newDebt->getDebt_type(), PDO::PARAM_INT);
+            $stmt->bindParam(':amount', $newDebt->getAmount());
+            $stmt->bindParam(':paid', $newDebt->getPaid());
+            $stmt->bindParam(':description', $newDebt->getDescription, PDO::PARAM_STR);
+            $stmt->bindParam(':time', $newDebt->getTime());            
+            $stmt->bindParam(':partner', $newDebt->getPartner(), PDO::PARAM_STR);
+            $stmt->bindParam(':created_at', $newDebt->getCreated_at());
+            $stmt->execute();
 
-        $validator
-            ->numeric('amount')
-            ->requirePresence('amount', 'create')
-            ->notEmpty('amount');
+            echo "SUCCESS";
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+    }
+    /**
+     * Deletes a debt object as a record from debts table in moneylover database
+     * @param id of a debt     
+     */    
 
-        $validator
-            ->numeric('paid')
-            ->requirePresence('paid', 'create')
-            ->notEmpty('paid');
+    public function delete($debtId)
+    {
+        
+        try {
+                $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $conn->prepare("DELETE FROM request WHERE id = :id");                
+                $stmt->bindParam(':id', $debtId);
+                $stmt->execute();
 
-        $validator
-            ->allowEmpty('description');
-
-        $validator
-            ->dateTime('time')
-            ->requirePresence('time', 'create')
-            ->notEmpty('time');
-
-        $validator
-            ->allowEmpty('partner');
-
-        $validator
-            ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        return $validator;
+                echo "SUCCESS";
+            }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+        
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
+
+    public function getInfo($customerId)
     {
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['wallet_id'], 'Wallets'));
-        $rules->add($rules->existsIn(['event_id'], 'Events'));
-        return $rules;
+            
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("SELECT * FROM debts WHERE customer_id = :customer_id");
+            $stmt->bindParam(':customer_id', $customerId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+
+            return json_encode($result);
+            }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;        
     }
 }

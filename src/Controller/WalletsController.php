@@ -24,7 +24,7 @@ class WalletsController extends AppController
         if ($walletTable.insert($newWallet)) {
             return $newWallet.getId();
         } else {
-            return fasle;
+            return false;
         }        
     }
 

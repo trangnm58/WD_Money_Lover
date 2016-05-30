@@ -16,53 +16,81 @@ use Cake\Validation\Validator;
  */
 class UnitsTable extends Table
 {
-
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
+    
+        /**
+     * insert Unit object as a record into units table in moneylover database
+     * @param Unit $unit
+     * @return id of that unit if insert into database successfully
      */
-    public function initialize(array $config)
-    {
-        parent::initialize($config);
+    public function insert(Unit $unit)
+    {                
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("INSERT INTO units (name, exchange_rate) VALUES (:name, :exchange_rate)");
+           
+            $stmt->bindParam(':name', $event->getName(),PDO::PARAM_STR);
+            $stmt->bindParam(':exchange_rate', $event->getExchange_rate());           
+            $stmt->execute();
 
-        $this->table('units');
-        $this->displayField('name');
-        $this->primaryKey('id');
-
-        $this->hasMany('RecurringTransactions', [
-            'foreignKey' => 'unit_id'
-        ]);
-        $this->hasMany('Transactions', [
-            'foreignKey' => 'unit_id'
-        ]);
-        $this->hasMany('Wallets', [
-            'foreignKey' => 'unit_id'
-        ]);
+            return $conn->lastInsertId();
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;            
     }
 
     /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * Updates a unit object as a record on units table in moneylover database
+     * @param Unit $unit    
      */
-    public function validationDefault(Validator $validator)
+   
+    public function update(Unit $unit)
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+            
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("UPDATE units SET  name =  :name, exchange_rate = :exchange_rate WHERE  id = :id ");
 
-        $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            $
+            $stmt->bindParam(':name', $unit->getName(),PDO::PARAM_STR);
+            $stmt->bindParam(':exchange_rate', $unit->getExchange_rate());
+            $stmt->bindParam(':id', $event->getId());
+            $stmt->execute();
 
-        $validator
-            ->numeric('exchange_rate')
-            ->requirePresence('exchange_rate', 'create')
-            ->notEmpty('exchange_rate');
+            echo "SUCCESS";
+            }
+            catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            $conn = null;
+    }
 
-        return $validator;
+    /**
+     * Deletes a debt object as a record from debts table in moneylover database
+     * @param id of a debt     
+     */    
+    public function delete($unitId)
+    {
+                
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("DELETE FROM units WHERE id = :id");            
+            $stmt->bindParam(':id', $unitId);
+            $stmt->execute();
+
+            echo "SUCCESS";
+        }
+        catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+        
     }
 }

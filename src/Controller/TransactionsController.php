@@ -33,7 +33,7 @@ class TransactionsController extends AppController
      * @param Transaction $transaction
      * @return boolean variable, it is true if set successfully
      */
-    public function updateWaletInfo(Wallet $transaction)
+    public function updateTransactionInfo(Transaction $transaction)
     {
         $transactionsTable = new TransactionsTable();
         if ($transactionsTable.update($transaction)) {

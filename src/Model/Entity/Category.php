@@ -92,7 +92,7 @@ class Category extends Entity
     }
 
     public function __construct(array $arrCategory)
-    {
+    {        
         $category = json_encode($arrCategory);
 
         if (isset($category.id) && $category.id != null) {

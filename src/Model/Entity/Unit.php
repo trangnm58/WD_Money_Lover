@@ -16,6 +16,9 @@ use Cake\ORM\Entity;
 class Unit extends Entity
 {
 
+    private $id;
+    private $name;
+    private $exchange_rate;
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -29,4 +32,52 @@ class Unit extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    // Get Functions
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getExchange_rate()
+    {
+        return $this->exchange_rate;
+    }
+
+    // Set Functions
+    public function setId($_id)
+    {
+        $this->id = $_id;
+    }
+
+    public function setName($_name)
+    {
+        $this->name;
+    }
+
+    public function setExchange_rate($_exchange_rate)
+    {
+        $this->exchange_rate = $_exchange_rate;
+    }
+
+    // Construct function
+    public function __construct(array $arrUnit)
+    {
+        $unit = json_encode($arrUnit);
+        if (isset($unit.id) &&unit.id != null) {
+            $this->id = $unit.id;
+        }
+        if (isset($unit.name) && $unit.name != null) {
+            $this->name = $unit.name;
+        }
+        if (isset($unit.exchange_rate) && $unit.exchange_rate != null) {
+            $this->exchange_rate = $unit.exchange_rate;
+        }
+    }
+
 }

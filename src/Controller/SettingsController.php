@@ -10,104 +10,24 @@ use App\Controller\AppController;
  */
 class SettingsController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
+	public function settingDefault(Setting $newSetting)
+	{
+		$settingTable = new SettingsTable();
+		if ($settingTable.insert($newSetting)) {			
+			return $newSetting.getId();
+		} else {
+			return false;
+		}
+	}
+    
+    public function updateSettingInfo(Setting $newSetting)
     {
-        $this->paginate = [
-            'contain' => ['Customers']
-        ];
-        $settings = $this->paginate($this->Settings);
-
-        $this->set(compact('settings'));
-        $this->set('_serialize', ['settings']);
+    	$settingTable = new SettingsTable();
+    	if ($settingTable.update($newSetting)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $setting = $this->Settings->get($id, [
-            'contain' => ['Customers']
-        ]);
-
-        $this->set('setting', $setting);
-        $this->set('_serialize', ['setting']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $setting = $this->Settings->newEntity();
-        if ($this->request->is('post')) {
-            $setting = $this->Settings->patchEntity($setting, $this->request->data);
-            if ($this->Settings->save($setting)) {
-                $this->Flash->success(__('The setting has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The setting could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Settings->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('setting', 'customers'));
-        $this->set('_serialize', ['setting']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $setting = $this->Settings->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $setting = $this->Settings->patchEntity($setting, $this->request->data);
-            if ($this->Settings->save($setting)) {
-                $this->Flash->success(__('The setting has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The setting could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->Settings->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('setting', 'customers'));
-        $this->set('_serialize', ['setting']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Setting id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $setting = $this->Settings->get($id);
-        if ($this->Settings->delete($setting)) {
-            $this->Flash->success(__('The setting has been deleted.'));
-        } else {
-            $this->Flash->error(__('The setting could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
-    }
 }

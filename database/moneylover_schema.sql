@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `debts` (
   `amount` double NOT NULL DEFAULT '0',
   `paid` double NOT NULL DEFAULT '0',
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `time` datetime NOT NULL,
+  `time` c NOT NULL,
   `wallet_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `partner` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,

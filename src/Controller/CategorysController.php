@@ -19,11 +19,7 @@ class CategorysController extends AppController
     public function addCategory(Category $newCategory)
     {
     	$categorysTable = new CategorysTable();    	
-    	if ($categorysTable.insert($newCategory)) {
-    		return $newCategory.getId();
-    	} else {
-    		return false;
-    	}
+    	$categorysTable.insert($newCategory);    		    	
     }
 
     /**
@@ -50,14 +46,18 @@ class CategorysController extends AppController
      */
     public function mergeCategory (Category $cate1, Category $cate2)
     {
+        $categorysTable = new CategorysTable();
+
     	$conn = new mysqli_connect("localhost","moneylover","12345678","moneylover");
     	if(!conn) {
     		return false;
     	} else {
-    		$sql1 = "UPDATE recurring_transactions SET category_id = $cate2.getId() WHERE id = $cate1.getId()";
-    		$sql1 = "UPDATE transactions SET category_id = $cate2.getId() WHERE id = $cate1.getId()";
-	        $sql3 = "DELETE from categorys WHERE id = $cate1.getId()";
-	        if (mysqli_query($conn,$sql1) && mysqli_query($conn, $sql2)) {            
+    		$sql1 = "UPDATE recurring_transactions SET category_id = $cate2.getId() WHERE category_id = $cate1.getId()";
+    		$sql2 = "UPDATE transactions SET category_id = $cate2.getId() WHERE category_id = $cate1.getId()";
+
+
+	        if (mysqli_query($conn,$sql1) && mysqli_query($conn, $sql2)) {  
+                $categorysTable.delete($cate1.getId());          
 		        $conn->close();
 		        return true;
 		    } else {
@@ -75,10 +75,6 @@ class CategorysController extends AppController
     public function removeCategory($_id)
     {
     	$categorysTable = new CategorysTable();
-    	if ($categorysTable.remove($_id)) {
-    		return true;
-    	} else {
-    		return false;
-    	}    	
+        $categorysTable.delete($_id);    	
     }
 }
