@@ -179,15 +179,6 @@ input[type=password] {
     input[type=password] {
         background: #f7f7f7;
     }
-    .footer-above {
-        display: none;
-    }
-    .footer-below {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background: #ccc !important;
-    }
 }
 /* ===== STYLE FOR FOOTER ===== */
 
@@ -230,14 +221,13 @@ footer {
 footer h3 {
     margin-bottom: 20px;
 }
-footer .footer-above {
-    padding-top: 20px;
-    background-color: #387e98;
-}
 footer .footer-col {
     margin-bottom: 30px;
 }
 footer .footer-below {
     padding: 15px 0;
-    background-color: #27586a;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ccc !important;
 }
