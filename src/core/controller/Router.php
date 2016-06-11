@@ -35,8 +35,8 @@
             $parameters = '';
 
             if (count($commandArray) == 0 || $commandArray[0] == '') {
-                $moduleName = 'main';
-                $controllerName = 'HomeController';
+                $moduleName = 'inout';
+                $controllerName = 'WelcomeController';
                 $actionName = 'render';
             } elseif ($commandArray[0] == "login") {
                 $moduleName = 'inout';
@@ -60,23 +60,23 @@
 
         private function secure($ret)
         {
-            // if ($ret['moduleName'] == 'inout') {
-            //     session_start();
-            //     if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
-            //         $ret['moduleName'] = 'main';
-            //         $ret['controllerName'] = 'HomeController';
-            //         $ret['actionName'] = 'render';
-            //         $ret['parameters'] = '';
-            //     }
-            // } elseif ($ret['moduleName'] == 'main') {
-            //     session_start();
-            //     if (!isset($_SESSION['userid']) || !isset($_SESSION['username'])) {
-            //         $ret['moduleName'] = 'inout';
-            //         $ret['controllerName'] = 'SignUpController';
-            //         $ret['actionName'] = 'render';
-            //         $ret['parameters'] = '';
-            //     }
-            // }
+            if ($ret['moduleName'] == 'inout') {
+                session_start();
+                if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
+                    $ret['moduleName'] = 'main';
+                    $ret['controllerName'] = 'HomeController';
+                    $ret['actionName'] = 'render';
+                    $ret['parameters'] = '';
+                }
+            } elseif ($ret['moduleName'] == 'main') {
+                session_start();
+                if (!isset($_SESSION['userid']) || !isset($_SESSION['username'])) {
+                    $ret['moduleName'] = 'inout';
+                    $ret['controllerName'] = 'SignUpController';
+                    $ret['actionName'] = 'render';
+                    $ret['parameters'] = '';
+                }
+            }
 
             return $ret;
         }
