@@ -2,6 +2,9 @@
  * Style for Login Page
  */
 /* ===== COMMON STYLE SHEET ===== */
+.container {
+    border: 1px solid black;
+}
 body {
     overflow-x: hidden;
 }

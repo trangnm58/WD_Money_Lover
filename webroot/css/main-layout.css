@@ -1,0 +1,178 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+body {
+    transition: background-color 0.5s ease;
+}
+hr {
+    border: 1px solid #555;
+}
+
+/* ===== STYLE FOR TOP NAV BAR =====*/
+
+.navbar {
+    font-family: sans-serif;
+    font-weight: 700;
+    background: #387e98;
+    border: 0;
+}
+
+.navbar-brand {
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+.navbar-item {
+    float: right;
+    line-height: 50px;
+    color: #fff;
+}
+
+/* ===== STYLE FOR TOP NAV BAR'S MENU BUTTON =====*/
+.navbar-toggle {
+    padding: 3px 10px;
+}
+.navbar-toggle-left {
+	float: left;
+	margin: 8px;
+}
+.navbar-noti {
+    position: relative;
+    background: transparent;
+    border: 0;
+    margin: 8px;
+    padding: 3px;
+    padding-top: 6px;
+    padding-bottom: 2px;
+    float: right;
+}
+/*bieu tuong chi hien khi has-noti active con lai thi ko co*/
+.navbar-noti .fa.fa-asterisk {
+    display: none;
+}
+.navbar-noti.has-noti .fa.fa-asterisk {
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: #ffcc5c;
+}
+
+.navbar-noti:hover .fa.fa-bell {
+    color: rgba(0,0,0,.5);
+}
+.fa.fa-bars, .fa.fa-bell {
+    color: white;
+    font-size: 24px;
+}
+@media only screen and (min-width: 768px) {
+    .navbar.navbar-fixed-top .container {
+        position: relative;
+    }
+    .navbar-noti {
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
+}
+
+/* ===== STYLE FOR SIDE MENU AND SIDE NOTI=====*/
+#side-menu::-webkit-scrollbar,
+#side-noti::-webkit-scrollbar {
+    display: none;
+}
+#side-menu, #side-noti {
+    padding-top: 50px;
+    height: 100vh;
+    width: 0px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background: #fff;
+}
+/*chi minh side noti fixed ca 2 chieu sidemenu fixed chieu ngang co dieu kien ben duoi*/
+#side-noti {
+    right: 0;
+}
+
+
+/* ===== STYLE FOR SIDE MENU ITEM=====*/
+#side-menu .list-group-item {
+    border: 0;
+    line-height: 30px;
+    padding-left: 50px;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+#side-menu .list-group-item i {
+    position: absolute;
+    left: 25px;
+    line-height: 30px;
+    font-size: 22px;
+    transform: translateX(-50%);
+}
+
+
+/* ===== STYLE FOR SIDE NOTI ITEM=====*/
+/*#side-menu .list-group-item {
+    border: 0;
+    line-height: 30px;
+    padding-left: 50px;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+#side-menu .list-group-item i {
+    position: absolute;
+    left: 25px;
+    line-height: 30px;
+    font-size: 22px;
+    transform: translateX(-50%);
+}
+*/
+
+
+/* ===== STYLE FOR RESPONSIVE =====*/
+/* fixed co dieu kien (chi fix ngang neu la man hinh nho)
+voi man hinh lon thi chi fix doc*/
+@media only screen and (max-width: 767px) {
+    #side-menu {
+        left: 0;
+    }
+}
+/*truong hop side menu da hien ra ma mo side noti thi doi mau nen sidemenu va item*/
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+    #side-menu, #side-menu .list-group-item {
+        background: inherit;
+    }
+}
+/*responsive cho menu*/
+@media only screen and (min-width: 768px) {
+    body>.container {
+        position: relative;
+    }
+    #side-menu {
+        width: 250px;
+    }
+    #content {
+        margin-left: 250px;
+    }
+}
+/*responsive cho noti*/
+@media only screen and (min-width: 1200px) {
+    .container {
+        padding-right: 250px;
+    }
+    .navbar-noti {
+        display: none;
+    }
+    #side-noti {
+        width: 250px;
+    }
+}
+
+
