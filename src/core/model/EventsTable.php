@@ -1,111 +1,81 @@
 <?php
-namespace App\Model\Table;
+    namespace core\model;
+    require_once 'src/core/model/PDOData.php';
+    require_once 'src/main/model/Event.php';
 
-use App\Model\Entity\Event;
 
-
-/**
- * Events Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $Debts
- * @property \Cake\ORM\Association\HasMany $Transactions
- */
-class EventsTable extends Table
-{
-
-    
-
-    /**
-     * insert Event object as a record into events table in moneylover database
-     * @param Event $event
-     * @return id of event if insert into database successfully
-     */
-        
-
-    public function insert(Event $event)
+    class EventsTable
     {
-                   
-        try {
-            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
-            // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        /**
+         * insert Event object as a record into events table in moneylover database
+         * @param Event $event
+         * @return id of event if insert into database successfully
+         */
+            
+
+        public function insert(Event $event)
+        {
+                       
+            $conn = &PDOData::connect();
             $stmt = $conn->prepare("INSERT INTO events (customer_id, name, ending_date, created_at) VALUES (:customer_id, :name, :ending_date, :created_at)");
 
-            $stmt->bindParam(':customer_id', $event->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':customer_id', $event->getCustomerId(), PDO::PARAM_INT);
             $stmt->bindParam(':name', $event->getName(),PDO::PARAM_STR);
-            $stmt->bindParam(':ending_date', $event->getEnding_date());
-            $stmt->bindParam(':created_at', $event->getCreated_at());                
+            $stmt->bindParam(':ending_date', $event->getEndingDate());
+            $stmt->bindParam(':created_at', $event->getCreatedAt());                
             $stmt->execute();
 
-            return $conn->lastInsertId();
-        }
-        catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-        $conn = null;            
-    }
+            $eventId = $conn->lastInsertId();
 
-    /**
-     * Updates a event object as a record on events table in moneylover database
-     * @param Event $event     
-     */    
+            PDOData::disconnect();
+            return $eventId;
+                        
+        }
 
-    public function update(Event $event)
-    {
-            
-        try {
-            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
-            // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        /**
+         * Updates a event object as a record on events table in moneylover database
+         * @param Event $event     
+         */    
+
+        public function update(Event $event)
+        {
+                
+            $conn = &PDOData::connect();
             $stmt = $conn->prepare("UPDATE events SET  name =  :name, ending_date = :ending_date, created_at = :created_at WHERE  id = :id and customer_id = :customer_id");
 
-            $stmt->bindParam(':customer_id', $event->getCustomer_id(), PDO::PARAM_INT);
+            $stmt->bindParam(':customer_id', $event->getCustomerId(), PDO::PARAM_INT);
             $stmt->bindParam(':name', $event->getName(),PDO::PARAM_STR);
-            $stmt->bindParam(':ending_date', $event->getEnding_date());
-            $stmt->bindParam(':created_at', $event->getCreated_at());
+            $stmt->bindParam(':ending_date', $event->getEndingDate());
+            $stmt->bindParam(':created_at', $event->getCreatedAt());
             $stmt->bindParam(':id', $event->getId());
             $stmt->execute();
 
+            PDOData::disconnect();
             echo "SUCCESS";
-            }
-            catch(PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
-            }
-            $conn = null;
-    }
-
-    /**
-     * Deletes a event object as a record from events table in moneylover database
-     * @param id of a event     
-     */    
-
-    public function delete($eventId)
-    {
                 
-        try {
-            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
-            // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+
+        /**
+         * Deletes a event object as a record from events table in moneylover database
+         * @param id of a event     
+         */    
+
+        public function delete($eventId)
+        {
+                    
+            $conn = &PDOData::connect();
             $stmt = $conn->prepare("DELETE FROM events WHERE id = :id");            
             $stmt->bindParam(':id', $eventId);
             $stmt->execute();
 
-            echo "SUCCESS";
+            PDOData::disconnect();
+            echo "SUCCESS";          
         }
-        catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-        $conn = null;
-        
-    }
 
-    public function getInfo($customerId)
-    {
-        try {
-            $conn = new PDO("mysql:host=localhost;dbname=moneylover", 'moneylover', '12345678');
-            // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        public function getEvents($customerId)
+        {
+            $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM events WHERE customer_id = :customer_id");
             $stmt->bindParam(':customer_id', $customerId);
             $stmt->execute();
@@ -115,12 +85,26 @@ class EventsTable extends Table
                 $result[] = $row;
             }
 
-            echo json_encode($result);
+            PDOData::disconnect();
+            return json_encode($result);
+                
         }
-        catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+
+        public function filter($eventId)
+        {
+            $conn = &PDOData::connect();
+            $stmt = $conn->prepare("SELECT * FROM events WHERE id = :id");
+            $stmt->bindParam(':id', $eventId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result[] = $row;
+            }
+
+            PDOData::disconnect();
+            return json_encode($result);
+                
         }
-        $conn = null;
-            
     }
-}
+?>
