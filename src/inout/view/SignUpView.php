@@ -29,21 +29,25 @@
         <div class="sign-up">
             <h1>Create new Account</h1>
 
-            <form class="form" method="post" action="#">
+            <form id="sign-up-form" class="form" method="post" onsubmit="return register()" action="/api/sign-up">
                 <p class="field">
-                    <input type="text" name="username" value="" placeholder="Username" required autofocus/>
+                    <span class="error-log"><?php echo $error["username"];?></span>
+                    <input type="text" name="username" value="" placeholder="Username" required autofocus onfocusout="checkUsername(this)" onfocus="clearErrorMessage(this)"/>
                     <i class="fa fa-user"></i>
                 </p>
                 <p class="field">
-                    <input type="text" name="email" value="" placeholder="Email" required/>
+                    <span class="error-log"><?php echo $error["email"];?></span>
+                    <input type="text" name="email" value="" placeholder="Email" required onfocusout="checkEmail(this)" onfocus="clearErrorMessage(this)"/>
                     <i class="fa fa-envelope"></i>
                 </p>
                 <p class="field">
-                    <input type="password" name="password" placeholder="Password" required/>
+                    <span class="error-log"><?php echo $error["password"];?></span>
+                    <input type="password" name="password" placeholder="Password" required onfocusout="checkPassword(this)" onfocus="clearErrorMessage(this)"/>
                     <i class="fa fa-lock"></i>
                 </p>
                 <p class="field">
-                    <input type="password" name="re-password" placeholder="Retype password" required/>
+                    <span class="error-log"><?php echo $error["re-password"];?></span>
+                    <input type="password" name="re-password" placeholder="Retype password" required onkeyup="checkRePassword(this)" onfocusout="checkRePassword(this)" onfocus="clearErrorMessage(this)"/>
                     <i class="fa fa-retweet"></i>
                 </p>
 

@@ -1,0 +1,55 @@
+/*!
+ * Style for Notification Page
+ */
+/* ===== COMMON STYLE SHEET ===== */
+body {
+    overflow-x: hidden;
+}
+p {
+    font-size: 20px;
+}
+a:hover,
+a:focus,
+a:active {
+    outline: 0;
+    color: #43b696 !important;
+    text-decoration: none;
+}
+/* ===== STYLE FOR TOP NAV BAR =====*/
+
+.navbar {
+    font-family: sans-serif;
+    font-weight: 700;
+    background: #387e98;
+    border: 0;
+}
+.navbar a:focus {
+    outline: 0;
+}
+.navbar-brand {
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+.navbar-item {
+    float: right;
+    line-height: 50px;
+    color: #fff;
+}
+/* ===== STYLE FOR NOTI DIV POS ===== */
+#notification {
+    padding: 60px 0;
+    text-align: justify;
+}
+
+/* ===== STYLE FOR FOOTER ===== */
+
+footer {
+    color: #fff;
+}
+footer .footer-below {
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ccc !important;
+}

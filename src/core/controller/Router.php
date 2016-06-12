@@ -17,17 +17,44 @@
             }
         }
 
-        private function api($commandArray)
-        {
-            if (true) {
-                # code...
+        private function api($commandArray) {
+            $ret = array();
+            if (count($commandArray) <= 1) {
+                echo 'FAILED';
+            } elseif ($commandArray[1] == 'login') {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'LoginController';
+                $ret['actionName'] = 'login';
+            } elseif ($commandArray[1] == 'logout') {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'LoginController';
+                $ret['actionName'] = 'logout';
+            } elseif ($commandArray[1] == 'test-username' && isset($commandArray[2])) {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'LoginController';
+                $ret['actionName'] = 'testUsername';
+                $ret['parameters'] = $commandArray[2];
+            } elseif ($commandArray[1] == 'test-email' && isset($commandArray[2])) {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'LoginController';
+                $ret['actionName'] = 'testEmail';
+                $ret['parameters'] = $commandArray[2];
+            } elseif ($commandArray[1] == 'sign-up') {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'SignUpController';
+                $ret['actionName'] = 'register';
+            } elseif ($commandArray[1] == 'verify-email') {
+                $ret['moduleName'] = 'inout';
+                $ret['controllerName'] = 'SignUpController';
+                $ret['actionName'] = 'verify';
+                $ret['parameters'] = array_slice($commandArray, 2);
             } else {
                 echo 'FAILED';
             }
+            return $ret;
         }
 
-        private function request($commandArray)
-        {
+        private function request($commandArray) {
             // Request to fallback (404-not-found) by default
             $moduleName = 'fallback';
             $controllerName = 'FallbackController';
@@ -38,14 +65,24 @@
                 $moduleName = 'inout';
                 $controllerName = 'WelcomeController';
                 $actionName = 'render';
-            } elseif ($commandArray[0] == "login") {
+            } elseif ($commandArray[0] == 'home') {
+                $moduleName = 'main';
+                $controllerName = 'HomeController';
+                $actionName = 'render';
+            } elseif ($commandArray[0] == 'login') {
                 $moduleName = 'inout';
                 $controllerName = 'LoginController';
                 $actionName = 'render';
-            } elseif ($commandArray[0] == "sign-up") {
+                $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'sign-up') {
                 $moduleName = 'inout';
                 $controllerName = 'SignUpController';
                 $actionName = 'render';
+            } elseif ($commandArray[0] == 'notification') {
+                $moduleName = 'inout';
+                $controllerName = 'NotificationController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
             }
 
             $ret = array();
@@ -58,102 +95,19 @@
             return self::secure($ret);
         }
 
-        private function secure($ret)
-        {
+        private function secure($ret) {
             if ($ret['moduleName'] == 'inout') {
                 session_start();
                 if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
-                    $ret['moduleName'] = 'main';
-                    $ret['controllerName'] = 'HomeController';
-                    $ret['actionName'] = 'render';
-                    $ret['parameters'] = '';
+                    header('location:/home');
                 }
             } elseif ($ret['moduleName'] == 'main') {
                 session_start();
                 if (!isset($_SESSION['userid']) || !isset($_SESSION['username'])) {
-                    $ret['moduleName'] = 'inout';
-                    $ret['controllerName'] = 'SignUpController';
-                    $ret['actionName'] = 'render';
-                    $ret['parameters'] = '';
+                    header('location:/login');
                 }
             }
 
             return $ret;
         }
     }
-
-    // $fController = new FrontController(
-    //                         $_SERVER['REQUEST_URI'],
-    //                         $_SERVER['SCRIPT_NAME'],
-    //                         $_POST,
-    //                         $_GET
-    //                     );
-// ucfirst($ret['controllerName']).'Controller'
-    // $fController->proc();
-    //     private $requestURI;
-    //     private $scriptName;
-    //     private $requestURIs;
-    //     private $scriptNames;
-
-    //     function __construct($requestURI='', $scriptName='', $postData=null, $getData=null)
-    //     {
-    //         $this->requestURI = $requestURI;
-    //         $this->scriptName = $scriptName;
-    //         $this->requestURIs = explode('/', $requestURI);
-    //         $this->scriptNames = explode('/', $scriptName);
-    //         $this->postData = $postData;
-    //         $this->getData = $getData;
-    //     }
-
-    //     public static function proc()
-    //     {
-    //         // User requesr home page
-    //         if ($this->requestURI == '/'
-    //             || $this->requestURI == '/index.php'
-    //             || $this->requestURI == '/home')
-    //         {
-    //             require_once 'src/Controller/WelcomeController.php';
-    //             $wControler = new WelcomeController();
-    //             $wControler->render();
-    //         // User request login page or login action
-    //         } elseif ($this->requestURI == '/login') {
-    //             // In the case of request the login
-    //             // login with the post data
-    //             if (isset($this->postData['username']) && isset($this->postData['password'])) {
-    //                 // Demo login.
-    //                 // In the fact login by call AccountController
-    //                 if (($this->postData['username'] == 'trang' && $this->postData['password'] == '123456')
-    //                     || ($this->postData['username'] == 'cat' && $this->postData['password'] == '123456')
-    //                     || ($this->postData['username'] == 'luong' && $this->postData['password'] == 'luongdo'))
-    //                 {
-    //                     session_start();
-    //                     $_SESSION['username'] = $this->postData['username'];
-    //                     $_SESSION['userid'] = 1;
-    //                     header('Location:/home');
-    //                 } else {
-    //                     echo 'Sai mat khau';
-    //                 }
-    //             // go to login page
-    //             } else {
-    //                 require_once 'src/Controller/LoginController.php';
-    //                 $lControler = new LoginController();
-    //                 $lControler->render();
-    //             }
-    //         // User request signout
-    //         } elseif ($this->requestURI == '/signout') {
-    //             session_start();
-    //             unset($_SESSION['username']);
-    //             unset($_SESSION['userid']);
-
-    //             // After sign out go to welcome page 
-    //             header('Location:/');
-    //         // User request sign up page
-    //         } elseif ($this->requestURI == '/sign-up') {
-    //             require_once 'src/Controller/SignUpController.php';
-    //             $sControler = new SignUpController();
-    //             $sControler->render();
-    //         } else {
-    //             require_once 'src/Template/page-not-found.html';
-    //         }
-    //     }
-    // }

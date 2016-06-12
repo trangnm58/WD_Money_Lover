@@ -12,14 +12,16 @@
         {
             // Routing
             $ret = Router::proc();
-        
-            // Execute the result of rerouting
-            $filename = 'src/'.$ret['moduleName'].'/controller/'.$ret['controllerName'].'.php';
-            require_once $filename;
-            
-            $controllerName = $ret['moduleName'].'\\controller\\'.$ret['controllerName'];
-            $controller = new $controllerName();
-            $controller->$ret['actionName']($ret['parameters']); 
+
+            if (count($ret) != 0) {
+                // Execute the result of rerouting
+                $filename = 'src/'.$ret['moduleName'].'/controller/'.$ret['controllerName'].'.php';
+                require_once $filename;
+
+                $controllerName = '\\'.$ret['moduleName'].'\\controller\\'.$ret['controllerName'];
+                $controller = new $controllerName();
+                $controller->$ret['actionName']($ret['parameters']);
+            }
         }
     }
 ?>

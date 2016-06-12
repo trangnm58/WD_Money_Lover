@@ -1,7 +1,10 @@
 <?php
     namespace core\model;
+    use \PDO;
+
     class PDOData {
         private static $conn;
+
         /**
         * Construct connection function
         */

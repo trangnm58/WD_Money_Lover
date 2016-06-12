@@ -29,13 +29,14 @@
         <div class="login">
             <h1>Login</h1>
 
-            <form class="form" method="post" action="/login">
+            <form class="form" method="post" action="/api/login">
                 <p class="field">
-                    <input type="text" name="username" value="" placeholder="Username" required autofocus/>
+                    <input type="text" name="username" value=<?php if($prevUsername == null) echo '""'; else echo '"'.$prevUsername.'"';?> placeholder="Username" required <?php if($prevUsername == null) echo 'autofocus';?>/>
                     <i class="fa fa-user"></i>
                 </p>
                 <p class="field">
-                    <input type="password" name="password" placeholder="Password" required/>
+                    <span class="error-log"><?php echo $errorMessage;?></span>
+                    <input type="password" name="password" placeholder="Password" required onkeypress="clearErrorMessage(this)" <?php if($prevUsername != null) echo 'autofocus';?>/>
                     <i class="fa fa-lock"></i>
                 </p>
 

@@ -1,103 +1,148 @@
 <?php
     namespace core\model;
     require_once 'src/core/model/PDOData.php';
-    require_once 'src/main/model/Account.php';
 
     /**
      * Class to interact with accounts table
-     * insert
-     * get
-     * filter
-     * update
-     * delete
+     *
+     * API
+     * insert($account = array())
+     * getIdByLogin($username = '', $password = '')
+     * checkByEmail($email = '')
+     * checkByUsername($username = '')
+     * updatePassword($newPassword = 'error', $id = '')
      */
-    class AccountsTable
-    {
-        // insert
-        public function insert(Account $account)
-        {                        
-            $conn = &PDOData::connect();
+    class AccountsTable {
+        // insert($account = array())
+        // INPUT: associative array
+        // require username, email, password, tokenhash
+        // HOW-TO-DO: insert a new account record
+        // OUTPUT: id of created account
+        public static function insert($account = array()) {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('INSERT INTO accounts (username, email, password, tokenhash) VALUES (:username, :email, :password, :tokenhash);');
 
-                // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("INSERT INTO accounts (username, email, password, created_at,tokenhash, activate) VALUES (:username, :email, :password, :created_at,:tokenhash, :activate)");
-           $stmt->bindParam(':username', $account->getUserName(), PDO::PARAM_STR);
-            $stmt->bindParam(':email', $account->getEmail(), PDO::PARAM_STR);
-            $stmt->bindParam(':password', $account->getPassword(), PDO::PARAM_STR);
-            $stmt->bindParam(':created_at', $account->getCreatedAt());
-            $stmt->bindParam(':tokenhash', $account->getTokenHash(), PDO::PARAM_STR);
-            $stmt->bindParam(':activate', $account->getActivate(), PDO::PARAM_INT);
-            $stmt->execute();
+                $stmt->bindParam(':username', $account['username']);
+                $stmt->bindParam(':email', $account['email']);
+                $stmt->bindParam(':password', $account['password']);
+                $stmt->bindParam(':tokenhash', $account['tokenhash']);
 
-            PDOData::disconnect();
-            return $conn->lastInsertId();
-        }
-        // get
-
-        public function getAccount($customerId)
-        {
-            $conn = &PDOData::connect();            
-            $stmt = $conn->prepare("SELECT * FROM accounts WHERE customer_id = :customer_id");
-            $stmt->bindParam(':customer_id', $customerId);
-            $stmt->execute();
-
-            $result = array();
-            while ($row = $stmt->fetch()) {
-                $result[] = $row;
+                if ($stmt->execute()) {
+                    return $conn->lastInsertId();
+                } else {
+                    return -1;
+                }
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
             PDOData::disconnect();
-            return json_encode($result);
-                    
         }
-        // filter
-        public function filter($accountId)
-        {
-            $conn = &PDOData::connect();            
-                // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("SELECT * FROM budgets WHERE id = :id");
-            $stmt->bindParam(':id', $accountId);
-            $stmt->execute();
 
-            $result = array();
-            while ($row = $stmt->fetch()) {
-                $result[] = $row;
+        // getIdByLogin($username = '', $password = '')
+        // INPUT: username and password to check
+        // HOW-TO-DO: check if this username and password is matched or not
+        // OUTPUT: int (id of the matched username, if not matched return -1)
+        public static function getIdByLogin($username = '', $password = '') {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('SELECT id FROM accounts WHERE username = :username and password = :password;');
+
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':password', $password);
+
+                $stmt->execute();
+
+                $result = $stmt->fetch();
+                if ($result != false) {
+                    echo var_dump($result);
+                    return intval($result['id']);
+                } else {
+                    return -1;
+                }
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
             PDOData::disconnect();
-            return json_encode($result);
-                    
         }
-        // update
-        public function update(Account $account)
-        {
-            $conn = &PDOData::connect();
 
-            $stmt = $conn->prepare("UPDATE accounts SET  username =  :username, email = :email, password = :password, tokenhash = :tokenhash, activate = :activate WHERE  id = :id and customer_id = :customer_id");
-                    
-           $stmt->bindParam(':username', $account->getUserName(), PDO::PARAM_STR);
-            $stmt->bindParam(':email', $account->getEmail(), PDO::PARAM_STR);
-            $stmt->bindParam(':password', $account->getPassword(), PDO::PARAM_STR);            
-            $stmt->bindParam(':tokenhash', $account->getTokenHash(), PDO::PARAM_STR);
-            $stmt->bindParam(':activate', $account->getActivate(), PDO::PARAM_INT);
-            $stmt->execute();
+        // checkByEmail($email = '')
+        // INPUT: email to check
+        // HOW-TO-DO: check if this email is existed on the system or not
+        // OUTPUT: bool (result of the check)
+        public static function checkByEmail($email = '') {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('SELECT 1 FROM accounts WHERE email = :email;');
 
+                $stmt->bindParam(':email', $email);
+
+                $stmt->execute();
+
+                return $stmt->fetch() == false;
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
             PDOData::disconnect();
-
-            return true;
-            
         }
-        // delete
-        public function delete($accountId)
-        {
-        
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("DELETE FROM accounts WHERE id = :id");                
-            $stmt->bindParam(':id', $accountId);
-            $stmt->execute();
 
+        // checkByUsername($username = '')
+        // INPUT: username to check
+        // HOW-TO-DO: check if this username is existed on the system or not
+        // OUTPUT: bool (result of the check)
+        public static function checkByUsername($username = '') {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('SELECT 1 FROM accounts WHERE username = :username;');
+
+                $stmt->bindParam(':username', $username);
+
+                $stmt->execute();
+
+                return $stmt->fetch() == false;
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
             PDOData::disconnect();
-            return true;             
+        }
+
+        // updatePassword($newPassword = 'error', $id = '')
+        // INPUT: id of the account to change and the new password
+        // HOW-TO-DO: change password of the id to new password
+        // OUTPUT: bool (success or not)
+        public static function updatePassword($newPassword = 'error', $id = '') {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('UPDATE accounts SET password = :password WHERE id = :id;');
+
+                $stmt->bindParam(':password', $newPassword);
+                $stmt->bindParam(':id', $id);
+
+                return $stmt->execute();
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
+        }
+
+        // verifyEmail($username = '', $tokenhash = '')
+        // INPUT: username and tokenhash of the account
+        // HOW-TO-DO: verify email with the tokenhash and username
+        // OUTPUT: bool (success or not)
+        public static function verifyEmail($username = '', $tokenhash = '') {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('UPDATE accounts SET activate = 1 WHERE username = :username AND tokenhash = :tokenhash;');
+
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':tokenhash', $tokenhash);
+
+                $stmt->execute();
+
+                return $stmt->rowCount() != 0;
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
         }
     }

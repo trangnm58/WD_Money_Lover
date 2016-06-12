@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="login-moneylover">
                     <a href="" id="forgot-password">Forgot Your Password?</a>
-                    <form action="/login" id="login-form" method="post" novalidate="novalidate">
+                    <form action="/api/login" id="login-form" method="post" novalidate="novalidate">
                         <div class="left-inner-addon ">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <input type="text" name="username" placeholder="Username" class="username" autofocus>
