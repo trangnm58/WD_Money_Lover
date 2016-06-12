@@ -48,6 +48,10 @@
                 $ret['controllerName'] = 'SignUpController';
                 $ret['actionName'] = 'verify';
                 $ret['parameters'] = array_slice($commandArray, 2);
+            } elseif ($commandArray[1] == 'change-password') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'ProfileController';
+                $ret['actionName'] = 'changePassword';
             } else {
                 echo 'FAILED';
             }
@@ -83,6 +87,10 @@
                 $controllerName = 'NotificationController';
                 $actionName = 'render';
                 $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'profile') {
+                $moduleName = 'main';
+                $controllerName = 'ProfileController';
+                $actionName = 'render';
             }
 
             $ret = array();
