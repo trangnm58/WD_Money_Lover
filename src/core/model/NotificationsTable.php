@@ -34,7 +34,7 @@
         public static function getNotifications($customerId)
         {
             $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM notifications WHERE customer_id = :customer_id ORDER BY created_at;");
+            $stmt = $conn->prepare("SELECT * FROM notifications WHERE customer_id = :customer_id ORDER BY created_at DESC;");
             $stmt->bindParam(':customer_id', $customerId);
             $stmt->execute();
 

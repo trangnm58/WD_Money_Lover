@@ -206,6 +206,11 @@ body {
     overflow-x: hidden;
 }
 
+#side-noti li a,
+#side-noti li a:hover {
+	cursor: default !important;
+}
+
 #side-noti li:first-child {
     font-size: 2rem;
     background-color: #43b696;
