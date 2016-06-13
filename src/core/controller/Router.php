@@ -91,6 +91,21 @@
                 $moduleName = 'main';
                 $controllerName = 'ProfileController';
                 $actionName = 'render';
+            } elseif ($commandArray[0] == 'transaction') {
+                $moduleName = 'main';
+                $controllerName = 'TransactionController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'wallet') {
+                $moduleName = 'main';
+                $controllerName = 'WalletController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'category') {
+                $moduleName = 'main';
+                $controllerName = 'WalletController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
             }
 
             $ret = array();
