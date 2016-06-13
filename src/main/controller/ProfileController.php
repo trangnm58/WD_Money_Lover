@@ -27,7 +27,6 @@
         // echo 'SUCCESS' if change successfully
         // otherwise, 'FAILED'
         private function getMyself() {
-            session_start();
             if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
                 $id = $_SESSION['userid'];
@@ -45,8 +44,6 @@
         // echo 'SUCCESS' if change successfully
         // otherwise, 'FAILED'
         public function changePassword() {
-            session_start();
-
             if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
                 // Get password from post data

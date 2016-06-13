@@ -43,11 +43,13 @@
         <div id="side-menu">
             <a id="profile" href="/profile">
 				<img src="img/icon.png" alt="avatar"/>
-				<span><?php 
-				session_start();
-				if (isset($_SESSION["username"])) {
-					echo $_SESSION['username'];
-				} ?></span>
+				<span>
+                    <?php 
+        				if (isset($_SESSION["username"])) {
+        					echo $_SESSION['username'];
+        				}
+                    ?>            
+                </span>
 			</a>
             <div class="list-group" onclick="closeSideMenu()">
                 <a class="list-group-item" href="/wallet">
@@ -96,11 +98,11 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     Help & Support
                 </a>
-                <a class="list-group-item" href="/wallet">
+                <a class="list-group-item" href="/edit-profile">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                    Edit Information
+                    Edit Profile
                 </a>
-                <a class="list-group-item" href="/home">
+                <a class="list-group-item" href="/change-password">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                     Change Password
                 </a>

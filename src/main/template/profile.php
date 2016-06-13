@@ -7,23 +7,47 @@
       </div>
 
       <div class="item mp-card-first-item">
-        Full name:<span class="mp-right"><?php echo $customer->getName();?></span>
+        Full name:<span class="mp-right">
+            <?php
+                echo $customer->getName();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Username:<span class="mp-right"><?php echo $customer->getUsername();?></span>
+        Username:<span class="mp-right">
+            <?php
+                echo $customer->getUsername();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Date of Birth:<span class="mp-right"><?php echo $customer->getDob();?></span>
+        Date of Birth:<span class="mp-right">
+            <?php
+                echo $customer->getDob();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Gender:<span class="mp-right">Male</span>
+        Gender:<span class="mp-right">
+            <?php
+                if($customer->getGender() == 1) {
+                    echo "Male";
+                } else {
+                    echo "Female";
+                }
+            ?>      
+        </span>
       </div>
 
       <div class="item">
-        Default Wallet:<span class="mp-right">1</span>
+        Default Wallet:<span class="mp-right">
+            <?php
+                echo $customer->getDefaultWallet();
+            ?>
+        </span>
       </div>
     </div>
 
@@ -35,23 +59,43 @@
       </div>
 
       <div class="item mp-card-first-item">
-        Address:<span class="mp-right">Phung thuong</span>
+        Address:<span class="mp-right">
+            <?php
+                echo $customer->getAddress();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        City:<span class="mp-right">Hanoi</span>
+        City:<span class="mp-right">
+            <?php
+                echo $customer->getCity();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Country:<span class="mp-right">Vietnam</span>
+        Country:<span class="mp-right">
+            <?php
+                echo $customer->getCountry();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Email:<span class="mp-right">ninjameo9x@gmail.com</span>
+        Email:<span class="mp-right">
+            <?php
+                echo $customer->getEmail();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Phone:<span class="mp-right">01234567890</span>
+        Phone:<span class="mp-right">
+            <?php
+                echo $customer->getPhone();
+            ?>
+        </span>
       </div>
     </div>
 
@@ -63,19 +107,35 @@
       </div>
 
       <div class="item mp-card-first-item">
-        University:<span class="mp-right">UET</span>
+        University:<span class="mp-right">
+            <?php
+                echo $customer->getUniversity();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Highschool:<span class="mp-right">Ngoc Tao</span>
+        Highschool:<span class="mp-right">
+            <?php
+                echo $customer->getHighschool();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Job:<span class="mp-right">Student</span>
+        Job:<span class="mp-right">
+            <?php
+                echo $customer->getJob();
+            ?>
+        </span>
       </div>
 
       <div class="item">
-        Company:<span class="mp-right">Google</span>
+        Company:<span class="mp-right">
+            <?php
+                echo $customer->getCompany();
+            ?>
+        </span>
       </div>
     </div>
 

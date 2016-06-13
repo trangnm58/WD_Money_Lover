@@ -43,7 +43,7 @@
             return $this->dob;
         }
 
-        public function getdefaultWallet() {
+        public function getDefaultWallet() {
             return $this->default_wallet;
         }
 
