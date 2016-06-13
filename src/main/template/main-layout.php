@@ -53,7 +53,7 @@
 			</a>
             <div class="list-group" onclick="closeSideMenu()">
                 <a class="list-group-item" href="/wallet">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
                     Wallets
                 </a>
                 <a class="list-group-item" href="/home">
@@ -99,11 +99,11 @@
                     Help & Support
                 </a>
                 <a class="list-group-item" href="/edit-profile">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
                     Edit Profile
                 </a>
                 <a class="list-group-item" href="/change-password">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
                     Change Password
                 </a>
                 <a class="list-group-item" href="/api/logout">

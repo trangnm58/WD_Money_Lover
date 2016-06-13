@@ -8,15 +8,23 @@
         // REQUEST FUNCTION
         // Render the default Login View
         public function render($param) {
-            $prevUsername = $param[0];
+            if (isset($param[0])) {
+                $prevUsername = $param[0];
 
-            if ($param[1] == 'failed') {
-                $errorMessage = 'Login failed! Try again!';
-            } else if ($param[1] == 'wrong-password! Try again!') {
-                $errorMessage = 'Wrong password! ';
+                if (isset($param[1])) {
+                    $errorMessage = '';
+                } else if ($param[1] == 'failed') {
+                    $errorMessage = 'Login failed! Try again!';
+                } else if ($param[1] == 'wrong-password! Try again!') {
+                    $errorMessage = 'Wrong password!';
+                } else {
+                    $errorMessage = $param[1];
+                }
             } else {
-                $errorMessage = $param[1];
+                $prevUsername = '';
+                $errorMessage = '';
             }
+
             require_once 'src/inout/view/LoginView.php';
         }
 
@@ -42,7 +50,6 @@
 
                 $id = \core\model\AccountsTable::getIdByLogin($username, $password);
                 if ($id != -1) {
-                    session_start();
                     $_SESSION['username'] = $username;
                     $_SESSION['userid'] = $id;
 
@@ -60,7 +67,6 @@
         // INPUT: nothing
         // HOW-TO-DO: end the session
         public function logout() {
-            session_start();
             unset($_SESSION['username']);
             unset($_SESSION['userid']);
 

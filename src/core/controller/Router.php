@@ -136,7 +136,7 @@
             } elseif ($commandArray[0] == 'edit-profile') {
                 $moduleName = 'main';
                 $controllerName = 'ProfileController';
-                $actionName = 'renderEdit';
+                $actionName = 'renderEditProfile';
             } elseif ($commandArray[0] == 'change-password') {
                 $moduleName = 'main';
                 $controllerName = 'ProfileController';

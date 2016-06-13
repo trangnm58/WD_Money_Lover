@@ -36,8 +36,8 @@ body {
     padding: 3px 10px;
 }
 .navbar-toggle-left {
-	float: left;
-	margin: 8px;
+    float: left;
+    margin: 8px;
 }
 .navbar-noti {
     position: relative;
@@ -112,46 +112,75 @@ body {
 }
 
 #profile {
-	display: inline-block;
-	background-color: #43b696;
-	height: 50px;
-	color: #fff;
-	white-space: nowrap;
-	overflow-x: hidden;
-	width: 100%;
+    display: block;
+    background-color: #43b696;
+    color: #fff;
+    white-space: nowrap;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    text-decoration: none;
 }
 
 #profile img {
-	width: 30px;
-	height: 30px;
-	margin: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    margin-top: 50px;
 }
 
-#profile p {
-	margin: 0;
-	margin-left: 20px;
+#profile span {
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap;
+    overflow-x: hidden;
+    position: absolute;
+    bottom: 10px;
 }
 
-#profile a {
-	color: white;
-	text-decoration: none;
+@media only screen and (min-width: 768px) {
+    #profile {
+        background-color: transparent;
+        color: #555;
+        white-space: nowrap;
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    #profile img {
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    #profile span {
+        font-size: 16px;
+        bottom: 10px;
+        left: 60px;
+    }
 }
 
 #side-menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #side-menu .list-group-item {
-	border: 0;
-	line-height: 30px;
+    border: 0;
+    line-height: 30px;
+    padding-left: 60px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    font-size: 16px;
 }
 
 #side-menu .list-group-item i {
-	margin-right: 10px;
-    font-size: 20px;
+    position: absolute;
+    left: 25px;
     line-height: 30px;
+    font-size: 22px;
+    transform: translateX(-50%);
 }
 
 /* ===== STYLE FOR SIDE NOTI ITEM=====*/
@@ -160,45 +189,45 @@ body {
 }
 
 #side-noti ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #side-noti .list-group-item {
-	border-radius: 0;
-	clear: both;
-	border-bottom: 0;
-	border-left: 0;
+    border-radius: 0;
+    clear: both;
+    border-bottom: 0;
+    border-left: 0;
 }
 
 #side-noti li {
-	width: 250px;
-	overflow-x: hidden;
+    width: 250px;
+    overflow-x: hidden;
 }
 
 #side-noti li:first-child {
-	font-size: 2rem;
-	background-color: #43b696;
-	color: white;
-	border: 0;
+    font-size: 2rem;
+    background-color: #43b696;
+    color: white;
+    border: 0;
 }
 
 #side-noti li .noti-icon {
-	display: inline-block;
-	width: 15%;
-	float: left;
+    display: inline-block;
+    width: 15%;
+    float: left;
 }
 
 #side-noti li p {
-	display: inline-block;
-	width: 80%;
-	line-height: 1em;
+    display: inline-block;
+    width: 80%;
+    line-height: 1em;
 }
 
 #side-noti li .time {
-	font-size: 1rem;
-	text-align: right;
+    font-size: 1rem;
+    text-align: right;
 }
 
 
@@ -238,5 +267,7 @@ body {
     }
     #side-noti {
         width: 250px;
+        border-left: 1px solid #ccc;
+        box-shadow: 0px 0px 3px 0px #eee;
     }
 }
