@@ -102,38 +102,94 @@ hr {
 
 
 /* ===== STYLE FOR SIDE MENU ITEM=====*/
+
 #side-menu .list-group-item {
     border: 0;
     line-height: 30px;
-    padding-left: 50px;
     white-space: nowrap;
     overflow-x: hidden;
 }
-#side-menu .list-group-item i {
-    position: absolute;
-    left: 25px;
-    line-height: 30px;
-    font-size: 22px;
-    transform: translateX(-50%);
+
+#profile {
+	background-color: #43b696;
+	height: 120px;
+	color: #fff;
 }
 
+#profile img {
+	width: 50px;
+	height: 50px;
+	margin: 20px;
+	margin-bottom: 5px;
+}
+
+#profile p {
+	margin: 0;
+	margin-left: 20px;
+}
+
+#profile a {
+	color: white;
+	text-decoration: none;
+}
+
+#side-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#side-menu .list-group-item {
+	border: 0;
+	line-height: 30px;
+}
+
+#side-menu .list-group-item i {
+	margin-right: 10px;
+}
 
 /* ===== STYLE FOR SIDE NOTI ITEM=====*/
-/*#side-menu .list-group-item {
+#side-noti .list-group-item {
     border: 0;
     line-height: 30px;
-    padding-left: 50px;
-    white-space: nowrap;
-    overflow-x: hidden;
 }
-#side-menu .list-group-item i {
-    position: absolute;
-    left: 25px;
-    line-height: 30px;
-    font-size: 22px;
-    transform: translateX(-50%);
+
+#side-noti ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
-*/
+
+#side-noti .list-group-item {
+	border-radius: 0;
+	clear: both;
+	border-bottom: 0;
+	border-left: 0;
+}
+
+#side-noti li:first-child {
+	font-size: 2rem;
+	background-color: #43b696;
+	color: white;
+	border: 0;
+}
+
+#side-noti li .noti-icon {
+	display: inline-block;
+	width: 15%;
+	float: left;
+	
+}
+
+#side-noti li p {
+	display: inline-block;
+	width: 80%;
+}
+
+#side-noti li .time {
+	font-size: 1rem;
+	text-align: right;
+}
 
 
 /* ===== STYLE FOR RESPONSIVE =====*/
@@ -174,5 +230,3 @@ voi man hinh lon thi chi fix doc*/
         width: 250px;
     }
 }
-
-

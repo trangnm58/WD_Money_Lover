@@ -6,7 +6,10 @@
     */
     class HomeController {
         public function render() {
-        	$content = 'src/main/template/tranactions.php';
+			$month = date("m-Y");
+        	$content = 'src/main/template/transactions.php';
+			$scriptFileName = "transaction.js";
+			$cssFileName = "transaction.css";
         	require_once 'src/main/view/HomeView.php';
         }
     }

@@ -41,15 +41,18 @@
 
     <div class="container" style="padding-top: 50px">
         <div id="side-menu">
-            <div id="profile" onclick="closeSideMenu()">
-                Luong do
-            </div>
+            <div id="profile">
+				<img src="img/icon.png" alt="avatar"/>
+				<span><?php if (isset($_SESSIONS["username"])) {
+					echo $_SESSION['username'];
+				} ?></span>
+			</div>
             <div class="list-group" onclick="closeSideMenu()">
                 <a class="list-group-item" href="/wallet">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                     Wallets
                 </a>
-                <a class="list-group-item" href="/transaction">
+                <a class="list-group-item" href="/home">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                     Transactions
                 </a>
@@ -102,24 +105,26 @@
             ?>
         </div>
         <div id="side-noti">
-            <div class="list-group" onclick="closeSideMenu()">
-                <a class="list-group-item" href="#">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                    Transactions
-                </a>
-                <a class="list-group-item" href="#">
-                    <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
-                    Debts
-                </a>
-                <a class="list-group-item" href="#">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                    Trends
-                </a>
-                <a class="list-group-item" href="#">
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                    Categories
-                </a>
-            </div>
+            <ul class="list-group list-unstyled" onclick="closeSideMenu()">
+				<li class="list-group-item">
+					Notifications
+				</li>
+				<li><a class="list-group-item" href="#">
+					<div class="noti-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+					<p class="details">Keep in touch with us for updates, tips and occasional free stuff. Tap to see now!</p>
+					<div class="time">2016-06-10 10PM</div>
+				</a></li>
+                <li><a class="list-group-item" href="#">
+					<div class="noti-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+					<p class="details">Keep in touch with us for updates, tips and occasional free stuff. Tap to see now!</p>
+					<div class="time">2016-06-10 10PM</div>
+				</a></li>
+				<li><a class="list-group-item" href="#">
+					<div class="noti-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+					<p class="details">Keep in touch with us for updates, tips and occasional free stuff. Tap to see now!</p>
+					<div class="time">2016-06-10 10PM</div>
+				</a></li>
+            </ul>
         </div>
     </div>
 </body>

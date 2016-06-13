@@ -49,3 +49,8 @@ function closeAllMenu() {
     closeSideMenu();
     closeSideNoti();
 }
+
+// check if there are notifications
+if ($("#side-noti ul li").length > 1) {
+	$(".navbar-noti").addClass("has-noti");
+}
