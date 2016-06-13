@@ -1,133 +1,96 @@
 <?php
     namespace main\model;
 
-
-    class Wallet
-    {
-
+    class Wallet {
         private $id;
-        private $account_id;
+        private $customer_id;
         private $name;
         private $description;
-        private $icon;
+        private $type;
         private $amount;
         private $unit_id;
         private $created_at;
 
         // get functions
-        public function getId()
-        {
+        public function getId() {
             return $this->id;
         }
-        
-        public function getAccountId()
-        {
-            return $this->account_id;
+
+        public function getCustomerId() {
+            return $this->customer_id;
         }
 
-        public function getName()
-        {
+        public function getName() {
             return $this->name;
         }
 
-        public function getDescription()
-        {
+        public function getDescription() {
             return $this->description;
         }
 
-        public function getIcon()
-        {
-            return $this->icon;
+        public function getType() {
+            return $this->type;
         }
 
-        public function getAmount()
-        {
+        public function getAmount() {
             return $this->amount;
         }
 
-        public function getUnitId()
-        {
+        public function getUnitId() {
             return $this->unit_id;
         }
-        public function getCreatedAt()
-        {
+
+        public function getCreatedAt() {
             return $this->created_at;
         }
 
-        public function getWallet()
-        {
-            $arrWallet = array('id' =>$this->id , 'account_id' =>$this->account_id , 'name' =>$this->name , 'description' => $this->description , 'icon' =>$this->icon , 'amount' =>$this->amount , 'unit_id' =>$this->unit_id , 'created_at' =>$this->created_at);
-            return $arrWallet;
-        }
-        //set functions       
-
-        public function setAccountId($_account_id)
-        {
-            $this->account_id = $_account_id;
+        //set functions
+        public function setid($id) {
+            $this->id = $id;
         }
 
-        public function setName($_name)
-        {
-            $this->name = $_name;
-        }
-        
-        public function setDescription($_description)
-        {
-            $this->description = $_description;
-        } 
-
-        public function setIcon($_icon)
-        {
-            $this->icon = $_icon;
-        } 
-
-        public function setAmount($_amount)
-        {
-            $this->amount = $_amount;
+        public function setcustomer_id($customer_id) {
+            $this->customer_id = $customer_id;
         }
 
-        public function setUnitId($_unit_id)
-        {
-            $this->unit_id = $_unit_id;
+        public function setname($name) {
+            $this->name = $name;
         }
 
-        public function setCreatedAt($_created_at)
-        {
-            $this->created_at = $_created_at;
+        public function setdescription($description) {
+            $this->description = $description;
         }
+
+        public function settype($type) {
+            $this->type = $type;
+        }
+
+        public function setamount($amount) {
+            $this->amount = $amount;
+        }
+
+        public function setunit_id($unit_id) {
+            $this->unit_id = $unit_id;
+        }
+
+        public function setcreated_at($created_at) {
+            $this->created_at = $created_at;
+        }
+
 
         /**
          * construct function has parameter as json
-         * JSON [{"id":$_id,"account_id":$_account,"name":$_name,"description":$_des,"icon":$_icon,"amount":$_amount},"unit_id":$_unit_id,"created_at":$_created_at]
          */
-        public function __construct(array $arrWallet)
+        public function __construct($wallet)
         {
-            $wallet = json_encode($arrWalletr);
-
-            if (isset($wallet.id) && $wallet.id != null) {
-                $this->id = $wallet.id;
-            }
-            if (isset( $wallet.account_id ) && $wallet.account_id != null) {
-                $this->account_id = $wallet.account_id;
-            }
-            if (isset( $wallet.name )) {
-                $this->name = $wallet.name;
-            }
-            if (isset( $wallet.description)) {
-                $this->description = $wallet.description;
-            }
-            if (isset($wallet.icon)) {
-                $this->icon = $wallet.icon;
-            }
-            if (isset($wallet.amount) && $wallet.amount != null) {
-                $this->amount = $wallet.amount;
-            }
-            if (isset($wallet.unit_id)&& $wallet.unit_id != null) {
-                $this.unit_id = $wallet.unit_id;
-            }
-            if (isset($wallet.created_at) && $wallet.created_at !=null) {
-                $this.created_at = $wallet.created_at;
-            }
+            $this->id = $wallet['id'];
+            $this->customer_id = $wallet['customer_id'];
+            $this->name = $wallet['name'];
+            $this->description = $wallet['description'];
+            $this->type = $wallet['type'];
+            $this->amount = $wallet['amount'];
+            $this->unit_id = $wallet['unit_id'];
+            $this->created_at = $wallet['created_at'];
         }
     }
 ?>

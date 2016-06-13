@@ -6,10 +6,18 @@
         private $account_id;
         private $username;
         private $email;
-        private $first_name;
-        private $last_name;
+        private $name;
         private $gender;
         private $dob;
+        private $default_wallet;
+        private $address;
+        private $city;
+        private $country;
+        private $phone;
+        private $university;
+        private $highschool;
+        private $job;
+        private $company;
 
         // Get functions
         public function getId() {
@@ -20,7 +28,7 @@
             return $this->account_id;
         }
 
-        public function getUserName() {
+        public function getUsername() {
             return $this->username;
         }
 
@@ -28,16 +36,8 @@
             return $this->email;
         }
 
-        public function getFirstName() {
-            return $this->first_name;
-        }
-
-        public function getLastName() {
-            return $this->last_name;
-        }
-
-        public function getFullName() {
-            return $this->first_name.$this->last_name;
+        public function getName() {
+            return $this->name;
         }
 
         public function getGender() {
@@ -48,13 +48,52 @@
             return $this->dob;
         }
 
+        public function getdefaultWallet() {
+            return $this->default_wallet;
+        }
+
+        public function getAddress() {
+            return $this->address;
+        }
+
+        public function getCity() {
+            return $this->city;
+        }
+
+        public function getCountry() {
+            return $this->country;
+        }
+
+        public function getPhone() {
+            return $this->phone;
+        }
+
+        public function getUniversity() {
+            return $this->university;
+        }
+
+        public function getHighschool() {
+            return $this->highschool;
+        }
+
+        public function getJob() {
+            return $this->job;
+        }
+
+        public function getCompany() {
+            return $this->company;
+        }
+
         // Set functions        
+        public function setId($_id) {
+            $this->id = $_id;
+        }
 
         public function setAccountId($_account_id) {
             $this->account_id = $_account_id;
         }
 
-        public function setUserName($_username) {
+        public function setUsername($_username) {
             $this->username = $_username;
         }
 
@@ -62,12 +101,8 @@
             $this->email = $_email;
         }
 
-        public function setFristName($_first_name) {
-            $this->first_name = $_first_name;
-        }
-
-        public function setLastName($_last_name) {
-            $this->last_name = $_last_name;
+        public function setName($_name) {
+            $this->name = $_name;
         }
 
         public function setGender($_gender) {
@@ -78,15 +113,59 @@
             $this->dob = $_dob;
         }
 
+        public function setDefaultWallet($_default_wallet) {
+            $this->default_wallet = $_default_wallet;
+        }
+
+        public function setAddress($_address) {
+            $this->address = $_address;
+        }
+
+        public function setCity($_city) {
+            $this->city = $_city;
+        }
+
+        public function setCountry($_country) {
+            $this->country = $_country;
+        }
+
+        public function setphone($_phone) {
+            $this->phone = $_phone;
+        }
+
+        public function setUniversity($_university) {
+            $this->university = $_university;
+        }
+
+        public function setHighschool($_highschool) {
+            $this->highschool = $_highschool;
+        }
+
+        public function setJob($_job) {
+            $this->job = $_job;
+        }
+
+        public function setCompany($_company) {
+            $this->company = $_company;
+        }
+
         // Construct function
         public function __construct($customer) {
             $this->id = $customer['id'];
             $this->account_id = $customer['account_id'];
             $this->username = $customer['username'];
             $this->email = $customer['email'];
-            $this->first_name = $customer['first_name'];
-            $this->last_name = $customer['last_name'];
+            $this->name = $customer['name'];
             $this->gender = $customer['gender'];
             $this->dob = $customer['dob'];
+            $this->default_wallet = $customer['default_wallet'];
+            $this->address = $customer['address'];
+            $this->city = $customer['city'];
+            $this->country = $customer['country'];
+            $this->phone = $customer['phone'];
+            $this->university = $customer['university'];
+            $this->highschool = $customer['highschool'];
+            $this->job = $customer['job'];
+            $this->company = $customer['company'];
         }
     }

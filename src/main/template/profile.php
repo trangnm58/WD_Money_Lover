@@ -7,107 +7,76 @@
       </div>
 
       <div class="item mp-card-first-item">
-        Họ tên:<span class="mp-right">{{eUser.profile.name}}</span>
+        Full name:<span class="mp-right">Duy Cat, Can</span>
       </div>
 
       <div class="item">
-        Tên tài khoản:<span class="mp-right">{{eUser.username}}</span>
+        Username:<span class="mp-right">cancat95</span>
       </div>
 
       <div class="item">
-        Ngày sinh:<span class="mp-right">{{eUser.profile.dob}}</span>
+        Date of Birth:<span class="mp-right">14/09/1995</span>
       </div>
 
       <div class="item">
-        Giới tính:<span class="mp-right">{{eUser.profile.gender}}</span>
+        Gender:<span class="mp-right">Male</span>
       </div>
 
       <div class="item">
-        Dân tộc:<span class="mp-right">{{eUser.profile.ethnic}}</span>
+        Default Wallet:<span class="mp-right">1</span>
       </div>
     </div>
 
     <div class="list card mp-info-card">
       <div class="item item-divider mp-card-divider">
         <h2>
-          <b>Thông tin liên hệ</b>
+          <b>Contact Information</b>
         </h2>
       </div>
 
       <div class="item mp-card-first-item">
-        Địa chỉ:<span class="mp-right">{{eUser.profile.address}}</span>
+        Address:<span class="mp-right">Phung thuong</span>
       </div>
 
       <div class="item">
-        Điện thoại:<span class="mp-right">{{eUser.profile.phone}}</span>
+        City:<span class="mp-right">Hanoi</span>
       </div>
 
       <div class="item">
-        Email:<span class="mp-right">{{eUser.profile.email}}</span>
+        Country:<span class="mp-right">Vietnam</span>
+      </div>
+
+      <div class="item">
+        Email:<span class="mp-right">ninjameo9x@gmail.com</span>
+      </div>
+
+      <div class="item">
+        Phone:<span class="mp-right">01234567890</span>
       </div>
     </div>
 
     <div class="list card mp-info-card">
       <div class="item item-divider mp-card-divider">
         <h2>
-          <b>Trình độ, kinh nghiệm</b>
+          <b>Education</b>
         </h2>
       </div>
 
       <div class="item mp-card-first-item">
-        Năm vào nghề:<span class="mp-right"></span>
+        University:<span class="mp-right">UET</span>
       </div>
 
       <div class="item">
-        Chức vụ:<span class="mp-right">{{eUser.profile.position}}</span>
+        Highschool:<span class="mp-right">Ngoc Tao</span>
       </div>
 
       <div class="item">
-        Môn dạy:<span class="mp-right">{{eUser.profile.specialize}}</span>
+        Job:<span class="mp-right">Student</span>
       </div>
 
       <div class="item">
-        Trình độ đào tạo:<span class="mp-right">{{eUser.profile.degree}}</span>
-      </div>
-
-      <div class="item">
-        Trình độ chính trị:<span class="mp-right">{{eUser.profile.politic}}</span>
-      </div>
-
-      <div class="item">
-        Đạt chuẩn tiếng Anh:<span class="mp-right">{{eUser.profile.english}}</span>
+        Company:<span class="mp-right">Google</span>
       </div>
     </div>
 
-    <div class="list card mp-info-card">
-      <div class="item item-divider mp-card-divider">
-        <h2>
-          <b>Thông tin khác</b>
-        </h2>
-      </div>
-
-      <div class="item mp-card-first-item">
-        Chế độ lao động:<span class="mp-right">{{eUser.profile.labor}}</span>
-      </div>
-
-      <div class="item">
-        Đảng viên:<span class="mp-right">{{eUser.profile.party ? "Có" : "Không"}}</span>
-      </div>
-
-      <div class="item">
-        Tổng phụ trách đội:<span class="mp-right">{{eUser.profile.team}}</span>
-      </div>
-
-      <div class="item">
-        Thư viện:<span class="mp-right">{{eUser.profile.library}}</span>
-      </div>
-
-      <div class="item">
-        Tham gia BDTX:<span class="mp-right">{{eUser.profile.education ?  "Có" : "Không"}}</span>
-      </div>
-
-      <div class="item">
-        Ghi chú:<span class="mp-right">{{eUser.profile.note}}</span>
-      </div>
-    </div>
 </div>
