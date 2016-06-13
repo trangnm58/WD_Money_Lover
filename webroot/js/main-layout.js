@@ -1,3 +1,4 @@
+var TIME_OUT = 300;
 
 function toggleSideMenu() {
     if (document.getElementById("side-menu").style.width == "250px") {
@@ -11,7 +12,9 @@ function closeSideMenu() {
         document.getElementById("side-menu").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
-	$("#content *").css("opacity", 1);
+	setTimeout(function() {
+		$("#content *").css("opacity", 1);
+	}, TIME_OUT);
 }
 function openSideMenu() {
     if ($(window).width() < 768) {
@@ -22,7 +25,9 @@ function openSideMenu() {
         }
     }
 	$("#content *").css("opacity", 0);
-	$("#side-menu *").css("opacity", 1);
+	setTimeout(function() {
+		$("#side-menu *").css("opacity", 1);
+	}, TIME_OUT);
 }
 
 function toggleSideNoti() {
@@ -37,8 +42,10 @@ function closeSideNoti() {
         document.getElementById("side-noti").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
-	$("#content *").css("opacity", 1);
-	$("#side-menu *").css("opacity", 1);
+	setTimeout(function() {
+		$("#content *").css("opacity", 1);
+		$("#side-menu *").css("opacity", 1);
+	}, TIME_OUT);
 }
 function openSideNoti() {
     if ($(window).width() < 1200) {
