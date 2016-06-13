@@ -2,11 +2,8 @@
 function toggleSideMenu() {
     if (document.getElementById("side-menu").style.width == "250px") {
         closeSideMenu();
-		$("#content *").css("opacity", 1);
     } else {
         openSideMenu();
-		$("#content *").css("opacity", 0.5);
-		$("#side-menu *").css("opacity", 1);
     }
 }
 function closeSideMenu() {
@@ -14,6 +11,7 @@ function closeSideMenu() {
         document.getElementById("side-menu").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
+	$("#content *").css("opacity", 1);
 }
 function openSideMenu() {
     if ($(window).width() < 768) {
@@ -23,17 +21,15 @@ function openSideMenu() {
             document.getElementById("side-noti").style.width = "0px";
         }
     }
+	$("#content *").css("opacity", 0);
+	$("#side-menu *").css("opacity", 1);
 }
 
 function toggleSideNoti() {
     if (document.getElementById("side-noti").style.width == "250px") {
         closeSideNoti();
-		$("#content *").css("opacity", 1);
-		$("#side-menu *").css("opacity", 1);
     } else {
         openSideNoti();
-		$("#content *").css("opacity", 0.5);
-		$("#side-menu *").css("opacity", 0.1);
     }
 }
 function closeSideNoti() {
@@ -41,7 +37,8 @@ function closeSideNoti() {
         document.getElementById("side-noti").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
-	
+	$("#content *").css("opacity", 1);
+	$("#side-menu *").css("opacity", 1);
 }
 function openSideNoti() {
     if ($(window).width() < 1200) {
@@ -51,6 +48,10 @@ function openSideNoti() {
             document.getElementById("side-menu").style.width = "0px";
         }
     }
+	
+	// blur content and side-menu
+	$("#content *").css("opacity", 0);
+	$("#side-menu *").css("opacity", 0);
 }
 
 function closeAllMenu() {

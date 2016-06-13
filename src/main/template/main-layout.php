@@ -41,12 +41,14 @@
 
     <div class="container" style="padding-top: 50px">
         <div id="side-menu">
-            <div id="profile">
+            <a id="profile" href="/profile">
 				<img src="img/icon.png" alt="avatar"/>
-				<span><?php if (isset($_SESSIONS["username"])) {
+				<span><?php 
+				session_start();
+				if (isset($_SESSION["username"])) {
 					echo $_SESSION['username'];
 				} ?></span>
-			</div>
+			</a>
             <div class="list-group" onclick="closeSideMenu()">
                 <a class="list-group-item" href="/wallet">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>

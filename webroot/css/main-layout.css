@@ -113,16 +113,19 @@ hr {
 }
 
 #profile {
+	display: inline-block;
 	background-color: #43b696;
-	height: 120px;
+	height: 50px;
 	color: #fff;
+	white-space: nowrap;
+	overflow-x: hidden;
+	width: 100%;
 }
 
 #profile img {
-	width: 50px;
-	height: 50px;
-	margin: 20px;
-	margin-bottom: 5px;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
 }
 
 #profile p {
@@ -153,7 +156,6 @@ hr {
 /* ===== STYLE FOR SIDE NOTI ITEM=====*/
 #side-noti .list-group-item {
     border: 0;
-    line-height: 30px;
 }
 
 #side-noti ul {
@@ -190,6 +192,7 @@ hr {
 #side-noti li p {
 	display: inline-block;
 	width: 80%;
+	line-height: 1em;
 }
 
 #side-noti li .time {
