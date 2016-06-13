@@ -73,6 +73,10 @@
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'HomeController';
                 $ret['actionName'] = 'deleteNoti';
+            } elseif ($commandArray[1] == 'add-wallet') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'WalletController';
+                $ret['actionName'] = 'addWallet';
             } else {
                 echo 'FAILED';
             }
