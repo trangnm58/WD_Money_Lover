@@ -1,9 +1,10 @@
 <?php
     namespace core\model;
-    require_once 'src/core/model/PDOData.php';
-    require_once 'src/main/model/Wallet.php';
-    class WalletsTable
-    {
+	use \PDO;
+	require_once 'src/core/model/PDOData.php';
+	require_once 'src/main/model/Wallet.php';
+
+    class WalletsTable {
         
         /**
          * insert Wallet object as a record into wallets table in moneylover database
@@ -67,16 +68,14 @@
 
         public function delete($walletId)
         {
-                    
             $conn = &PDOData::connect();
-            $stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");            
-            $stmt->bindParam(':id', $transactionId);
+            $stmt = $conn->prepare("DELETE FROM wallets WHERE id = :id");            
+            $stmt->bindParam(':id', $walletId);
             $stmt->execute();
 
             PDOData::disconnect();
 
             echo "SUCCESS";
-            
         }
 
         /**
@@ -92,14 +91,13 @@
             $stmt->execute();
 
             $result = array();
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
             
             PDOData::disconnect();
 
-            return json_encode($result);
-                    
+            return $result;
         }
 
         public function filter($walletId)

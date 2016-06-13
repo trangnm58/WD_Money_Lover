@@ -1,12 +1,11 @@
 <?php
     namespace core\model;
+	use \PDO;
     require_once 'src/core/model/PDOData.php';
     require_once 'src/main/model/Transaction.php';
 
     class TransactionsTable
     {
-        
-
         /**
          * insert Transaction object as a record into transactions table in moneylover database
          * @param Transaction $transaction
@@ -119,5 +118,24 @@
             PDOData::disconnect();
             echo "SUCCESS";
         }
+		
+		/**
+		 * Get all transactions in month-year
+		 */
+		public function getTransactionsByMonth($month, $year) {
+			$conn = &PDOData::connect();
+            $stmt = $conn->prepare("SELECT * FROM transactions WHERE MONTH(time) = :month AND YEAR(time) = :year");
+            $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+			$stmt->bindParam(':year', $year, PDO::PARAM_INT);
+            $stmt->execute();
+			
+			$result = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $result[] = $row;
+            }
+
+            PDOData::disconnect();
+            return $result;
+		}
     }
 ?>

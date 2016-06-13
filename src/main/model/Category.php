@@ -25,7 +25,7 @@
         }
 
         // Set function
-        public function setName($id) {
+        public function setId($id) {
             $this->id = $id;
         }
 

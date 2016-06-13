@@ -1,11 +1,11 @@
 <?php
     namespace core\model;
+	use \PDO;
     require_once 'src/core/model/PDOData.php';
     require_once 'src/main/model/Unit.php';
-    class UnitsTable
-    {
-        
-            /**
+
+    class UnitsTable {
+        /**
          * insert Unit object as a record into units table in moneylover database
          * @param Unit $unit
          * @return id of that unit if insert into database successfully
@@ -24,6 +24,7 @@
 
             return $unitId;
         }
+
         public function filter($unitId)
         {
             $conn = &PDOData::connect();
@@ -75,7 +76,6 @@
             PDOData::disconnect();
 
             echo "SUCCESS";
-
         }
     }
 ?>

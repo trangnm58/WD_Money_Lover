@@ -1,11 +1,11 @@
 <?php
     namespace core\model;
+	use \PDO;
     require_once 'src/core/model/PDOData.php';
-    require_once 'src/main/model/Category.php';
+	require_once 'src/main/model/Category.php';
 
-    class CategorysTable extends Table
+    class CategorysTable
     {
-
         /**
          * insert Category object as a record into categorys table in moneylover database
          * @param Category $newCategory
@@ -30,7 +30,6 @@
             PDOData::disconnect();
 
             return $categoryId;
-            
         }
 
         /**
@@ -78,23 +77,21 @@
         {
 
             $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM categorys WHERE customer_id = :customer_id");
+            $stmt = $conn->prepare("SELECT * FROM categorys WHERE customer_id = :customer_id OR customer_id IS NULL");
             $stmt->bindParam(':customer_id', $customerId);
             $stmt->execute();
 
             $result = array();
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
 
             PDOData::disconnect();
-            return json_encode($result);
-                
+            return $result;
         }
 
         public function filter($categoryId)
         {
-
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM categorys WHERE id = :id");
             $stmt->bindParam(':id', $categoryId);
