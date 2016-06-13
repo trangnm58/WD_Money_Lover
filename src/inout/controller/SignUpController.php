@@ -76,7 +76,7 @@
                     $customer = array();
                     $customer['username'] = $account['username'];
                     $customer['email'] = $account['email'];
-                    $customer['account_id'] = $id;
+                    $customer['id'] = $id;
 
                     if (\core\model\CustomersTable::insert($customer)) {
                         if (self::sendConfirmEmail($account)) {

@@ -7,15 +7,15 @@
       </div>
 
       <div class="item mp-card-first-item">
-        Full name:<span class="mp-right">Duy Cat, Can</span>
+        Full name:<span class="mp-right"><?php echo $customer->getName();?></span>
       </div>
 
       <div class="item">
-        Username:<span class="mp-right">cancat95</span>
+        Username:<span class="mp-right"><?php echo $customer->getUsername();?></span>
       </div>
 
       <div class="item">
-        Date of Birth:<span class="mp-right">14/09/1995</span>
+        Date of Birth:<span class="mp-right"><?php echo $customer->getDob();?></span>
       </div>
 
       <div class="item">

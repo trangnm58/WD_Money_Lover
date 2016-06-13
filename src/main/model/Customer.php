@@ -3,7 +3,6 @@
 
     class Customer {
         private $id;
-        private $account_id;
         private $username;
         private $email;
         private $name;
@@ -22,10 +21,6 @@
         // Get functions
         public function getId() {
             return $this->id;
-        }
-
-        public function getAccountId() {
-            return $this->account_id;
         }
 
         public function getUsername() {
@@ -89,10 +84,6 @@
             $this->id = $_id;
         }
 
-        public function setAccountId($_account_id) {
-            $this->account_id = $_account_id;
-        }
-
         public function setUsername($_username) {
             $this->username = $_username;
         }
@@ -152,7 +143,6 @@
         // Construct function
         public function __construct($customer) {
             $this->id = $customer['id'];
-            $this->account_id = $customer['account_id'];
             $this->username = $customer['username'];
             $this->email = $customer['email'];
             $this->name = $customer['name'];
