@@ -204,6 +204,7 @@ body {
 #side-noti li {
     width: 250px;
     overflow-x: hidden;
+	border-bottom: 1px solid #ddd;
 }
 
 #side-noti li a,

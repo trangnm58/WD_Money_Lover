@@ -1,3 +1,6 @@
+if ($("#transaction-list>ul li").length == 0) {
+	$("#transaction-list>ul").append('<span>No transaction. Add more!</span>');
+}
 
 var openTransactionForm = function() {
 	// show form
@@ -7,8 +10,24 @@ var openTransactionForm = function() {
 }
 
 var backToList = function() {
-	// show form
+	// hide form
 	$("#transaction-form").toggle();
-	// hide list
+	
+	// clear all form fields
+	$('#transaction-form').trigger("reset");
+	
+	// show list
 	$("#transaction-list").toggle();
+}
+
+var addTransaction = function() {
+	return true;
+}
+
+var prevMonth = function() {
+	
+}
+
+var nextMonth = function() {
+	
 }
