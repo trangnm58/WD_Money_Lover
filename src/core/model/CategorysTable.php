@@ -70,7 +70,7 @@
 
         /**
          * Get info of a Category object as a record from categorys table in moneylover database
-         * @param id of a category
+         * @param id of a customer
          * @return array as json has properties: id, account_id, name, description, icon, amount, unit_id and created_at
          */
         public function getCategorys($customerId)

@@ -124,12 +124,15 @@
 					Notifications
 				</li>
 				<!-- noti list here -->
-				<li><a class="list-group-item" href="#">
-					<div class="noti-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
-					<p class="details">Keep in touch with us for updates, tips and occasional free stuff. Tap to see now!</p>
-					<div class="time">2016-06-10 10PM</div>
-					<?php echo var_dump($notis); ?>
-				</a></li>
+				<?php
+					foreach($notis as $n) {
+						echo "<li><a class='list-group-item' href='#'>
+								<div class='noti-icon'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i></div>
+								<p class='details'>". $n->getDetail() . "</p>
+								<div class='time'>". $n->getCreatedAt() . "</div>
+							</a></li>";
+					}
+				?>
             </ul>
         </div>
     </div>

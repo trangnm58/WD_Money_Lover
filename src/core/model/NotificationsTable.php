@@ -28,7 +28,7 @@
          * @param id of a notification
          * @return array of Notification objects
          */
-        public function getNotis($customerId)
+        public function getNotifications($customerId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM notifications WHERE customer_id = :customer_id");

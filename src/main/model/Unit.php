@@ -3,7 +3,6 @@
     
     class Unit
     {
-
         private $id;
         private $name;
         private $exchange_rate;
@@ -36,6 +35,5 @@
             $this->name = $unit['name'];
             $this->exchange_rate = $unit['exchange_rate'];
         }
-
     }
 ?>
