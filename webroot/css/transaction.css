@@ -27,6 +27,13 @@
 	padding-bottom: 60px;
 }
 
+#transaction-list ul>span {
+	color: #aaa;
+	margin: 100px auto;
+	display: block;
+	text-align: center;
+}
+
 #transaction-list li table {
 	width: 100%;
 	color: black;
@@ -37,7 +44,6 @@
 	margin-bottom: 5px;
 	border-radius: 0;
 }
-
 
 #transaction-list .date {
 	border-bottom: 1px solid #eee;

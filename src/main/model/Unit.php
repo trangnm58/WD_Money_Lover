@@ -1,8 +1,7 @@
 <?php
     namespace main\model;
     
-    class Unit
-    {
+    class Unit {
         private $id;
         private $name;
         private $exchange_rate;
