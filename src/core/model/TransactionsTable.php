@@ -11,36 +11,40 @@
          * @param array $transaction
          * @return Id of transaction inserted
          */
-        public function insert($transaction)
+        public static function insert($transaction)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, category_id, time, description) VALUES (:customer_id, :amount, :unit_id, :wallet_id, :category_id, :time, :description);");
+			try {
+				$conn = &PDOData::connect();
+				$stmt = $conn->prepare("INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, category_id, time, description) VALUES (:customer_id, :amount, :unit_id, :wallet_id, :category_id, :time, :description);");
 
-            $stmt->bindParam(':customer_id', $transaction["customer_id"], PDO::PARAM_INT);
-            $stmt->bindParam(':amount', $transaction["amount"]);
-            $stmt->bindParam(':unit_id', $transaction["unit_id"], PDO::PARAM_INT);
-            $stmt->bindParam(':wallet_id', $transaction["wallet_id"], PDO::PARAM_INT);
-			$stmt->bindParam(':category_id', $transaction["category_id"], PDO::PARAM_INT);
-            $stmt->bindParam(':time', $transaction["time"]);
-            $stmt->bindParam(':description', $transaction["description"], PDO::PARAM_STR);
+				$stmt->bindParam(':customer_id', $transaction["customer_id"], PDO::PARAM_INT);
+				$stmt->bindParam(':amount', $transaction["amount"]);
+				$stmt->bindParam(':unit_id', $transaction["unit_id"], PDO::PARAM_INT);
+				$stmt->bindParam(':wallet_id', $transaction["wallet_id"], PDO::PARAM_INT);
+				$stmt->bindParam(':category_id', $transaction["category_id"], PDO::PARAM_INT);
+				$stmt->bindParam(':time', $transaction["time"]);
+				$stmt->bindParam(':description', $transaction["description"], PDO::PARAM_STR);
 
-            $stmt->execute();
-            $transactionId = $conn->lastInsertId();
+				$stmt->execute();
+				$transactionId = $conn->lastInsertId();
 
-            PDOData::disconnect();
-            return $transactionId;
+				return $transactionId;
+			} catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+			PDOData::disconnect();
         }
 
         /**
          * Updates a Transaction object as a record on transactions table in moneylover database
          * @param Transaction $transaction     
          */
-        public function update(Transaction $transaction)
+        public static function update(Transaction $transaction)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare(
 				"UPDATE transactions SET
-					amount =  :amount,
+					amount = :amount,
 					time = :time,
 					description = :description,
 					created_at = :created_at
@@ -65,7 +69,7 @@
          * @param id of a transaction
          * @return array as json has properties: id, customer_id, amount,unit_id, wallet_id, category_id, event_id, description, location, partner, created_at
          */
-        public function getTransactions($customerId)
+        public static function getTransactions($customerId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM transactions WHERE customer_id = :customer_id");
@@ -81,7 +85,7 @@
             return json_encode($result);
         }
     
-        public function filter($transactionId)
+        public static function filter($transactionId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM transactions WHERE id = :id");
@@ -101,7 +105,7 @@
          * Deletes a Transaction object as a record from transactions table in moneylover database
          * @param id of a transaction    
          */
-        public function delete($transactionId)
+        public static function delete($transactionId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");            
@@ -115,7 +119,7 @@
 		/**
 		 * Get all transactions in month-year
 		 */
-		public function getTransactionsByMonth($customerId, $month, $year) {
+		public static function getTransactionsByMonth($customerId, $month, $year) {
 			$conn = &PDOData::connect();
             $stmt = $conn->prepare(
 				"SELECT * FROM transactions

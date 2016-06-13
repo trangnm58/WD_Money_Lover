@@ -10,7 +10,7 @@
 		 * @param id of a customer
          * @return Unit object
          */
-        public function getUnits()
+        public static function getUnits()
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM units");
@@ -31,7 +31,7 @@
          * @param Unit $unit
          * @return id of that unit if insert into database successfully
          */
-        public function insert(Unit $unit)
+        public static function insert(Unit $unit)
         {                
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("INSERT INTO units (name, exchange_rate) VALUES (:name, :exchange_rate)");
@@ -46,7 +46,7 @@
             return $unitId;
         }
 
-        public function filter($unitId)
+        public static function filter($unitId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM units WHERE id = :id");
@@ -67,7 +67,7 @@
          * @param Unit $unit    
          */
        
-        public function update(Unit $unit)
+        public static function update(Unit $unit)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("UPDATE units SET  name =  :name, exchange_rate = :exchange_rate WHERE  id = :id ");
@@ -86,7 +86,7 @@
          * Deletes a debt object as a record from debts table in moneylover database
          * @param id of a debt     
          */    
-        public function delete($unitId)
+        public static function delete($unitId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("DELETE FROM units WHERE id = :id");            

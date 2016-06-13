@@ -12,7 +12,7 @@
          * @return id of category
          */
         
-        public function insert(Category $category)
+        public static function insert(Category $category)
         {        
             $conn = &PDOData::connect();
 
@@ -37,7 +37,7 @@
          * @param Category $newCategory     
          */    
 
-        public function update(Category $category)
+        public static function update(Category $category)
         {
             
             $conn = &PDOData::connect();
@@ -57,7 +57,7 @@
          * @param id of a category     
          */
         
-        public function delete($categoryId)
+        public static function delete($categoryId)
         {   
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("DELETE FROM categorys WHERE id = :id");                
@@ -73,7 +73,7 @@
          * @param id of a customer
          * @return array as json has properties: id, account_id, name, description, icon, amount, unit_id and created_at
          */
-        public function getCategorys($customerId)
+        public static function getCategorys($customerId)
         {
 
             $conn = &PDOData::connect();
@@ -90,7 +90,7 @@
             return $result;
         }
 
-        public function filter($categoryId)
+        public static function filter($categoryId)
         {
             $conn = &PDOData::connect();
             $stmt = $conn->prepare("SELECT * FROM categorys WHERE id = :id");
@@ -104,8 +104,6 @@
 
             PDOData::disconnect();
             return json_encode($result);
-                
         }
-
     }
 ?>
