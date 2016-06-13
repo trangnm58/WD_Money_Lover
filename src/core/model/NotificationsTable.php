@@ -11,16 +11,19 @@
          * @return boolean variable, it is true if insert into database successfully
          */
 
-        public function delete($notificationId)
+        public static function delete($notificationId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("DELETE FROM notifications WHERE id = :id");            
-            $stmt->bindParam(':id', $notificationId);
-            $stmt->execute();
+			try {
+				$conn = &PDOData::connect();
+				$stmt = $conn->prepare("DELETE FROM notifications WHERE id = :id");            
+				$stmt->bindParam(':id', $notificationId);
+				$stmt->execute();
 
-            PDOData::disconnect();
-
-            echo "SUCCESS";
+				PDOData::disconnect();
+			} catch(PDOException $e) {
+                return false;
+            }
+            return true;
         }
 
         /**
@@ -28,10 +31,10 @@
          * @param id of a notification
          * @return array of Notification objects
          */
-        public function getNotifications($customerId)
+        public static function getNotifications($customerId)
         {
             $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM notifications WHERE customer_id = :customer_id");
+            $stmt = $conn->prepare("SELECT * FROM notifications WHERE customer_id = :customer_id ORDER BY created_at;");
             $stmt->bindParam(':customer_id', $customerId);
             $stmt->execute();
 

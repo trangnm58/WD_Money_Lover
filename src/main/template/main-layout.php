@@ -145,9 +145,9 @@
 				<?php
 					foreach($notis as $n) {
 						echo "<li id='noti-id-".$n->getId()."'>
-								<a class='list-group-item' href='#'>
+								<a class='list-group-item' href='#' onclick='closeAllMenu()'>
 									<div class='delete-icon' onclick='deleteNoti(".$n->getId().")'><i class='fa fa-times' aria-hidden='true'></i></div>
-									<div class='noti-icon'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i></div>
+									<div class='noti-icon'><i class='fa fa-exclamation-circle' aria-hidden='true'></i></i></div>
 									<p class='details'>". $n->getDetail() . "</p>
 									<div class='time'>". $n->getCreatedAt() . "</div>
 								</a>
