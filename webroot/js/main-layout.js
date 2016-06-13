@@ -1,4 +1,4 @@
-var TIME_OUT = 300;
+var TIME_OUT = 000;
 
 function toggleSideMenu() {
     if (document.getElementById("side-menu").style.width == "250px") {

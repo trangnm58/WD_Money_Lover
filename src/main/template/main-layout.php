@@ -59,16 +59,17 @@
                     Transactions
                 </a>
                 <a class="list-group-item" href="#">
-                    <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
-                    Debts
-                </a>
-                <a class="list-group-item" href="#">
                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                     Trends
                 </a>
                 <a class="list-group-item" href="/category">
                     <i class="fa fa-cubes" aria-hidden="true"></i>
                     Categories
+                </a>
+                <hr/>
+                <a class="list-group-item" href="#">
+                    <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
+                    Debts
                 </a>
                 <a class="list-group-item" href="#">
                     <i class="fa fa-money" aria-hidden="true"></i>
@@ -90,9 +91,18 @@
                     <i class="fa fa-undo" aria-hidden="true"></i>
                     Recurring Transactions
                 </a>
+                <hr/>
                 <a class="list-group-item" href="#">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     Help & Support
+                </a>
+                <a class="list-group-item" href="/wallet">
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    Edit Information
+                </a>
+                <a class="list-group-item" href="/home">
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    Change Password
                 </a>
                 <a class="list-group-item" href="/api/logout">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>

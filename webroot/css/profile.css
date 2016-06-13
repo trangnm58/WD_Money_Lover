@@ -1,13 +1,15 @@
 #profile-container {
     min-height: calc(100vh - 50px);
 }
+/*===== STYLE FOR CARD =====*/
+
 .item {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 16px;
     position: relative;
-    z-index: 1;
+    z-index: 0;
     display: block;
     margin: -1px;
     border-color: #ddd;
@@ -25,6 +27,8 @@
     overflow: hidden;
     border-radius: 2px;
     background-color: #fff;
+    margin-left: 0;
+    margin-right: 0; 
 }
 .list {
     position: relative;
@@ -46,8 +50,15 @@
     font-weight: 500;
 }
 .mp-info-card {
-    margin: 10px;
+    margin: 10px 0;
 }
+@media only screen and (min-width: 768px) {
+    .mp-info-card {
+        margin-left: 10px;
+    }
+}
+/*===== STYLE FOR CARD DIVIDER =====*/
+
 .mp-card-divider {
     border-bottom: 0 !important;
     height: 25px;
