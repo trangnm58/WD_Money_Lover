@@ -60,7 +60,7 @@
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                     Transactions
                 </a>
-                <a class="list-group-item" href="#">
+                <a class="list-group-item" href="/trend">
                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                     Trends
                 </a>
@@ -94,7 +94,7 @@
                     Recurring Transactions
                 </a>
                 <hr/>
-                <a class="list-group-item" href="#">
+                <a class="list-group-item" href="/help">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     Help & Support
                 </a>
