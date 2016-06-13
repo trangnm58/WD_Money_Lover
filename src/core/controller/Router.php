@@ -52,6 +52,23 @@
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'ProfileController';
                 $ret['actionName'] = 'changePassword';
+            } elseif ($commandArray[1] == 'add-transaction') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'TransactionController';
+                $ret['actionName'] = 'addTransaction';
+            } elseif ($commandArray[1] == 'delete-transaction') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'TransactionController';
+                $ret['actionName'] = 'deleteTransaction';
+            } elseif ($commandArray[1] == 'update-transaction') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'TransactionController';
+                $ret['actionName'] = 'updateTransaction';
+            } elseif ($commandArray[1] == 'get-transaction') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'TransactionController';
+                $ret['actionName'] = 'updateTransaction';
+                $ret['parameters'] = array_slice($commandArray, 2);
             } else {
                 echo 'FAILED';
             }
@@ -103,9 +120,27 @@
                 $parameters = array_slice($commandArray, 1);
             } elseif ($commandArray[0] == 'category') {
                 $moduleName = 'main';
-                $controllerName = 'WalletController';
+                $controllerName = 'CategoryController';
                 $actionName = 'render';
                 $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'trend') {
+                $moduleName = 'main';
+                $controllerName = 'TrendController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'help') {
+                $moduleName = 'main';
+                $controllerName = 'HelpController';
+                $actionName = 'render';
+                $parameters = array_slice($commandArray, 1);
+            } elseif ($commandArray[0] == 'edit-profile') {
+                $moduleName = 'main';
+                $controllerName = 'ProfileController';
+                $actionName = 'renderEdit';
+            } elseif ($commandArray[0] == 'change-password') {
+                $moduleName = 'main';
+                $controllerName = 'ProfileController';
+                $actionName = 'renderChangePassword';
             }
 
             $ret = array();
