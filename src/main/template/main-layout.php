@@ -123,14 +123,16 @@
 				<li class="list-group-item">
 					Notifications
 				</li>
-				<!-- noti list here -->
 				<?php
 					foreach($notis as $n) {
-						echo "<li><a class='list-group-item' href='#'>
-								<div class='noti-icon'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i></div>
-								<p class='details'>". $n->getDetail() . "</p>
-								<div class='time'>". $n->getCreatedAt() . "</div>
-							</a></li>";
+						echo "<li id='noti-id-".$n->getId()."'>
+								<a class='list-group-item' href='#'>
+									<div class='delete-icon' onclick='deleteNoti(".$n->getId().")'><i class='fa fa-times' aria-hidden='true'></i></div>
+									<div class='noti-icon'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i></div>
+									<p class='details'>". $n->getDetail() . "</p>
+									<div class='time'>". $n->getCreatedAt() . "</div>
+								</a>
+							</li>";
 					}
 				?>
             </ul>

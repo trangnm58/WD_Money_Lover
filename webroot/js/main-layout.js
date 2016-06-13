@@ -1,5 +1,3 @@
-var TIME_OUT = 000;
-
 function toggleSideMenu() {
     if (document.getElementById("side-menu").style.width == "250px") {
         closeSideMenu();
@@ -12,9 +10,7 @@ function closeSideMenu() {
         document.getElementById("side-menu").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
-	setTimeout(function() {
-		$("#content *").css("opacity", 1);
-	}, TIME_OUT);
+	$("#content *").css("opacity", 1);
 }
 function openSideMenu() {
     if ($(window).width() < 768) {
@@ -25,9 +21,7 @@ function openSideMenu() {
         }
     }
 	$("#content *").css("opacity", 0);
-	setTimeout(function() {
-		$("#side-menu *").css("opacity", 1);
-	}, TIME_OUT);
+	$("#side-menu *").css("opacity", 1);
 }
 
 function toggleSideNoti() {
@@ -42,10 +36,8 @@ function closeSideNoti() {
         document.getElementById("side-noti").style.width = "0px";
         document.body.style.backgroundColor = "white";
     }
-	setTimeout(function() {
-		$("#content *").css("opacity", 1);
-		$("#side-menu *").css("opacity", 1);
-	}, TIME_OUT);
+	$("#content *").css("opacity", 1);
+	$("#side-menu *").css("opacity", 1);
 }
 function openSideNoti() {
     if ($(window).width() < 1200) {
@@ -64,6 +56,15 @@ function openSideNoti() {
 function closeAllMenu() {
     closeSideMenu();
     closeSideNoti();
+}
+
+function deleteNoti(id) {
+	// use Ajax to delete notification with "id"
+	$.post("/api/delete-noti", {id: id}, function(data, status) {
+		if (data) {
+			$("#noti-id-" + id).remove();
+		}
+    });
 }
 
 

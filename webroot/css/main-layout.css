@@ -225,6 +225,10 @@ body {
     line-height: 1em;
 }
 
+#side-noti li .delete-icon {
+	text-align: right;
+}
+
 #side-noti li .time {
     font-size: 1rem;
     text-align: right;

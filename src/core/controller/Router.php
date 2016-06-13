@@ -69,6 +69,10 @@
                 $ret['controllerName'] = 'TransactionController';
                 $ret['actionName'] = 'updateTransaction';
                 $ret['parameters'] = array_slice($commandArray, 2);
+			} elseif ($commandArray[1] == 'delete-noti') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'HomeController';
+                $ret['actionName'] = 'deleteNoti';
             } else {
                 echo 'FAILED';
             }
