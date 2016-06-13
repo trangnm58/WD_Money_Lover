@@ -3,9 +3,11 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+
 body {
     transition: background-color 0.5s ease;
 }
+
 hr {
     border: 1px solid #555;
 }
@@ -167,6 +169,11 @@ hr {
 	border-left: 0;
 }
 
+#side-noti li {
+	width: 250px;
+	overflow-x: hidden;
+}
+
 #side-noti li:first-child {
 	font-size: 2rem;
 	background-color: #43b696;
@@ -178,7 +185,6 @@ hr {
 	display: inline-block;
 	width: 15%;
 	float: left;
-	
 }
 
 #side-noti li p {
@@ -194,7 +200,7 @@ hr {
 
 /* ===== STYLE FOR RESPONSIVE =====*/
 /* fixed co dieu kien (chi fix ngang neu la man hinh nho)
-voi man hinh lon thi chi fix doc*/
+   voi man hinh lon thi chi fix doc*/
 @media only screen and (max-width: 767px) {
     #side-menu {
         left: 0;
@@ -206,7 +212,7 @@ voi man hinh lon thi chi fix doc*/
         background: inherit;
     }
 }
-/*responsive cho menu*/
+/*responsive for menu*/
 @media only screen and (min-width: 768px) {
     body>.container {
         position: relative;
@@ -218,7 +224,7 @@ voi man hinh lon thi chi fix doc*/
         margin-left: 250px;
     }
 }
-/*responsive cho noti*/
+/*responsive for noti*/
 @media only screen and (min-width: 1200px) {
     .container {
         padding-right: 250px;
