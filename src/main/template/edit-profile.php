@@ -1,4 +1,4 @@
-<div id="profile-container">
+<div id="edit-profile-container">
     <div class="list card mp-info-card">
       <div class="item item-divider mp-card-divider">
         <h2>
