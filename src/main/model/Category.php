@@ -4,7 +4,7 @@
     class Category {
         private $id;
         private $name;
-        private $type;
+        private $icon;
         private $customer_id;
 
         // get functions
@@ -16,8 +16,8 @@
             return $this->name;
         }
 
-        public function getType() {
-            return $this->type;
+        public function getIcon() {
+            return $this->icon;
         }
 
         public function getCustomerId() {
@@ -33,8 +33,8 @@
             $this->name = $_name;
         }
 
-        public function setType($_type) {
-            $this->type = $_type;
+        public function setIcon($_icon) {
+            $this->icon = $_icon;
         }
 
         public function setCustomerId($_customer_id) {
@@ -44,7 +44,7 @@
         public function __construct($category) {        
             $this->id = $category['id'];
             $this->name = $category['name'];
-            $this->type = $category['type'];
+            $this->icon = $category['icon'];
             $this->customer_id = $category['customer_id'];
         }
     }
