@@ -10,18 +10,19 @@
 	<ul class="list-group">
 		<?php
 			foreach ($transactions as $t) {
-				$date = new DateTime($t["transaction"]->getTime());
-				echo '<li id="trans-id-' . $t["transaction"]->getId() . '" class="list-group-item" onclick="showDetails(' . $t["transaction"]->getId() . ')">
+				$date = new DateTime($t["transaction"]["time"]);
+				echo '<li id="trans-id-' . $t["transaction"]["id"] . '" class="list-group-item" onclick="showDetails(' . $t["transaction"]["id"] . ')">
+						<span style="display:none">' . $date->format("d") . '</span>
 						<table>
 							<tr class="date">
 								<td class="d">' . $date->format("d") . '</td>
 								<td class="my">' . $date->format("F Y") . '</td>
-								<td class="wallet">' . $t["wallet"]->getName() . '</td>
+								<td class="wallet">' . $t["wallet"]["name"] . '</td>
 							</tr>
 							<tr class="details">
 								<td><img src="img/icon.png" alt="category image"/></td>
-								<td class="category">' . $t["category"]->getName() . '</td>
-								<td class="money">' . $t["transaction"]->getAmount() . ' ' . $t["unit"]->getName() . '</td>
+								<td class="category">' . $t["category"]["name"] . '</td>
+								<td class="money">' . $t["transaction"]["amount"] . ' ' . $t["unit"]["name"] . '</td>
 							</tr>
 						</table>
 					</li>';

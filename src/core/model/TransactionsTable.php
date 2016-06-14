@@ -86,7 +86,7 @@
             PDOData::disconnect();
             return json_encode($result);
         }
-    
+
         public static function get($transactionId)
         {
 			try {            

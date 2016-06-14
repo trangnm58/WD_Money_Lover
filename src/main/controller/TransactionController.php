@@ -66,28 +66,41 @@
             }
 		}
 		
-		public function getTransactionsByMonth($currentMonth, $currentYear) {
+		public function getTransactionsByMonth($month, $year) {
 			require_once 'src/core/model/TransactionsTable.php';
 			session_start();
 			$customer_id = $_SESSION["userid"];
 
-			$results = \core\model\TransactionsTable::getTransactionsByMonth($customer_id, $currentMonth, $currentYear);
+			$results = \core\model\TransactionsTable::getTransactionsByMonth($customer_id, $month, $year);
 
 			$transactions = array();
 			foreach ($results as $t) {
 					$temp = array();
-					$temp["transaction"] = new \main\model\Transaction($t);
-					$temp["wallet"] = new \main\model\Wallet(\core\model\WalletsTable::get($t["wallet_id"]));
-					$temp["category"] = new \main\model\Category(\core\model\CategorysTable::get($t["category_id"]));
-					$temp["unit"] = new \main\model\Unit(\core\model\UnitsTable::get($t["unit_id"]));
+					$temp["transaction"] = $t;
+					$temp["wallet"] = \core\model\WalletsTable::get($t["wallet_id"]);
+					$temp["category"] = \core\model\CategorysTable::get($t["category_id"]);
+					$temp["unit"] = \core\model\UnitsTable::get($t["unit_id"]);
 					$transactions[] = $temp;
 				}
 			return $transactions;
 		}
+		
+		public function getTransaction($param) {
+			if ($param == array()) {
+				// get all current month
+			} elseif ($param[0] == "month") {
+				// get thang param[1] cua nam param[2]
+				$transactions = $this->getTransactionsByMonth($param[1], $param[2]);
+
+				echo json_encode($transactions);
+			} elseif ($param[0] == "category") {
+				// thi get theo category theo param[1];
+			}
+		}
 
 		public function addTransaction() {
 			require_once 'src/core/model/TransactionsTable.php';
-			session_start();
+
 			$customer_id = $_SESSION["userid"];
             $amount = $_POST['money'];
             $unit_id = $_POST['unit'];
