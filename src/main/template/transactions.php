@@ -10,7 +10,7 @@
 	<ul class="list-group">
 		<!-- Danh sach transactions o day -->
 		<?php echo var_dump($transactions); ?>
-		<!--<li class="list-group-item">
+		<li class="list-group-item" onclick="showDetails()">
 			<table>
 				<tr class="date">
 					<td class="d">13</td>
@@ -23,7 +23,7 @@
 					<td class="money">12.000 VND</td>
 				</tr>
 			</table>
-		</li>  -->
+		</li>
 	</ul>
 </div>
 
