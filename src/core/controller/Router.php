@@ -3,6 +3,7 @@
 
     class Router {
         public static function proc() {
+            session_start();
                  
             // Explode the URI
             $requestURI = explode('/', strtolower($_SERVER['REQUEST_URI']));
@@ -163,12 +164,10 @@
 
         private function secure($ret) {
             if ($ret['moduleName'] == 'inout') {
-                session_start();
                 if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
                     header('location:/home');
                 }
             } elseif ($ret['moduleName'] == 'main') {
-                session_start();
                 if (!isset($_SESSION['userid']) || !isset($_SESSION['username'])) {
                     header('location:/login');
                 }

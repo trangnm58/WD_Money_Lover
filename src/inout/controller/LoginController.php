@@ -38,6 +38,7 @@
             require_once 'src/core/model/AccountsTable.php';
             $usernameRegex = '/^[a-zA-Z0-9]{6,50}$/';
             $passwordRegex = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50}/';
+
             $username = $_POST['username'];
             $password = $_POST['password'];
 
