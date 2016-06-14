@@ -14,56 +14,50 @@
         
         public static function insert(Wallet $wallet)
         {
-            
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("INSERT INTO wallets (customer_id, name, description, icon, amount, unit_id, created_at) VALUES (:customer_id, :name, :description, :icon, :amount, :unit_id, :created_at)");
+            try {
 
-            $stmt->bindParam(':customer_id', $wallet->getCustomerId());
-            $stmt->bindParam(':name', $wallet->getName());
-            $stmt->bindParam(':description', $wallet->getDescription());
-            $stmt->bindParam(':icon', $wallet->getIcon());
-            $stmt->bindParam(':amount', $wallet->getAmount());
-            $stmt->bindParam(':unit_id', $wallet->getUnitId());
-            $stmt->bindParam(':created_at', $wallet->getCreatedAt());                
-            if($stmt->execute()) {
-
-
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare("INSERT INTO wallets (customer_id, name, description, icon, amount, unit_id, created_at) VALUES (:customer_id, :name, :description, :icon, :amount, :unit_id, :created_at)");
+                $stmt->bindParam(':customer_id', $wallet["customer_id"]);
+                $stmt->bindParam(':name', $wallet["name"]);
+                $stmt->bindParam(':description', $wallet["description"]);
+                $stmt->bindParam(':icon', $wallet["icon"]);
+                $stmt->bindParam(':amount', $wallet["amount"]);
+                $stmt->bindParam(':unit_id', $wallet["unit_id"]);
+                $stmt->execute();
+                $walletId = $conn->lastInsertId();
+                return $walletId;
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
-            $walletId = $conn->lastInsertId();
-
-            PDOData::disconnect();
-
-            return $walletId;
-                     
+            PDOData::disconnect();                     
         }
         
         /**
          * Updates a Wallet object as a record on wallets table in moneylover database
          * @param Wallet $wallet     
          */   
-        public static function update(Wallet $wallet)
+        public static function update($wallet, $id)
         {
-            
+            try {
                 $conn = &PDOData::connect();
                 $stmt = $conn->prepare("UPDATE wallets SET  name =  :name, description = :description, icon = :icon, amount = :amount, created_at = :created_at WHERE  id = :id ");
                 
-                $stmt->bindParam(':name', $wallet->getName());
-                $stmt->bindParam(':description', $wallet->getDescription());
-                $stmt->bindParam(':icon', $wallet->getIcon());
-                $stmt->bindParam(':amount', $wallet->getAmount());
-                $stmt->bindParam(':unit_id', $wallet->getUnitId());            
-                $stmt->bindParam(':created_at', $wallet->getCreatedAt());
-                $stmt->bindParam(':id', $wallet->getId());
-                $stmt->execute();
-
-            
-            
-
+                $stmt->bindParam(':name', $wallet["name"]);
+                $stmt->bindParam(':description', $wallet["description"]);
+                $stmt->bindParam(':icon', $wallet["icon"]);
+                $stmt->bindParam(':amount', $wallet["amount"]);
+                $stmt->bindParam(':unit_id', $wallet["unit_id"]);                            
+                $stmt->bindParam(':id', $id;
+                if ($stmt->execute()) {
+                    echo "SUCCESS";
+                } else {
+                    echo "FAILED";
+                }           
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
             PDOData::disconnect();
-
-            echo "SUCCESS";
-            
         }
         /**
          * Deletes a Wallet object as a record from wallets table in moneylover database
@@ -73,14 +67,20 @@
 
         public static function delete($walletId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("DELETE FROM wallets WHERE id = :id");            
-            $stmt->bindParam(':id', $walletId);
-            $stmt->execute();
 
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare("DELETE FROM wallets WHERE id = :id");            
+                $stmt->bindParam(':id', $walletId);
+                if ($stmt->execute()) {
+                    echo "SUCCESS";
+                }else {
+                    echo "FAILED";
+                }                             
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
             PDOData::disconnect();
-
-            echo "SUCCESS";
         }
 
         /**
