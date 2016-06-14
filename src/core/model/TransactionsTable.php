@@ -15,7 +15,10 @@
         {
 			try {
 				$conn = &PDOData::connect();
-				$stmt = $conn->prepare("INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, category_id, time, description) VALUES (:customer_id, :amount, :unit_id, :wallet_id, :category_id, :time, :description);");
+				$stmt = $conn->prepare(
+					"INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, category_id, time, description)
+					VALUES (:customer_id, :amount, :unit_id, :wallet_id, :category_id, :time, :description);"
+				);
 
 				$stmt->bindParam(':customer_id', $transaction["customer_id"], PDO::PARAM_INT);
 				$stmt->bindParam(':amount', $transaction["amount"]);
@@ -116,13 +119,17 @@
          */
         public static function delete($transactionId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");            
-            $stmt->bindParam(':id', $transactionId);
-            $stmt->execute();
+			try {
+				$conn = &PDOData::connect();
+				$stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");  
+				$stmt->bindParam(':id', $transactionId);
+				$stmt->execute();
 
-            PDOData::disconnect();
-            echo "SUCCESS";
+				PDOData::disconnect();
+			} catch(PDOException $e) {
+                return false;
+            }
+            return true;
         }
 		
 		/**

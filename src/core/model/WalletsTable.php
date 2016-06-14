@@ -116,20 +116,41 @@
                 $stmt->execute();
 
                 if ($stmt->execute()) {
-                        if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            return $result;
-                        } else {
-                            return array();
-                        }
-                    } else {
-                        return array();
-                    }
+					if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+						return $result;
+					} else {
+						return array();
+					}
+				} else {
+					return array();
+				}
             } catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
             PDOData::disconnect();
-                    
         }
+		
+		public static function updateAmount($id = '', $amount = 0) {
+            try {            
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare("UPDATE wallets SET amount = :amount WHERE id = :id;");
+				$stmt->bindParam(':amount', $amount);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
 
+                if ($stmt->execute()) {
+					if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
+        }
     }
 ?>

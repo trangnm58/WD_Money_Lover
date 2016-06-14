@@ -234,6 +234,7 @@ body {
 
 #side-noti li .delete-icon {
 	text-align: right;
+	cursor: pointer;
 }
 
 #side-noti li .time {

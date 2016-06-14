@@ -4,6 +4,8 @@
 	require_once 'src/core/model/WalletsTable.php';
 	require_once 'src/core/model/CategorysTable.php';
 	require_once 'src/core/model/UnitsTable.php';
+	require_once 'src/main/model/Wallet.php';
+	require_once 'src/main/model/Category.php';
 
 
     /**
@@ -118,6 +120,20 @@
 			$transaction['time'] = $time;
 			$transaction['description'] = $description;
 
-			echo \core\model\TransactionsTable::insert($transaction);
+			// substract amount in wallet
+			// get wallet
+			$wallet = \core\model\WalletsTable::get($wallet_id);
+			$new_amount = $wallet["amount"] - $amount;
+			// update amount of wallet
+			$w = \core\model\WalletsTable::updateAmount($wallet_id, $new_amount);
+			// return new transaction's id
+			$transaction['id'] = \core\model\TransactionsTable::insert($transaction);
+			echo json_encode($transaction);
+		}
+		
+		public function deleteTransaction() {
+			require_once 'src/core/model/TransactionsTable.php';
+			$id = $_POST['id'];
+			echo \core\model\TransactionsTable::delete($id);
 		}
     }
