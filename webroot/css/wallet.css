@@ -1,0 +1,114 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+/* ===== STYLE FOR TOP NAV BAR =====*/
+#wallet-container {
+	min-height: calc(100vh - 50px);
+	max-width:600px;
+	padding-top: 20px;
+	margin: 0 auto;
+}
+
+.navbar {
+    font-family: sans-serif;
+    font-weight: 700;
+    background: #387e98;
+    border: 0;
+}
+.navbar a:focus {
+    outline: 0;
+}
+.navbar-brand {
+    text-transform: uppercase;
+    
+}
+.navbar-item {
+    float: right;
+    line-height: 50px;
+    color: #fff;
+}
+.add-button {
+	width: 60px;
+	height: auto;
+	bottom: 60px;
+	position: fixed;
+	right: 60px;
+	}
+
+@media(min-width:320px) {
+	
+	.navbar-brand {
+		font-size: 1em;
+		margin-left: -15px;
+	}
+	
+}
+
+.add-button {
+	width: 40px;
+	height: auto;
+	bottom: 0px;
+	position: fixed;
+	right: 30px;
+	}
+.total {
+	height: 70px;
+}
+.wallet-img {
+	width: 50px; 
+	height: auto;
+}
+.total-wallet-info {
+	margin-left: 70px;
+	margin-top: -45px
+}
+
+.each-wallet {
+	height: 60px;
+}
+.each-wallet-info {
+	font-size: 10pt; margin-left:50px;margin-top: -30px;
+}
+/* ===== STYLE FOR SIDE BAR =====*/
+
+
+/* ===== STYLE FOR CREATE TRANSACTION BUTTON =====*/
+
+#wallet-container>button {
+	border-radius: 100%;
+	border: 0;
+	width: 60px;
+	height: 60px;
+	background-color: #43b696;
+	font-size: 3.8rem;
+	color: white;
+	padding: 0;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 1;
+}
+
+#wallet-container>button:focus {
+	outline: 0;
+	background-color: #37957a;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+	#wallet-container>button {
+		right: 100px;
+		bottom: 50px;
+		width: 60px;
+	height: 60px;
+	}	
+}
+
+@media only screen and (min-width: 1200px) {
+	#wallet-container>button {
+		right: 300px;
+		bottom: 50px;
+	}
+	
+}
