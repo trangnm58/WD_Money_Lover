@@ -55,4 +55,26 @@
             }
             PDOData::disconnect();
         }
+
+        // updateBacicInformation($info, $id)
+        // INPUT: $id is id of customer want to update
+        // $info has name, dob, gender
+        // HOW-TO-DO: update this basic information
+        // OUTPUT: boolean success or not
+        public static function updateBacicInformation($info, $id) {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('UPDATE customers AS c SET name=IFNULL(:name, c.name), gender=IFNULL(:gender, c.gender), dob=IFNULL(:dob, c.dob) WHERE id = :id;');
+
+                $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':name', $info['name']);
+                $stmt->bindParam(':gender', $info['gender']);
+                $stmt->bindParam(':dob', $info['dob']);
+
+                return $stmt->execute();
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
+        }
     }

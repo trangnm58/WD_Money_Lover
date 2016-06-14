@@ -30,6 +30,22 @@
     margin-left: 0;
     margin-right: 0; 
 }
+.card a {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+}
+@media only screen and (min-width: 768px) {
+    .card a {
+        display: none;
+    }
+    .card:hover a {
+        display: block!important;
+    }
+}
 .list {
     position: relative;
     padding-left: 0;
@@ -79,4 +95,81 @@
 }
 .mp-right {
     float: right;
+}
+/*===== STYLE FOR MODEL =====*/
+
+.modal-body {
+    background: #eee;
+}
+.edit-form input[type="text"],
+.edit-form input[type="date"],
+.edit-form input[type="number"],
+.edit-form textarea,
+.edit-form select {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #fff;
+    color: #8a97a0;
+    margin-bottom: 10px;
+}
+
+.edit-form select {
+    padding: 6px;
+    height: 42px;
+}
+
+.edit-form button {
+    padding: 10px 0;
+    color: #fff;
+    background-color: #43b696;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 49%;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    border: 0;
+}
+
+.edit-form button[type="button"] {
+    background-color: orange;
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 4px;
+}
+.save-btn, .cancel-btn {
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    border: 0;
+    border-radius: 0;
+}
+.save-btn {
+    background: #43b696;
+}
+.cancel-btn {
+    background: #ff6f69;
+}
+/*===== STYLE FOR ALERT =====*/
+.alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    z-index: 999;
+    display: none;
+}
+.alert-show {
+    display: block!important;
 }

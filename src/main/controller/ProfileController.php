@@ -33,12 +33,9 @@
         }
 
         // PRIVATE FUNCTION
-        // changePassword()
+        // getMyself()
         // INPUT: nothing
-        // HOW-TO-DO: get password from POST data
-        // change password for current acoount
-        // echo 'SUCCESS' if change successfully
-        // otherwise, 'FAILED'
+        // HOW-TO-DO: get all customer information by id
         private function getMyself() {
             if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
@@ -46,6 +43,31 @@
 
                 $result = \core\model\CustomersTable::get($id);
                 return new \main\model\Customer($result);
+            }
+        }
+
+        // API
+        // updateBasicInformation()
+        // INPUT: nothing
+        // HOW-TO-DO: get password from POST data
+        // change password for current acoount
+        // echo 'SUCCESS' if change successfully
+        // otherwise, echo 'FAILED' or error log
+        public function updateBasicInformation() {
+            if (isset($_SESSION['username']) && isset($_SESSION['userid'])) {
+                // Get data from post data
+                $info = array();
+                $info['name'] = $_POST['name'];
+                $info['dob'] = $_POST['dob'];
+                $info['gender'] = $_POST['gender'];
+
+                if (\core\model\CustomersTable::updateBacicInformation($info, $_SESSION['userid'])) {
+                    echo "SUCCESS";
+                } else {
+                    echo "FAILED";
+                }
+            } else {
+                echo "NOT LOGIN";
             }
         }
 
@@ -61,9 +83,8 @@
                 $passwordRegex = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50}/';
 
                 // Get password from post data
-                $post = json_decode(file_get_contents('php://input'), true);
-                $oldPassword = sha1($post['old-password']);
-                $newPassword = sha1($post['new-password']);
+                $oldPassword = sha1($_POST['old-password']);
+                $newPassword = sha1($_POST['new-password']);
 
                 if (preg_match($passwordRegex, $newPassword) == 1) {
                     // Get id from session

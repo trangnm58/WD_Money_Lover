@@ -20,6 +20,10 @@
 
         private function api($commandArray) {
             $ret = array();
+            $ret['moduleName'] = '';
+            $ret['controllerName'] = '';
+            $ret['actionName'] = '';
+            $ret['parameters'] = array();
             if (count($commandArray) <= 1) {
                 echo 'FAILED';
             } elseif ($commandArray[1] == 'login') {
@@ -53,6 +57,10 @@
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'ProfileController';
                 $ret['actionName'] = 'changePassword';
+            } elseif ($commandArray[1] == 'update-basic-information') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'ProfileController';
+                $ret['actionName'] = 'updateBasicInformation';
             } elseif ($commandArray[1] == 'add-transaction') {
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'TransactionController';
@@ -68,16 +76,25 @@
             } elseif ($commandArray[1] == 'get-transaction') {
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'TransactionController';
-                $ret['actionName'] = 'updateTransaction';
+                $ret['actionName'] = 'getTransaction';
                 $ret['parameters'] = array_slice($commandArray, 2);
 			} elseif ($commandArray[1] == 'delete-noti') {
                 $ret['moduleName'] = 'main';
-                $ret['controllerName'] = 'HomeController';
+                $ret['controllerName'] = 'MainLayoutController';
                 $ret['actionName'] = 'deleteNoti';
             } elseif ($commandArray[1] == 'add-wallet') {
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'WalletController';
                 $ret['actionName'] = 'addWallet';
+            } elseif ($commandArray[1] == 'delete-wallet') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'WalletController';
+                $ret['actionName'] = 'deleteWallet';
+            } elseif ($commandArray[1] == 'get-wallet') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'WalletController';
+                $ret['actionName'] = 'getWallet';
+                $ret['parameters'] = array_slice($commandArray, 2);
             } else {
                 echo 'FAILED';
             }
@@ -142,10 +159,6 @@
                 $controllerName = 'HelpController';
                 $actionName = 'render';
                 $parameters = array_slice($commandArray, 1);
-            } elseif ($commandArray[0] == 'edit-profile') {
-                $moduleName = 'main';
-                $controllerName = 'ProfileController';
-                $actionName = 'renderEditProfile';
             } elseif ($commandArray[0] == 'change-password') {
                 $moduleName = 'main';
                 $controllerName = 'ProfileController';

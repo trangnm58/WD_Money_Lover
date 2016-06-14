@@ -75,7 +75,7 @@
                     <i class="fa fa-google-wallet" aria-hidden="true"></i>
                     Wallets
                 </a>
-                <a class="list-group-item" href="/home">
+                <a class="list-group-item" href="/transaction">
                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                     Transactions
                 </a>
@@ -116,10 +116,6 @@
                 <a class="list-group-item" href="/help">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     Help & Support
-                </a>
-                <a class="list-group-item" href="/edit-profile">
-                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                    Edit Profile
                 </a>
                 <a class="list-group-item" href="/change-password">
                     <i class="fa fa-refresh" aria-hidden="true"></i>
