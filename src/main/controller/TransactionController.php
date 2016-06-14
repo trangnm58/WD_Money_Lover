@@ -1,5 +1,6 @@
 <?php
     namespace main\controller;
+	use \DateTime;
 	require_once 'src/core/model/WalletsTable.php';
 	require_once 'src/core/model/CategorysTable.php';
 	require_once 'src/core/model/UnitsTable.php';
@@ -12,15 +13,14 @@
         public function render() {
 			date_default_timezone_set('Asia/Bangkok');
 
-			$currentMonth = date("m-Y");
-			$currentMonth = date('m-Y', strtotime('-1 month'));
-			
-			$transactions = $this->getTransactionsByMonth($currentMonth);
+			$currentDate = new DateTime();
+
+			$transactions = $this->getTransactionsByMonth($currentDate->format("m"), $currentDate->format("Y"));
 			
 			$categories = $this->getCategories();
 			$wallets = $this->getWallets();
 			$units = $this->getUnits();
-			
+
         	require_once 'src/main/view/TransactionView.php';
         }
 		
@@ -66,10 +66,25 @@
             }
 		}
 		
-		public function getTransactionsByMonth($currentMonth) {
-			
+		public function getTransactionsByMonth($currentMonth, $currentYear) {
+			require_once 'src/core/model/TransactionsTable.php';
+			session_start();
+			$customer_id = $_SESSION["userid"];
+
+			$results = \core\model\TransactionsTable::getTransactionsByMonth($customer_id, $currentMonth, $currentYear);
+
+			$transactions = array();
+			foreach ($results as $t) {
+					$temp = array();
+					$temp["transaction"] = new \main\model\Transaction($t);
+					$temp["wallet"] = new \main\model\Wallet(\core\model\WalletsTable::get($t["wallet_id"]));
+					$temp["category"] = new \main\model\Category(\core\model\CategorysTable::get($t["category_id"]));
+					$temp["unit"] = new \main\model\Unit(\core\model\UnitsTable::get($t["unit_id"]));
+					$transactions[] = $temp;
+				}
+			return $transactions;
 		}
-		
+
 		public function addTransaction() {
 			require_once 'src/core/model/TransactionsTable.php';
 			session_start();
@@ -89,7 +104,7 @@
 			$transaction['category_id'] = $category_id;
 			$transaction['time'] = $time;
 			$transaction['description'] = $description;
-			$id = \core\model\TransactionsTable::insert($transaction);
-			$this->render();
+
+			echo \core\model\TransactionsTable::insert($transaction);
 		}
     }
