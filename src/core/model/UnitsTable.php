@@ -46,20 +46,27 @@
             return $unitId;
         }
 
-        public static function filter($unitId)
+        public static function get($unitId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM units WHERE id = :id");
-            $stmt->bindParam(':id', $unitId, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $result = array();
-            while ($row = $stmt->fetch()) {
-                $result[] = $row;
+			try {
+				$conn = &PDOData::connect();
+				$stmt = $conn->prepare("SELECT * FROM units WHERE id = :id");
+				$stmt->bindParam(':id', $unitId, PDO::PARAM_INT);
+				$stmt->execute();
+				
+				if ($stmt->execute()) {
+					if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+						return $result;
+					} else {
+						return array();
+					}
+				} else {
+					return array();
+				}
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
-            PDOData::disconnect();
-            return json_encode($result);
+			PDOData::disconnect();
         }
 
         /**

@@ -114,7 +114,6 @@
             $this->created_at = $_created_at;
         }
 
-
         public function __construct($transaction)
         {
             $this->id = $transaction['id'];

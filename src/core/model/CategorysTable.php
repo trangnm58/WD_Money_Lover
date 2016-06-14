@@ -90,20 +90,27 @@
             return $result;
         }
 
-        public static function filter($categoryId)
+        public static function get($categoryId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM categorys WHERE id = :id");
-            $stmt->bindParam(':id', $categoryId);
-            $stmt->execute();
+			try {            
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare("SELECT * FROM categorys WHERE id = :id");
+                $stmt->bindParam(':id', $categoryId);
+                $stmt->execute();
 
-            $result = array();
-            while ($row = $stmt->fetch()) {
-                $result[] = $row;
+                if ($stmt->execute()) {
+                        if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            return $result;
+                        } else {
+                            return array();
+                        }
+                    } else {
+                        return array();
+                    }
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
             PDOData::disconnect();
-            return json_encode($result);
         }
     }
 ?>

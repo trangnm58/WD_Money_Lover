@@ -25,12 +25,14 @@
 				$stmt->bindParam(':time', $transaction["time"]);
 				$stmt->bindParam(':description', $transaction["description"], PDO::PARAM_STR);
 
-				$stmt->execute();
-				$transactionId = $conn->lastInsertId();
-
-				return $transactionId;
+				if ($stmt->execute()) {
+                    return $conn->lastInsertId();
+                } else {
+                    return 0;
+                }
 			} catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
+				return false;
             }
 			PDOData::disconnect();
         }
@@ -85,20 +87,27 @@
             return json_encode($result);
         }
     
-        public static function filter($transactionId)
+        public static function get($transactionId)
         {
-            $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM transactions WHERE id = :id");
-            $stmt->bindParam(':id', $transactionId, PDO::PARAM_INT);
-            $stmt->execute();
+			try {            
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare("SELECT * FROM transactions WHERE id = :id");
+                $stmt->bindParam(':id', $transactionId);
+                $stmt->execute();
 
-            $result = array();
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $result[] = $row;
+                if ($stmt->execute()) {
+                        if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            return $result;
+                        } else {
+                            return array();
+                        }
+                    } else {
+                        return array();
+                    }
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-
             PDOData::disconnect();
-            return json_encode($result);
         }
 
         /**
@@ -121,17 +130,13 @@
 		 */
 		public static function getTransactionsByMonth($customerId, $month, $year) {
 			$conn = &PDOData::connect();
-            $stmt = $conn->prepare(
-				"SELECT * FROM transactions
-				WHERE customer_id = :customer_id
-				AND MONTH(time) = :month
-				AND YEAR(time) = :year"
-			);
+            $stmt = $conn->prepare("SELECT * FROM transactions WHERE customer_id = :customer_id AND MONTH(time) = :month AND YEAR(time) = :year ORDER BY time DESC;");
+
 			$stmt->bindParam(':customer_id', $customerId, PDO::PARAM_INT);
             $stmt->bindParam(':month', $month, PDO::PARAM_INT);
 			$stmt->bindParam(':year', $year, PDO::PARAM_INT);
             $stmt->execute();
-			
+
 			$result = array();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $result[] = $row;
