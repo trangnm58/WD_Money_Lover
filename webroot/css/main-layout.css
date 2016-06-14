@@ -223,6 +223,7 @@ body {
     display: inline-block;
     width: 15%;
     float: left;
+	font-size: 1.8rem;
 }
 
 #side-noti li p {

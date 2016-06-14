@@ -45,6 +45,10 @@
 	border-radius: 0;
 }
 
+#transaction-list li:hover {
+	background-color: #eef;
+}
+
 #transaction-list .date {
 	border-bottom: 1px solid #eee;
 }

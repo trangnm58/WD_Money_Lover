@@ -43,7 +43,7 @@
                 && isset($_SESSION['userid'])) {
                 $id = $_SESSION['userid'];
 
-                $results = \core\model\WalletsTable::getInfo($id);
+                $results = \core\model\WalletsTable::getWallets($id);
 				$wallets = array();
 				foreach ($results as $w) {
 					$wallets[] = new \main\model\Wallet($w);

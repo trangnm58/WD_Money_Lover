@@ -20,6 +20,10 @@ var backToList = function() {
 	$("#transaction-list").toggle();
 }
 
+var showDetails = function() {
+	
+}
+
 var addTransaction = function() {
 	return true;
 }
