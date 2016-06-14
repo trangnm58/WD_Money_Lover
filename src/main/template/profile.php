@@ -102,24 +102,23 @@
             <h2><b>Contact Information</b></h2>
         </div>
 
-        <a onclick="editBasicInformation()">
+        <a type="button" data-toggle="modal" data-target="#editContactInformation">
             <i aria-hidden="true" class="fa fa-pencil-square"></i>
             Edit
         </a>
 
-        
         <div class="item mp-card-first-item">
-            Address: <span class="mp-right"><?php
+            Address: <span id='info-address' class="mp-right"><?php
                             echo $customer->getAddress();
                         ?></span>
         </div>
         <div class="item">
-            City: <span class="mp-right"><?php
+            City: <span id='info-city' class="mp-right"><?php
                             echo $customer->getCity();
                         ?></span>
         </div>
         <div class="item">
-            Country: <span class="mp-right"><?php
+            Country: <span id='info-country' class="mp-right"><?php
                             echo $customer->getCountry();
                         ?></span>
         </div>
@@ -129,41 +128,117 @@
                         ?></span>
         </div>
         <div class="item">
-            Phone: <span class="mp-right"><?php
+            Phone: <span id='info-phone' class="mp-right"><?php
                             echo $customer->getPhone();
                         ?></span>
         </div>
     </div>
+
+    <div class="modal fade" id="editContactInformation" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Contact Informations</h4>
+                </div>
+                <div class="modal-body">
+                        <form id="editContactInformationForm" class="edit-form" method="post">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" value=<?php
+                                echo '"'.$customer->getAddress().'"';
+                            ?>/>
+
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" value=<?php
+                                echo '"'.$customer->getCity().'"';
+                            ?>/>
+
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" value=<?php
+                                echo '"'.$customer->getCountry().'"';
+                            ?>/>
+
+                            <label for="phone">Phone</label>
+                            <input type="text" id="phone" name="phone" value=<?php
+                                echo '"'.$customer->getPhone().'"';
+                            ?>/>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn" data-dismiss="modal">Cancel</button>
+                    <button class="save-btn" onclick="saveEditContact()"  data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="list card mp-info-card">
-        <div class="item item-divider mp-card-divider">
+        <div type="button" class="item item-divider mp-card-divider">
             <h2><b>Education</b></h2>
         </div>
 
-        <a onclick="editBasicInformation()">
+        <a type="button" data-toggle="modal" data-target="#editEducationInformation">
             <i aria-hidden="true" class="fa fa-pencil-square"></i>
             Edit
         </a>
-
         
         <div class="item mp-card-first-item">
-            University: <span class="mp-right"><?php
+            University: <span id='info-university' class="mp-right"><?php
                             echo $customer->getUniversity();
                         ?></span>
         </div>
         <div class="item">
-            Highschool: <span class="mp-right"><?php
+            Highschool: <span id='info-highschool' class="mp-right"><?php
                             echo $customer->getHighschool();
                         ?></span>
         </div>
         <div class="item">
-            Job: <span class="mp-right"><?php
+            Job: <span id='info-job' class="mp-right"><?php
                             echo $customer->getJob();
                         ?></span>
         </div>
         <div class="item">
-            Company: <span class="mp-right"><?php
+            Company: <span id='info-company' class="mp-right"><?php
                             echo $customer->getCompany();
                         ?></span>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editEducationInformation" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Education Informations</h4>
+                </div>
+                <div class="modal-body">
+                        <form id="editEducationInformationForm" class="edit-form" method="post">
+                            <label for="university">University</label>
+                            <input type="text" id="university" name="university" value=<?php
+                                echo '"'.$customer->getUniversity().'"';
+                            ?>/>
+
+                            <label for="highschool">Highschool</label>
+                            <input type="text" id="highschool" name="highschool" value=<?php
+                                echo '"'.$customer->getHighschool().'"';
+                            ?>/>
+
+                            <label for="job">Job</label>
+                            <input type="text" id="job" name="job" value=<?php
+                                echo '"'.$customer->getJob().'"';
+                            ?>/>
+
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" value=<?php
+                                echo '"'.$customer->getCompany().'"';
+                            ?>/>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn" data-dismiss="modal">Cancel</button>
+                    <button class="save-btn" onclick="saveEditEducation()"  data-dismiss="modal">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

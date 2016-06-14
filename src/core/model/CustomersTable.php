@@ -56,12 +56,12 @@
             PDOData::disconnect();
         }
 
-        // updateBacicInformation($info, $id)
+        // updateBasicInformation($info, $id)
         // INPUT: $id is id of customer want to update
         // $info has name, dob, gender
         // HOW-TO-DO: update this basic information
         // OUTPUT: boolean success or not
-        public static function updateBacicInformation($info, $id) {
+        public static function updateBasicInformation($info, $id) {
             try {
                 $conn = &PDOData::connect();
                 $stmt = $conn->prepare('UPDATE customers AS c SET name=IFNULL(:name, c.name), gender=IFNULL(:gender, c.gender), dob=IFNULL(:dob, c.dob) WHERE id = :id;');
@@ -70,6 +70,52 @@
                 $stmt->bindParam(':name', $info['name']);
                 $stmt->bindParam(':gender', $info['gender']);
                 $stmt->bindParam(':dob', $info['dob']);
+
+                return $stmt->execute();
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
+        }
+
+        // updateContactInformation($info, $id)
+        // INPUT: $id is id of customer want to update
+        // $info has name, dob, gender
+        // HOW-TO-DO: update this contact information
+        // OUTPUT: boolean success or not
+        public static function updateContactInformation($info, $id) {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('UPDATE customers AS c SET address=IFNULL(:address, c.address), city=IFNULL(:city, c.city), country=IFNULL(:country, c.country), phone=IFNULL(:phone, c.phone) WHERE id = :id;');
+
+                $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':address', $info['address']);
+                $stmt->bindParam(':city', $info['city']);
+                $stmt->bindParam(':country', $info['country']);
+                $stmt->bindParam(':phone', $info['phone']);
+
+                return $stmt->execute();
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            PDOData::disconnect();
+        }
+
+        // updateEducationInformation($info, $id)
+        // INPUT: $id is id of customer want to update
+        // $info has name, dob, gender
+        // HOW-TO-DO: update this contact information
+        // OUTPUT: boolean success or not
+        public static function updateEducationInformation($info, $id) {
+            try {
+                $conn = &PDOData::connect();
+                $stmt = $conn->prepare('UPDATE customers AS c SET university=IFNULL(:university, c.university), highschool=IFNULL(:highschool, c.highschool), job=IFNULL(:job, c.job), company=IFNULL(:company, c.company) WHERE id = :id;');
+
+                $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':university', $info['university']);
+                $stmt->bindParam(':highschool', $info['highschool']);
+                $stmt->bindParam(':job', $info['job']);
+                $stmt->bindParam(':company', $info['company']);
 
                 return $stmt->execute();
             } catch(PDOException $e) {

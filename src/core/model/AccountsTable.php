@@ -55,7 +55,6 @@
 
                 $result = $stmt->fetch();
                 if ($result != false) {
-                    echo var_dump($result);
                     return intval($result['id']);
                 } else {
                     return -1;

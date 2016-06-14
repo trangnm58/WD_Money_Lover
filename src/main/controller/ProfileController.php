@@ -61,13 +61,65 @@
                 $info['dob'] = $_POST['dob'];
                 $info['gender'] = $_POST['gender'];
 
-                if (\core\model\CustomersTable::updateBacicInformation($info, $_SESSION['userid'])) {
-                    echo "SUCCESS";
+                if (\core\model\CustomersTable::updateBasicInformation($info, $_SESSION['userid'])) {
+                    echo 'SUCCESS';
                 } else {
-                    echo "FAILED";
+                    echo 'FAILED';
                 }
             } else {
-                echo "NOT LOGIN";
+                echo 'NOT LOGIN';
+            }
+        }
+
+        // API
+        // updateContactInformation()
+        // INPUT: nothing
+        // HOW-TO-DO: get password from POST data
+        // change password for current acoount
+        // echo 'SUCCESS' if change successfully
+        // otherwise, echo 'FAILED' or error log
+        public function updateContactInformation() {
+            if (isset($_SESSION['username']) && isset($_SESSION['userid'])) {
+                // Get data from post data
+                $info = array();
+                $info['address'] = $_POST['address'];
+                $info['city'] = $_POST['city'];
+                $info['country'] = $_POST['country'];
+                $info['phone'] = $_POST['phone'];
+
+                if (\core\model\CustomersTable::updateContactInformation($info, $_SESSION['userid'])) {
+                    echo 'SUCCESS';
+                } else {
+                    echo 'FAILED';
+                }
+            } else {
+                echo 'NOT LOGIN';
+            }
+        }
+
+        // API
+        // updateEducationInformation()
+        // INPUT: nothing
+        // HOW-TO-DO: get password from POST data
+        // change password for current acoount
+        // echo 'SUCCESS' if change successfully
+        // otherwise, echo 'FAILED' or error log
+        public function updateEducationInformation() {
+            if (isset($_SESSION['username']) && isset($_SESSION['userid'])) {
+                // Get data from post data
+                $info = array();
+                $info['university'] = $_POST['university'];
+                $info['highschool'] = $_POST['highschool'];
+                $info['job'] = $_POST['job'];
+                $info['company'] = $_POST['company'];
+
+                if (\core\model\CustomersTable::updateEducationInformation($info, $_SESSION['userid'])) {
+                    echo 'SUCCESS';
+                } else {
+                    echo 'FAILED';
+                }
+            } else {
+                echo 'NOT LOGIN';
             }
         }
 
@@ -83,28 +135,32 @@
                 $passwordRegex = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50}/';
 
                 // Get password from post data
-                $oldPassword = sha1($_POST['old-password']);
-                $newPassword = sha1($_POST['new-password']);
+                $oldPassword = $_POST['oldPassword'];
+                $newPassword = $_POST['newPassword'];
 
                 if (preg_match($passwordRegex, $newPassword) == 1) {
+                    // encrpypt password
+                    $oldPassword = sha1($_POST['oldPassword']);
+                    $newPassword = sha1($_POST['newPassword']);
+                    
                     // Get id from session
                     $username = $_SESSION['username'];
 
-                    $id = \core\model\AccountsTable::getIdByLogin($username, $password);
+                    $id = \core\model\AccountsTable::getIdByLogin($username, $oldPassword);
                     if ($id != -1 && $id == $_SESSION['userid']) {
                         if (\core\model\AccountsTable::updatePassword($newPassword, $id)) {
-                            echo "SUCCESS";
+                            echo 'SUCCESS';
                         } else {
-                            echo "FAILED";
+                            echo 'FAILED';
                         }
                     } else {
-                        echo "WRONG PASSWORD";
+                        echo 'WRONG PASSWORD';
                     }
                 } else {
-                    echo "NEW PASSWORD IS INVALID";
+                    echo 'INVALID PASSWORD';
                 }
             } else {
-                echo "NOT LOGIN";
+                echo 'NOT LOGIN';
             }
         }
     }

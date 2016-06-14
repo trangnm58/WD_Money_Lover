@@ -61,6 +61,14 @@
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'ProfileController';
                 $ret['actionName'] = 'updateBasicInformation';
+            } elseif ($commandArray[1] == 'update-contact-information') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'ProfileController';
+                $ret['actionName'] = 'updateContactInformation';
+            } elseif ($commandArray[1] == 'update-education-information') {
+                $ret['moduleName'] = 'main';
+                $ret['controllerName'] = 'ProfileController';
+                $ret['actionName'] = 'updateEducationInformation';
             } elseif ($commandArray[1] == 'add-transaction') {
                 $ret['moduleName'] = 'main';
                 $ret['controllerName'] = 'TransactionController';

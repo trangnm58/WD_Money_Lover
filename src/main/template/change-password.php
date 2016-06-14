@@ -1,142 +1,23 @@
-<div id="profile-container">
-    <div class="list card mp-info-card">
-      <div class="item item-divider mp-card-divider">
-        <h2>
-          <b>Basic Information</b>
-        </h2>
-      </div>
+<div id="change-password-container">
+    <div id="alert-success" class="alert alert-success alert-dismissible" role="alert"></div>
+    <div id="alert-danger" class="alert alert-danger alert-dismissible" role="alert"></div>
+    <form id="changePasswordForm" class="edit-form" method="post" onsubmit="return changePassword(this)">
+        <div class="edit-input">
+            <span class="error-log" id="old-password-error"></span>
+            <label for="old-password">Old Password</label>
+            <input type="password" id="old-password" name="old-password" placeholder="Old Password" required onfocusout="checkOldPassword(this)" onfocus="clearErrorMessage(this)" autofocus="true" />
+        </div>
+        <div class="edit-input">
+            <span class="error-log" id="new-password-error"></span>
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" name="new-password" placeholder="New Password" required onfocusout="checkNewPassword(this)" onfocus="clearErrorMessage(this)"/>
+        </div>
+        <div class="edit-input">
+            <span class="error-log" id="retype-password-error"></span>
+            <label for="re-password">Retype Password</label>
+            <input type="password" id="re-password" name="re-password" placeholder="Retype Password" required onfocusout="checkRetypePassword(this)" onkeyup="checkRetypePassword(this)" onfocus="clearErrorMessage(this)"/>
+        </div>
 
-      <div class="item mp-card-first-item">
-        Full name:<span class="mp-right">
-            <?php
-                echo $customer->getName();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Username:<span class="mp-right">
-            <?php
-                echo $customer->getUsername();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Date of Birth:<span class="mp-right">
-            <?php
-                echo $customer->getDob();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Gender:<span class="mp-right">
-            <?php
-                if($customer->getGender() == 1) {
-                    echo "Male";
-                } else {
-                    echo "Female";
-                }
-            ?>      
-        </span>
-      </div>
-
-      <div class="item">
-        Default Wallet:<span class="mp-right">
-            <?php
-                echo $customer->getDefaultWallet();
-            ?>
-        </span>
-      </div>
-    </div>
-
-    <div class="list card mp-info-card">
-      <div class="item item-divider mp-card-divider">
-        <h2>
-          <b>Contact Information</b>
-        </h2>
-      </div>
-
-      <div class="item mp-card-first-item">
-        Address:<span class="mp-right">
-            <?php
-                echo $customer->getAddress();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        City:<span class="mp-right">
-            <?php
-                echo $customer->getCity();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Country:<span class="mp-right">
-            <?php
-                echo $customer->getCountry();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Email:<span class="mp-right">
-            <?php
-                echo $customer->getEmail();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Phone:<span class="mp-right">
-            <?php
-                echo $customer->getPhone();
-            ?>
-        </span>
-      </div>
-    </div>
-
-    <div class="list card mp-info-card">
-      <div class="item item-divider mp-card-divider">
-        <h2>
-          <b>Education</b>
-        </h2>
-      </div>
-
-      <div class="item mp-card-first-item">
-        University:<span class="mp-right">
-            <?php
-                echo $customer->getUniversity();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Highschool:<span class="mp-right">
-            <?php
-                echo $customer->getHighschool();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Job:<span class="mp-right">
-            <?php
-                echo $customer->getJob();
-            ?>
-        </span>
-      </div>
-
-      <div class="item">
-        Company:<span class="mp-right">
-            <?php
-                echo $customer->getCompany();
-            ?>
-        </span>
-      </div>
-    </div>
-
+        <input type="submit" class="save-btn" name="submit" value="Save" />
+    </form>
 </div>
