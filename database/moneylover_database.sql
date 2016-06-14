@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2016 at 02:51 PM
+-- Generation Time: Jun 14, 2016 at 10:25 AM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.17
 
@@ -36,7 +36,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `activate` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `id` (`id`),
+  KEY `id_2` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
 
 --
@@ -79,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `budgets` (
 CREATE TABLE IF NOT EXISTS `categorys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`)
@@ -89,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `categorys` (
 -- Dumping data for table `categorys`
 --
 
-INSERT INTO `categorys` (`id`, `name`, `type`, `customer_id`) VALUES
+INSERT INTO `categorys` (`id`, `name`, `icon`, `customer_id`) VALUES
 (1, 'Transportations', 'fa-taxi', NULL),
 (2, 'Shopping', 'fa-shopping-cart', NULL),
 (3, 'Food', 'fa-cutlery', NULL),
@@ -108,8 +110,7 @@ INSERT INTO `categorys` (`id`, `name`, `type`, `customer_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `customers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -127,16 +128,17 @@ CREATE TABLE IF NOT EXISTS `customers` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
-  KEY `fk_customer_customer_id` (`account_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+  UNIQUE KEY `id_2` (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `account_id`, `username`, `email`, `name`, `gender`, `dob`, `default_wallet`, `address`, `city`, `country`, `phone`, `university`, `highschool`, `job`, `company`) VALUES
-(20, 26, 'cancat95', 'ninjameo9x@gmail.com', 'Duy Cat, Can', 1, '1995-09-14', NULL, 'Cum 3 Phung Thuong Phuc Tho', 'Ha Noi', 'Vietnam', '0969422782', 'University of Engineering and Technology', 'Ngoc Tao Hightschool', 'Student', 'Google'),
-(21, 27, 'cancat952', 'khuattrang999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `customers` (`id`, `username`, `email`, `name`, `gender`, `dob`, `default_wallet`, `address`, `city`, `country`, `phone`, `university`, `highschool`, `job`, `company`) VALUES
+(26, 'cancat95', 'ninjameo9x@gmail.com', 'Duy Cat, Can', 1, '1995-09-14', NULL, 'Cum 3 Phung Thuong Phuc Tho', 'Ha Noi', 'Vietnam', '0969422782', 'University of Engineering and Technology', 'Ngoc Tao Highschool', 'Student', 'Google'),
+(27, 'cancat952', 'khuattrang999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -198,9 +200,9 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `type`, `customer_id`, `detail`, `created_at`) VALUES
-(1, 1, 20, 'Your account is created! Check your email to verify!', '2016-06-12 05:30:00'),
-(2, 1, 20, 'Verified email successfully!', '2016-06-12 06:00:00'),
-(3, 1, 20, 'We created a new wallet for you. Check wallet to edit total money!', '2016-06-12 05:31:00');
+(1, 1, 26, 'Your account is created! Check your email to verify!', '2016-06-12 05:30:00'),
+(2, 1, 26, 'Verified email successfully!', '2016-06-12 06:00:00'),
+(3, 1, 26, 'We created a new wallet for you. Check wallet to edit total money!', '2016-06-12 05:31:00');
 
 -- --------------------------------------------------------
 
@@ -260,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `wallet_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `time` datetime NOT NULL,
-  `event_id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
   `description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `partner` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -270,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   KEY `category_id` (`category_id`),
   KEY `wallet_id` (`wallet_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -317,8 +319,8 @@ CREATE TABLE IF NOT EXISTS `wallets` (
 --
 
 INSERT INTO `wallets` (`id`, `customer_id`, `name`, `description`, `type`, `amount`, `unit_id`, `created_at`) VALUES
-(1, 20, 'Cash', 'Cash', 'fa-money', 20000, 1, '2016-06-13 07:40:20'),
-(2, 20, 'BIDV', 'BIDV Cau Giay', 'fa-credit-card-alt', 5000000, 2, '2016-06-13 07:40:20');
+(1, 26, 'Cash', 'Cash', 'fa-money', 20000, 1, '2016-06-13 07:40:20'),
+(2, 26, 'BIDV', 'BIDV Cau Giay', 'fa-credit-card-alt', 5000000, 2, '2016-06-13 07:40:20');
 
 --
 -- Constraints for dumped tables
@@ -337,14 +339,6 @@ ALTER TABLE `budgets`
 --
 ALTER TABLE `categorys`
   ADD CONSTRAINT `fk_category_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `customers`
---
-ALTER TABLE `customers`
-  ADD CONSTRAINT `fk_customer_customer_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_email` FOREIGN KEY (`email`) REFERENCES `accounts` (`email`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_customer_username` FOREIGN KEY (`username`) REFERENCES `accounts` (`username`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `debts`
