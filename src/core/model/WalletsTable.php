@@ -48,7 +48,7 @@
                 $stmt->bindParam(':icon', $wallet["icon"]);
                 $stmt->bindParam(':amount', $wallet["amount"]);
                 $stmt->bindParam(':unit_id', $wallet["unit_id"]);                            
-                $stmt->bindParam(':id', $id;
+                $stmt->bindParam(':id', $id);
                 if ($stmt->execute()) {
                     echo "SUCCESS";
                 } else {

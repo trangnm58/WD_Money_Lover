@@ -3,6 +3,7 @@
     require_once 'src/core/model/AccountsTable.php';
     require_once 'src/main/model/Customer.php';
     require_once 'src/core/model/WalletsTable.php';
+   	require_once 'src/core/model/UnitsTable.php';
     /**
     * HomeController
     */
@@ -14,8 +15,7 @@
         	$content = 'src/main/template/wallet.php';
 			$cssFileName = 'wallet.css?v=1.0.0';
             $scriptFileName = 'wallet.js?v=1.0.0';                     
-            $listWallet = $this->getMyWallet();
-            //$this->addWallet();
+            $listWallet = $this->getMyWallet();            
             $units = $this->getUnits();		
         	require_once 'src/main/view/WalletView.php';
         }
@@ -66,7 +66,7 @@
                 && isset($_SESSION['userid'])) {                
                 $result = \core\model\WalletsTable::get($id);
                 return new \main\model\Wallet($result);
-            }            ;
+            }            
         }
 
         private function updateWallet($id) {                
@@ -88,8 +88,8 @@
             );              
             $result = \core\model\WalletsTable::update($wallet, $id);
             $this->render();                
-            }
         }
+        
         private function getMyWallet() {
         	if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {

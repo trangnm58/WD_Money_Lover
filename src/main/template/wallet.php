@@ -1,23 +1,12 @@
 <div id="wallet-container" style="">
 
         <div id="side-menu-item-list" class="list-group">
-
-            <a class="list-group-item total " href="#">
-                <div>
-                    <img class="wallet-img" src="favicon.png" />
-                </div>
-                <div class="total-wallet-info"><strong>Total</strong>
-                    <p>$ 95</p>
-                </div>
-            </a>
-            
-            <br>
-            <p>
-                <strong>Included from total</strong>
-            </p>
+            <h4>
+                <strong>Included in total</strong>
+            </h4>
             <div class ="included-in-total">  
                 <?php foreach ($listWallet as $row=>$wallet):?>             
-                <a class="list-group-item total each-wallet" id = <?php echo $wallet['id']; ?> data-toggle="modal" data-target="#editWallet" href="#">
+                <a class="list-group-item total each-wallet" id = <?php echo $wallet['id']; ?> data-toggle="modal" data-target="#editWallet" href="#" onclick="getWalletInfo(<?php echo $wallet['id']; ?>)"> 
                     <?php echo '<i class=" fa '.$wallet['type'].' fa-2x " aria-hidden="true" > '  ;?> </i>
                     <div class="each-wallet-info">
                         <strong>                        
@@ -30,7 +19,6 @@
                                 echo $wallet['unit_name'].' '.$wallet['amount'];
                             ?>
                         </p>
-
                     </div>
                 </a>                
             <?php endforeach;?>
