@@ -1,8 +1,7 @@
 <?php
     namespace core\model;
 	use \PDO;
-	require_once 'src/core/model/PDOData.php';
-	require_once 'src/main/model/Wallet.php';
+	require_once 'src/core/model/PDOData.php';	
 
     class WalletsTable {
         
@@ -12,21 +11,23 @@
          * @return Id off wallet inserted
          */
         
-        public static function insert(Wallet $wallet)
+        public static function insert($wallet)
         {
             try {
 
                 $conn = &PDOData::connect();
-                $stmt = $conn->prepare("INSERT INTO wallets (customer_id, name, description, icon, amount, unit_id, created_at) VALUES (:customer_id, :name, :description, :icon, :amount, :unit_id, :created_at)");
+                $stmt = $conn->prepare('INSERT INTO wallets (customer_id, name, description, type, amount, unit_id) VALUES (:customer_id, :name, :description, :type, :amount, :unit_id);');
                 $stmt->bindParam(':customer_id', $wallet["customer_id"]);
                 $stmt->bindParam(':name', $wallet["name"]);
                 $stmt->bindParam(':description', $wallet["description"]);
-                $stmt->bindParam(':icon', $wallet["icon"]);
+                $stmt->bindParam(':type', $wallet["type"]);
                 $stmt->bindParam(':amount', $wallet["amount"]);
                 $stmt->bindParam(':unit_id', $wallet["unit_id"]);
-                $stmt->execute();
-                $walletId = $conn->lastInsertId();
-                return $walletId;
+                if ($stmt->execute()) {
+                    return $conn->lastInsertId();
+                } else {
+                    return  0;
+                }
             } catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
@@ -49,11 +50,7 @@
                 $stmt->bindParam(':amount', $wallet["amount"]);
                 $stmt->bindParam(':unit_id', $wallet["unit_id"]);                            
                 $stmt->bindParam(':id', $id);
-                if ($stmt->execute()) {
-                    echo "SUCCESS";
-                } else {
-                    echo "FAILED";
-                }           
+                return $stmt->execute();
             } catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
