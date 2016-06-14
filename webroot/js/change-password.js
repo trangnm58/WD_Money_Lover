@@ -1,13 +1,12 @@
 check = [false, false, false];
 
 function changePassword(myself) {
-    form = document.getElementById('changePasswordForm');
     if (!check[0]) {
-        form.childNodes[1].childNodes[1].innerText = 'Old password is invalid!'
+        myself.childNodes[1].childNodes[1].innerText = 'Old password is invalid!';
     } else if (!check[1]) {
-        form.childNodes[3].childNodes[1].innerText = 'Password is invalid!'
+        myself.childNodes[3].childNodes[1].innerText = 'Password is invalid!';
     } else if (!check[2]) {
-        form.childNodes[5].childNodes[1].innerText = 'Repassword is invalid!'
+        myself.childNodes[5].childNodes[1].innerText = 'Repassword is invalid!';
     } else {
         newPassword = myself.elements.namedItem("new-password").value;
         oldPaddword = myself.elements.namedItem("old-password").value;
@@ -15,12 +14,28 @@ function changePassword(myself) {
         data = {oldPassword: oldPaddword, newPassword: newPassword};
 
         $.post('/api/change-password', data, function(data) {
-                alert(data);
             if (data == 'SUCCESS') {
+                $('#alert-success').addClass('alert-show');
+                $('#alert-success').text('Update successfully!');
+
+                setTimeout(function(){
+                    $('#alert-success').removeClass('alert-show');
+                }, 5000);
+                myself.elements.namedItem("old-password").value = '';
+                myself.elements.namedItem("new-password").value = '';
+                myself.elements.namedItem("re-password").value = '';
             } else if (data == 'WRONG PASSWORD') {
-                // thong bao loi tai error log xoa mk moi ben duoi
+                myself.elements.namedItem("new-password").value = '';
+                myself.elements.namedItem("re-password").value = '';
+
+                myself.childNodes[1].childNodes[1].innerText = 'Wrong password! Please try again!';
             } else {
-                // thong bao error Minhtai0812
+                $('#alert-danger').addClass('alert-show');
+                $('#alert-danger').text('Update failed!');
+
+                setTimeout(function(){
+                    $('#alert-danger').removeClass('alert-show');
+                }, 5000);
             }
         });
     }

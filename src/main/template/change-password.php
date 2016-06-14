@@ -15,7 +15,7 @@
         <div class="edit-input">
             <span class="error-log" id="retype-password-error"></span>
             <label for="re-password">Retype Password</label>
-            <input type="password" id="re-password" name="re-password" placeholder="Retype Password" required onfocusout="checkRetypePassword(this)" onkeyup="checkRetypePassword(this)" onfocus="clearErrorMessage(this)"/>
+            <input type="password" id="re-password" name="re-password" placeholder="Retype Password" required onkeyup="checkRetypePassword(this)" onfocus="clearErrorMessage(this)"/>
         </div>
 
         <input type="submit" class="save-btn" name="submit" value="Save" />
