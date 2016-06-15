@@ -26,6 +26,9 @@
         	require_once 'src/main/view/TransactionView.php';
         }
 		
+		/**
+		 * Output: array of Category objects of current user
+		 */
 		public function getCategories() {
             if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
@@ -40,6 +43,9 @@
             }
 		}
 		
+		/**
+		 * Output: array of Wallet objects of current user
+		 */
 		public function getWallets() {
             if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
@@ -54,6 +60,9 @@
             }
 		}
 		
+		/**
+		 * Output: array of Unit objects of the system
+		 */
 		public function getUnits() {
 			if (isset($_SESSION['username'])
                 && isset($_SESSION['userid'])) {
@@ -68,6 +77,10 @@
             }
 		}
 		
+		/**
+		 * Input: int month, int year
+		 * Output: array of with 4 arrays: "transaction", "wallet", "category", "unit"
+		 */
 		public function getTransactionsByMonth($month, $year) {
 			require_once 'src/core/model/TransactionsTable.php';
 			session_start();
@@ -87,6 +100,10 @@
 			return $transactions;
 		}
 		
+		/**
+		 * Input: param
+		 * getTransaction api
+		 */
 		public function getTransaction($param) {
 			if ($param == array()) {
 				// get all current month
@@ -100,6 +117,9 @@
 			}
 		}
 
+		/**
+		 * addTransaction api
+		 */
 		public function addTransaction() {
 			require_once 'src/core/model/TransactionsTable.php';
 
@@ -131,6 +151,9 @@
 			echo json_encode($transaction);
 		}
 		
+		/**
+		 * deleteTransaction api
+		 */
 		public function deleteTransaction() {
 			require_once 'src/core/model/TransactionsTable.php';
 			$id = $_POST['id'];

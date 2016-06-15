@@ -16,8 +16,23 @@
 			try {
 				$conn = &PDOData::connect();
 				$stmt = $conn->prepare(
-					"INSERT INTO transactions (customer_id, amount, unit_id, wallet_id, category_id, time, description)
-					VALUES (:customer_id, :amount, :unit_id, :wallet_id, :category_id, :time, :description);"
+					"INSERT INTO transactions (
+						customer_id,
+						amount,
+						unit_id,
+						wallet_id,
+						category_id,
+						time,
+						description
+					) VALUES (
+						:customer_id,
+						:amount,
+						:unit_id,
+						:wallet_id,
+						:category_id,
+						:time,
+						:description
+					);"
 				);
 
 				$stmt->bindParam(':customer_id', $transaction["customer_id"], PDO::PARAM_INT);
@@ -77,7 +92,10 @@
         public static function getTransactions($customerId)
         {
             $conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM transactions WHERE customer_id = :customer_id");
+            $stmt = $conn->prepare(
+				"SELECT * FROM transactions
+				WHERE customer_id = :customer_id;"
+			);
             $stmt->bindParam(':customer_id', $customerId, PDO::PARAM_INT);
             $stmt->execute();
 
@@ -94,7 +112,10 @@
         {
 			try {            
                 $conn = &PDOData::connect();
-                $stmt = $conn->prepare("SELECT * FROM transactions WHERE id = :id");
+                $stmt = $conn->prepare(
+					"SELECT * FROM transactions
+					WHERE id = :id;"
+				);
                 $stmt->bindParam(':id', $transactionId);
                 $stmt->execute();
 
@@ -121,7 +142,10 @@
         {
 			try {
 				$conn = &PDOData::connect();
-				$stmt = $conn->prepare("DELETE FROM transactions WHERE id = :id");  
+				$stmt = $conn->prepare(
+					"DELETE FROM transactions
+					WHERE id = :id;"
+				);  
 				$stmt->bindParam(':id', $transactionId);
 				$stmt->execute();
 
@@ -137,7 +161,12 @@
 		 */
 		public static function getTransactionsByMonth($customerId, $month, $year) {
 			$conn = &PDOData::connect();
-            $stmt = $conn->prepare("SELECT * FROM transactions WHERE customer_id = :customer_id AND MONTH(time) = :month AND YEAR(time) = :year ORDER BY time DESC;");
+            $stmt = $conn->prepare(
+				"SELECT * FROM transactions
+				WHERE customer_id = :customer_id
+				AND MONTH(time) = :month
+				AND YEAR(time) = :year ORDER BY time DESC;"
+			);
 
 			$stmt->bindParam(':customer_id', $customerId, PDO::PARAM_INT);
             $stmt->bindParam(':month', $month, PDO::PARAM_INT);
